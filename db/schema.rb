@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_122359) do
+ActiveRecord::Schema.define(version: 2021_02_08_132930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "certificates", force: :cascade do |t|
+    t.string "title"
+    t.date "date_graduation"
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_certificates_on_course_id"
+    t.index ["user_id"], name: "index_certificates_on_user_id"
+  end
 
   create_table "course_authors", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -47,6 +58,17 @@ ActiveRecord::Schema.define(version: 2021_02_08_122359) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_courses_lists", force: :cascade do |t|
+    t.float "current_result"
+    t.boolean "certificate"
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_user_courses_lists_on_course_id"
+    t.index ["user_id"], name: "index_user_courses_lists_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -58,8 +80,12 @@ ActiveRecord::Schema.define(version: 2021_02_08_122359) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "certificates", "courses"
+  add_foreign_key "certificates", "users"
   add_foreign_key "course_authors", "courses"
   add_foreign_key "course_authors", "users"
+  add_foreign_key "user_courses_lists", "courses"
+  add_foreign_key "user_courses_lists", "users"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "roles"
 end
