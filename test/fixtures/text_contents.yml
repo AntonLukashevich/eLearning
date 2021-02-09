@@ -2,8 +2,6 @@
 
 one:
   text: MyText
-  lecture_block: one
 
 two:
   text: MyText
-  lecture_block: two

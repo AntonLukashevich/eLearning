@@ -1,3 +1,2 @@
-class TextContent < ApplicationRecord
-  belongs_to :lecture_block
+class TextContent < LectureBlock
 end

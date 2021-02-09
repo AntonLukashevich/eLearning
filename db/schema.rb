@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_09_074114) do
+ActiveRecord::Schema.define(version: 2021_02_09_130319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,14 +54,6 @@ ActiveRecord::Schema.define(version: 2021_02_09_074114) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "image_contents", force: :cascade do |t|
-    t.string "image"
-    t.bigint "lecture_block_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lecture_block_id"], name: "index_image_contents_on_lecture_block_id"
-  end
-
   create_table "lecture_blocks", force: :cascade do |t|
     t.string "title"
     t.string "type"
@@ -94,14 +86,6 @@ ActiveRecord::Schema.define(version: 2021_02_09_074114) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "text_contents", force: :cascade do |t|
-    t.text "text"
-    t.bigint "lecture_block_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lecture_block_id"], name: "index_text_contents_on_lecture_block_id"
-  end
-
   create_table "user_courses_lists", force: :cascade do |t|
     t.float "current_result"
     t.boolean "certificate"
@@ -120,16 +104,19 @@ ActiveRecord::Schema.define(version: 2021_02_09_074114) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "role_id", null: false
     t.bigint "organization_id", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
-  end
-
-  create_table "video_contents", force: :cascade do |t|
-    t.string "video"
-    t.bigint "lecture_block_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lecture_block_id"], name: "index_video_contents_on_lecture_block_id"
   end
 
   add_foreign_key "certificates", "courses"
@@ -137,13 +124,10 @@ ActiveRecord::Schema.define(version: 2021_02_09_074114) do
   add_foreign_key "course_authors", "courses"
   add_foreign_key "course_authors", "users"
   add_foreign_key "course_blocks", "courses"
-  add_foreign_key "image_contents", "lecture_blocks"
   add_foreign_key "lecture_blocks", "lectures"
   add_foreign_key "lectures", "course_blocks"
-  add_foreign_key "text_contents", "lecture_blocks"
   add_foreign_key "user_courses_lists", "courses"
   add_foreign_key "user_courses_lists", "users"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "roles"
-  add_foreign_key "video_contents", "lecture_blocks"
 end
