@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_08_132930) do
+ActiveRecord::Schema.define(version: 2021_02_09_074114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2021_02_08_132930) do
     t.index ["user_id"], name: "index_course_authors_on_user_id"
   end
 
+  create_table "course_blocks", force: :cascade do |t|
+    t.integer "order"
+    t.string "type"
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_blocks_on_course_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "titile"
     t.text "description"
@@ -43,6 +52,33 @@ ActiveRecord::Schema.define(version: 2021_02_08_132930) do
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "image_contents", force: :cascade do |t|
+    t.string "image"
+    t.bigint "lecture_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_block_id"], name: "index_image_contents_on_lecture_block_id"
+  end
+
+  create_table "lecture_blocks", force: :cascade do |t|
+    t.string "title"
+    t.string "type"
+    t.integer "order"
+    t.bigint "lecture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_id"], name: "index_lecture_blocks_on_lecture_id"
+  end
+
+  create_table "lectures", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "course_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_block_id"], name: "index_lectures_on_course_block_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -56,6 +92,14 @@ ActiveRecord::Schema.define(version: 2021_02_08_132930) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "text_contents", force: :cascade do |t|
+    t.text "text"
+    t.bigint "lecture_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_block_id"], name: "index_text_contents_on_lecture_block_id"
   end
 
   create_table "user_courses_lists", force: :cascade do |t|
@@ -80,12 +124,26 @@ ActiveRecord::Schema.define(version: 2021_02_08_132930) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  create_table "video_contents", force: :cascade do |t|
+    t.string "video"
+    t.bigint "lecture_block_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_block_id"], name: "index_video_contents_on_lecture_block_id"
+  end
+
   add_foreign_key "certificates", "courses"
   add_foreign_key "certificates", "users"
   add_foreign_key "course_authors", "courses"
   add_foreign_key "course_authors", "users"
+  add_foreign_key "course_blocks", "courses"
+  add_foreign_key "image_contents", "lecture_blocks"
+  add_foreign_key "lecture_blocks", "lectures"
+  add_foreign_key "lectures", "course_blocks"
+  add_foreign_key "text_contents", "lecture_blocks"
   add_foreign_key "user_courses_lists", "courses"
   add_foreign_key "user_courses_lists", "users"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "roles"
+  add_foreign_key "video_contents", "lecture_blocks"
 end
