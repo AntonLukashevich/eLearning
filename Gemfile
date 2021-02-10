@@ -30,6 +30,9 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
 gem 'pry'
+gem 'carrierwave'
+gem "mini_magick"
+
 gem "letter_opener", :group => :development
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -1,0 +1,11 @@
+<h4>Your account</h4>
+
+
+<%=image_tag @user.avatar.url(:thumb), class: 'img-show' if  @user.avatar?%><br>
+First name: <%= @user.first_name %><br>
+Last name: <%= @user.last_name %><br>
+Email: <%= @user.email %><br>
+ID: <%= @user.id%><br>
+
+
+Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>

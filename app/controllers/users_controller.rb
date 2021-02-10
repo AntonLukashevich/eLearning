@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
+    #binding.pry
     @user = User.new(user_params)
 
     if @user.save
@@ -42,9 +42,11 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name,:email, :password, :password_confirmation,
-                                 :role_id).merge(role_id: Role.where(name: 'user').last.id)
-
+    # params.require(:user).permit(:first_name, :last_name,:email, :password, :password_confirmation,
+    #                              :role_id).merge(role_id: Role.where(name: 'user').last.id)
+    #
+    permitted = params.require(:user).permit(:first_name, :last_name,:email, :password, :password_confirmation, :role_id, :avatar)
+    permitted.merge!(role_id: Role.where(name: 'user').last.id)
   end
 
   def set_user

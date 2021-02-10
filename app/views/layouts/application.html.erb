@@ -15,15 +15,17 @@
 <header class="navbar navbar-light bg-faded">
   <h5 class="my-0 mr-md-auto me-md-0"><%= link_to "eLearning", courses_index_path %></h5>
   <nav class="my-1 my-md-0">
-            <span class="p-2 text-dark">
-                567856785678</span>
+
   </nav>
-  <span class="p-2 text-dark">
-            <%= link_to "Account", user_session_path %></span>
+
 
   <%if user_signed_in? %>
     <span class="p-2 text-dark">
+            <%= link_to current_user.email, user_path(current_user) %>
+  </span>
+    <span class="p-2 text-dark">
             <%= link_to "Sign out", destroy_user_session_path, method: :delete %></span>
+
     <% else %>
   <span class="p-2 text-dark">
              <%= link_to "Sign up", new_user_registration_path %></span>
