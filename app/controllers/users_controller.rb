@@ -42,10 +42,8 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    # params.require(:user).permit(:first_name, :last_name,:email, :password, :password_confirmation,
-    #                              :role_id).merge(role_id: Role.where(name: 'user').last.id)
-    #
-    permitted = params.require(:user).permit(:first_name, :last_name,:email, :password, :password_confirmation, :role_id, :avatar)
+
+    permitted = params.require(:course).permit(:title)
     permitted.merge!(role_id: Role.where(name: 'user').last.id)
   end
 

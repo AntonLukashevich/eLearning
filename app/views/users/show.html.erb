@@ -9,3 +9,7 @@ ID: <%= @user.id%><br>
 
 
 Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
+
+<br><br><br>
+
+<button><%= link_to "Create course", new_course_path %></button>

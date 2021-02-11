@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'organizations/index'
   devise_for :users, controllers: {registrations: 'users' }
   get 'courses/index'
   get 'users/index'
@@ -10,5 +11,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :courses
+  resources :organizations
   resources :roles
+
 end

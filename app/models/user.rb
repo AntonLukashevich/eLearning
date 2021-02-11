@@ -5,11 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   belongs_to :role
-  has_many :course_authors
+  belongs_to :course_authors
   has_many :user_courses_lists
   has_many :certificates
 
   mount_uploader :avatar, AvatarUploader
+
+
 
 
 end
