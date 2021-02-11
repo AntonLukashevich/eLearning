@@ -1,7 +1,7 @@
 class Course < ApplicationRecord
   #after_create :add_course_author_to_authors_table
 
-  belongs_to :course_author
+  has_and_belongs_to_many :users
   #accepts_nested_attributes_for :course_author, allow_destroy: true
 
 

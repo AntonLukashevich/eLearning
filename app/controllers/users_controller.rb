@@ -11,6 +11,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    #@user_courses = User.joins(:courses).where(users_courses: {id: params[:id]})
+    @user_courses = User.includes(:courses).find(params[:id]).courses
+    #@user_courses = User.eager_load(:courses).find(params[:id]).courses
   end
 
   def edit
@@ -48,7 +51,8 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user= User.find(params[:id])
+    @user = User.find(params[:id])
+    #.includes(:courses).where(courses: {id: params[:id]})
   end
 
 end

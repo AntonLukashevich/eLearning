@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   belongs_to :role
-  belongs_to :course_authors
+  has_and_belongs_to_many :courses
   has_many :user_courses_lists
   has_many :certificates
 

@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy]
-  after_action :add_course_author_to_authors_table, only: :create
+  #after_action :add_course_author_to_authors_table, only: :create
 
   def index
     @courses  = Course.all
@@ -52,11 +52,11 @@ class CoursesController < ApplicationController
     @course= Course.find(params[:id])
   end
 
-  def add_course_author_to_authors_table
-    @course_author = CourseAuthor.create(user_id: User.find_by(id: session[:user_id]), course_id: Course.last.id)
-    binding.pry
-    @course_author.save
-  end
-
+  # def add_course_author_to_authors_table
+  #   @course_author = CourseAuthor.create(user_id: User.find_by(id: session[:user_id]), course_id: Course.last.id)
+  #   #@course_author = CourseAuthor.create(user_id: 4, course_id: Course.last.id)
+  #   #binding.pry
+  #   @course_author.save
+  # end
 
 end

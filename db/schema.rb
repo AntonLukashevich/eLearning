@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_074523) do
+ActiveRecord::Schema.define(version: 2021_02_11_133437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,15 +24,6 @@ ActiveRecord::Schema.define(version: 2021_02_11_074523) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_certificates_on_course_id"
     t.index ["user_id"], name: "index_certificates_on_user_id"
-  end
-
-  create_table "course_authors", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_course_authors_on_course_id"
-    t.index ["user_id"], name: "index_course_authors_on_user_id"
   end
 
   create_table "course_blocks", force: :cascade do |t|
@@ -118,10 +109,15 @@ ActiveRecord::Schema.define(version: 2021_02_11_074523) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  create_table "users_courses", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_users_courses_on_course_id"
+    t.index ["user_id"], name: "index_users_courses_on_user_id"
+  end
+
   add_foreign_key "certificates", "courses"
   add_foreign_key "certificates", "users"
-  add_foreign_key "course_authors", "courses"
-  add_foreign_key "course_authors", "users"
   add_foreign_key "course_blocks", "courses"
   add_foreign_key "lecture_blocks", "lectures"
   add_foreign_key "lectures", "course_blocks"
