@@ -1,4 +1,5 @@
 class CourseAuthorsController < ApplicationController
+
   def new
     @course_author = CourseAuthor.new
   end
@@ -7,7 +8,7 @@ class CourseAuthorsController < ApplicationController
     @course_author = CourseAuthor.new(author_params)
 
     if @course_author.save
-      redirect_to
+      redirect_to @course_author
     else
       render 'new'
     end
