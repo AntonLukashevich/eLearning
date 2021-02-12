@@ -19,7 +19,15 @@ class CoursesController < ApplicationController
   end
 
   def create
+
+    @user = User.find(session[:user_id])
+    #@user.courses.create(course_params)
     @course = Course.new(course_params)
+    #binding.pry
+    #@course.user_ids << User.find(current_user).id
+    @course.user_ids << @user.id
+    #@course = @user.courses.create(course_params)
+
     if @course.save
       #@course.build_course_author
       redirect_to @course

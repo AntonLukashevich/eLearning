@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_11_133437) do
+ActiveRecord::Schema.define(version: 2021_02_12_091839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2021_02_11_133437) do
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "courses_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_courses_users_on_course_id"
+    t.index ["user_id"], name: "index_courses_users_on_user_id"
   end
 
   create_table "lecture_blocks", force: :cascade do |t|
@@ -107,13 +114,6 @@ ActiveRecord::Schema.define(version: 2021_02_11_133437) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
-  end
-
-  create_table "users_courses", id: false, force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "course_id"
-    t.index ["course_id"], name: "index_users_courses_on_course_id"
-    t.index ["user_id"], name: "index_users_courses_on_user_id"
   end
 
   add_foreign_key "certificates", "courses"

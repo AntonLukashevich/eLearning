@@ -1,14 +1,13 @@
 <h4>Your account</h4>
 
-
 <%=image_tag @user.avatar.url(:thumb), class: 'img-show' if  @user.avatar?%><br>
 First name: <%= @user.first_name %><br>
 Last name: <%= @user.last_name %><br>
 Email: <%= @user.email %><br>
 ID: <%= @user.id%><br>
-
-
 Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
+
+
 
 <br><br><br>
 
@@ -17,15 +16,13 @@ Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
 <button><%= link_to "Create course", new_course_path %></button>
 
 
+
+
 <table>
+  <%#binding.pry %>
   <% @user_courses.each do |course| %>
     <tr>
-      <td><%= course.course.title %></td>
-      <td><%= link_to 'Show', user_path(course) %></td>
-      <td><%= link_to 'Edit', edit_user_path(course) %></td>
-      <td><%= link_to 'Destroy', user_path(course),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' } %></td>
+      <td><%= course.title %></td>
     </tr>
   <% end %>
 
