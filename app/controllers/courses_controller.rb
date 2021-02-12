@@ -19,17 +19,11 @@ class CoursesController < ApplicationController
   end
 
   def create
-
-    @user = User.find(session[:user_id])
-    #@user.courses.create(course_params)
-    @course = Course.new(course_params)
+    @user = User.find_by(params[:user_id])
     #binding.pry
-    #@course.user_ids << User.find(current_user).id
-    @course.user_ids << @user.id
-    #@course = @user.courses.create(course_params)
+    @course = @user.courses.create(course_params)
 
     if @course.save
-      #@course.build_course_author
       redirect_to @course
     else
       render 'new'
@@ -51,7 +45,7 @@ class CoursesController < ApplicationController
 
   private
   def course_params
-    permitted = params.require(:course).permit(:title, :description,:type_course, :rating, :status)
+    permitted = params.require(:course).permit(:title, :description,:type_course, :rating, :status, :user_id)
     # course_author_attributes: [user_id: session[:user_id], course_id: :course.id] )
     permitted.merge!(status: "draft" )
   end
