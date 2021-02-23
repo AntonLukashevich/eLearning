@@ -3,7 +3,9 @@ class CoursesController < ApplicationController
   #after_action :add_course_author_to_authors_table, only: :create
 
   def index
-    @courses  = Course.all
+    #binding.pry
+    @courses  = Course.eager_load(:course_blocks)
+    #binding.pry
   end
 
   def new
@@ -40,7 +42,7 @@ class CoursesController < ApplicationController
 
   def destroy
     @course.destroy
-    redirect_to users_path
+    redirect_to courses_path
   end
 
   private
@@ -62,3 +64,4 @@ class CoursesController < ApplicationController
   # end
 
 end
+

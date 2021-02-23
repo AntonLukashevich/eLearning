@@ -32,6 +32,7 @@ gem 'devise'
 gem 'pry'
 gem 'carrierwave'
 gem "mini_magick"
+gem 'trix-rails', require: 'trix'
 
 gem "letter_opener", :group => :development
 

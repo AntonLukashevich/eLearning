@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'lecture_blocks/index'
+  get 'lectures/index'
   get 'organizations/index'
   devise_for :users, controllers: {registrations: 'users' }
   get 'courses/index'
@@ -10,8 +12,31 @@ Rails.application.routes.draw do
   root 'courses#index', as: 'home'
 
   resources :users
-  resources :courses
+
+  resources :courses do
+    resources :course_blocks do
+      resources :lectures, controller: 'lectures', type: 'Lecture' do
+        resources :lecture_blocks
+      end
+    end
+  end
+
+
+  # resources :courses do
+  #     resources :lectures, controller: 'lectures', type: 'Lecture' do
+  #       resources :lecture_blocks
+  #     end
+  # end
+
   resources :organizations
   resources :roles
+
+
+  #resources :lectures
+
+
+  #resources :lecture_blocks
+  #resources :text_content, controller: 'lecture_blocks', type: 'TextContent'
+
 
 end

@@ -1,0 +1,18 @@
+<h3>New Lecture</h3>
+<%binding.pry %>
+<%= form_with(model: @lecture, url: [@course, @course_block, @lecture]) do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
+
+<%end %>

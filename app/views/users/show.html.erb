@@ -10,9 +10,6 @@ Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
 
 
 <br><br><br>
-
-
-
 <button><%= link_to "Create course", new_course_path %></button>
 
 
@@ -22,7 +19,8 @@ Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
   <%#binding.pry %>
   <% @user_courses.each do |course| %>
     <tr>
-      <td><%= course.title %></td>
+      <td><%= course.title %> | <%=link_to 'Show',course_path(course) %></td>
+
     </tr>
   <% end %>
 
