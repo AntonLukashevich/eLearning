@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_24_121700) do
+ActiveRecord::Schema.define(version: 2021_02_24_143613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,6 @@ ActiveRecord::Schema.define(version: 2021_02_24_121700) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "course_block_id", null: false
-    t.index ["course_block_id"], name: "index_lecture_blocks_on_course_block_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -156,7 +154,6 @@ ActiveRecord::Schema.define(version: 2021_02_24_121700) do
   add_foreign_key "certificates", "courses"
   add_foreign_key "certificates", "users"
   add_foreign_key "course_blocks", "courses"
-  add_foreign_key "lecture_blocks", "course_blocks"
   add_foreign_key "user_courses_lists", "courses"
   add_foreign_key "user_courses_lists", "users"
   add_foreign_key "users", "roles"

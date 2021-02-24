@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :courses do
-    resources :course_blocks
+    #resources :course_blocks
     resources :lectures do
         resources :lecture_blocks
     end

@@ -21,7 +21,7 @@ class LectureBlocksController < ApplicationController
   end
 
   def create
-
+    binding.pry
     @course = Course.find(params[:course_id])
     @lecture = @course.lectures.find(params[:lecture_id])
     @lecture_block = @lecture.lecture_blocks.build(block_params)
@@ -37,7 +37,14 @@ class LectureBlocksController < ApplicationController
 
   def block_params
     #:course_block_id = params[:lecture_id]
-    params.require(:lecture_block).permit(:title, :content, course_block_id: :lecture_id)
+    binding.pry
+
+    a = params.require(:lecture_block).permit(:title, :content, :lecture_id).to_h.tap do |n|
+      binding.pry
+      n["course_block_id"] = params["lecture_id"]
+      #n.except!(:lecture_id)
+    end
+    binding.pry
   end
 
   def set_lecture_block
