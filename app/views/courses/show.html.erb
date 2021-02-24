@@ -6,12 +6,12 @@
 </div>
 <br>
 <%# binding.pry %>
-<%=link_to 'Create new Block of Course', new_course_course_block_path(@course)%>
+<%=link_to 'Create new lecture of Course', new_course_lecture_path(@course)%>
 <br>
 <div>
   <% @course.course_blocks.each do |block| %>
     <div>
-      <%= block.title%> | <%= link_to 'Show', course_course_block_path(@course, block) %>
+      <%= block.title%> | <%= link_to 'Show', course_lecture_path(@course, block) %>
       <br>
     </div>
   <%end %>

@@ -13,5 +13,7 @@
  *= require_tree .
  *= require_self
  *= require trix
- */
+*/
+
 @import "bootstrap";
+@import "./actiontext.scss";

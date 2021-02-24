@@ -14,13 +14,13 @@ Rails.application.routes.draw do
   resources :users
 
   resources :courses do
-    resources :course_blocks do
-      resources :lectures, controller: 'lectures', type: 'Lecture' do
+    resources :course_blocks
+    resources :lectures do
         resources :lecture_blocks
-      end
     end
   end
 
+  resources :pictures, only: [:create, :destroy]
 
   # resources :courses do
   #     resources :lectures, controller: 'lectures', type: 'Lecture' do

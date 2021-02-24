@@ -1,15 +1,13 @@
 class LecturesController < ApplicationController
-  before_action :set_course, only: %i[show edit update destroy]
+  before_action :set_lecture, only: %i[show edit update destroy]
 
   def index
     @course = Course.find(params[:course_id])
-    @course_block = @course.course_blocks.find(params[:course_block_id])
-    @lectures = @course_block.lecture
+    @lectures = @course.course_blocks.where(type: "Lecture")
   end
 
   def new
     @course = Course.find(params[:course_id])
-    @course_block = @course.course_blocks.find(params[:course_block_id])
     @lecture = Lecture.new
   end
 
@@ -20,11 +18,9 @@ class LecturesController < ApplicationController
   end
 
   def create
-
     @course = Course.find(params[:course_id])
-    @course_block = @course.course_blocks.find(params[:course_block_id])
-    binding.pry
-    @lecture = @course_block.lectures.build(lecture_params)
+    #binding.pry
+    @lecture = @course.lectures.build(lecture_params)
 
     if @lecture.save
       redirect_to @course
@@ -53,6 +49,9 @@ class LecturesController < ApplicationController
   end
 
   def set_lecture
-    @lecture = Lecture.find(params[:id])
+    #binding.pry
+    @course = Course.find(params[:course_id])
+    #binding.pry
+    @lecture = @course.course_blocks.find(params[:id])
   end
 end

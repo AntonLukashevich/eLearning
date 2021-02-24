@@ -1,5 +1,5 @@
 class Lecture < CourseBlock
-  belongs_to :course_block
+  belongs_to :course
 
   has_many :lecture_blocks
 end

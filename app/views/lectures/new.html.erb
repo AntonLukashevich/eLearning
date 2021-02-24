@@ -1,6 +1,6 @@
 <h3>New Lecture</h3>
-<%binding.pry %>
-<%= form_with(model: @lecture, url: [@course, @course_block, @lecture]) do |f| %>
+<%#binding.pry %>
+<%= form_with(model: @lecture, url: [@course, @lecture]) do |f| %>
   <div>
     <%= f.label :title %>
     <%= f.text_field :title %>

@@ -1,0 +1,7 @@
+Lecture:<h3> <%=@lecture.title %></h3>
+<div>
+  Content:<%=@lecture.description %>
+</div>
+<br><br>
+
+<%=link_to 'Add theme to lecture', new_course_lecture_lecture_block_path(@course, @lecture) %>
