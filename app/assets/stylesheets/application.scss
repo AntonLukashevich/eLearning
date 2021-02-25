@@ -17,3 +17,20 @@
 
 @import "bootstrap";
 @import "./actiontext.scss";
+
+body {
+  background-color: #EFEFEF;
+  padding-right: 15%;
+  padding-left: 15%;
+}
+
+.course-container{
+  //background-color: #EFEEEF;
+  padding-left: 1em;
+  padding-top: 1em;
+  padding-right: 1em;
+}
+
+.navbar{
+  background-color: #D4E6F1;
+}

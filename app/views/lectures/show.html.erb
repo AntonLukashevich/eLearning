@@ -1,7 +1,14 @@
 Lecture:<h3> <%=@lecture.title %></h3>
 <div>
-  Content:<%=@lecture.description %>
+  Description:<%=@lecture.description %>
 </div>
 <br><br>
 
 <%=link_to 'Add theme to lecture', new_course_lecture_lecture_block_path(@course, @lecture) %>
+
+<% @lecture.lecture_blocks.each do |block|%>
+  <div>
+    <%= block.title %> | <%=link_to 'Show',course_lecture_lecture_block_path(@course, @lecture, block)%>
+  </div>
+  <br>
+<% end %>

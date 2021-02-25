@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_24_143613) do
+ActiveRecord::Schema.define(version: 2021_02_25_141142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2021_02_24_143613) do
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
   end
 
   create_table "courses_users", force: :cascade do |t|
@@ -94,8 +95,12 @@ ActiveRecord::Schema.define(version: 2021_02_24_143613) do
 
   create_table "lecture_blocks", force: :cascade do |t|
     t.string "title"
+    t.bigint "lecture_id"
+    t.bigint "test_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_id"], name: "index_lecture_blocks_on_lecture_id"
+    t.index ["test_id"], name: "index_lecture_blocks_on_test_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -154,6 +159,8 @@ ActiveRecord::Schema.define(version: 2021_02_24_143613) do
   add_foreign_key "certificates", "courses"
   add_foreign_key "certificates", "users"
   add_foreign_key "course_blocks", "courses"
+  add_foreign_key "lecture_blocks", "course_blocks", column: "lecture_id"
+  add_foreign_key "lecture_blocks", "course_blocks", column: "test_id"
   add_foreign_key "user_courses_lists", "courses"
   add_foreign_key "user_courses_lists", "users"
   add_foreign_key "users", "roles"

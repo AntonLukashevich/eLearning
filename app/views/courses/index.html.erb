@@ -1,13 +1,24 @@
-<h1>Courses#index</h1>
 
-<table>
-  <%# binding.pry %>
-  <% @courses.each do |course| %>
-    <tr>
-    <td>
-      Name: <%= course.title %> | <%=link_to 'Show',course_path(course)%> |
-      <%= link_to 'Destroy', course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
-    </td>
-    </tr>
-  <% end %>
-</table>
+
+
+<%# binding.pry %>
+<% @courses.each do |course| %>
+  <article class="course">
+
+    <selection class="course clearfix" >
+      <div>
+        <%= image_tag course.image.url(:course), class: 'img-thumbnail img-show' if course.image? %>
+      </div>
+      <div class="course-title"> <%= course.title %></div>
+    </selection>
+
+    <div align="right">
+      <small class="course">
+        <%= link_to 'Show', course_path(course) %> |
+        <%= link_to 'Destroy', course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </small>
+    </div>
+
+
+  </article>
+<% end %>

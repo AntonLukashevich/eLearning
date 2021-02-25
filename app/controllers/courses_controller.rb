@@ -47,7 +47,7 @@ class CoursesController < ApplicationController
 
   private
   def course_params
-    permitted = params.require(:course).permit(:title, :description,:type_course, :rating, :status, :user_id)
+    permitted = params.require(:course).permit(:title, :description,:type_course, :rating, :status, :user_id, :image)
     # course_author_attributes: [user_id: session[:user_id], course_id: :course.id] )
     permitted.merge!(status: "draft" )
   end
