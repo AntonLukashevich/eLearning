@@ -2,31 +2,31 @@
 // They will automatically be included in application.scss.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-article.course{
-  margin-top: 1em;
-  padding: 1em 0;
-  border: 1px solid lightslategray;
-  border-radius: 5px;
-  //background-color: aliceblue;
-  //height: 10em;
+h1 {
+  color: #111;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 64px;
+  margin: 0 0 0;
+  padding: 10px 30px;
+  text-transform: uppercase;
 }
 
-section.course{
-  padding: 1em 0;
+
+div.description {
+  color: #111;
+  font-family: 'Raleway',sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 32px;
+  margin: 0 0 24px;
 }
 
-div.course-title{
-  padding-left: 1em;
-  font-size: x-large;
+div.summary{
+  padding: 1em;
 }
 
-small.course{
-  padding-bottom: 1em;
-  padding-right: 1em;
-}
-
-.img-show{
-  display: block;
-  float: left;
-  margin-right: 1em;
+.course-description{
+  height: auto;
 }

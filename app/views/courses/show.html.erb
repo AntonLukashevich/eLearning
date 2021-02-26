@@ -1,6 +1,11 @@
+<div align="right">
+  <%=link_to 'Back to Main', courses_path%>
+  | <%= link_to 'Edit', edit_course_path(@course) %>
+</div>
 <div>
-  Title: <%= @course.title %><br>
-  Description: <%= @course.description %><br>
+  <%=image_tag @course.image.url(:course), class: 'img-thumbnail img-show' if @course.image? %>
+  <h1><%= @course.title %></h1>
+  <div class="description"> <%= @course.description %></div>
   Status: <%= @course.status %><br>
   Type: <%= @course.type_course %><br>
 </div>
@@ -11,7 +16,8 @@
 <div>
   <% @course.course_blocks.each do |block| %>
     <div>
-      <%= block.title%> | <%= link_to 'Show', course_lecture_path(@course, block) %>
+      <%= block.title%> | <%=block.id %> | <%= link_to 'Show', course_lecture_path(@course, block) %>
+      | <%= link_to 'Edit', edit_course_lecture_path(@course, block) %>
       <br>
     </div>
   <%end %>

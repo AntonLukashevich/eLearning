@@ -11,16 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
     @user_courses = User.find(params[:id]).courses
-
-
-    #@user_courses = User.joins(:courses).where(users_courses: {id: params[:id]})
-    #
-    # user_courses = User.includes(:courses).find(params[:id]).courses
-    #@courses = Course.joins(users_course: :user).where(user_id: current_user)
-    #@user = User.includes(:courses).find
-
   end
 
   def edit
@@ -61,7 +52,6 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-    #.includes(:courses).where(courses: {id: params[:id]})
   end
 
 end

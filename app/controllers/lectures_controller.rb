@@ -19,7 +19,6 @@ class LecturesController < ApplicationController
 
   def create
     @course = Course.find(params[:course_id])
-    #binding.pry
     @lecture = @course.lectures.build(lecture_params)
 
     if @lecture.save
@@ -49,9 +48,7 @@ class LecturesController < ApplicationController
   end
 
   def set_lecture
-    #binding.pry
     @course = Course.find(params[:course_id])
-    #binding.pry
     @lecture = @course.course_blocks.find(params[:id])
   end
 end

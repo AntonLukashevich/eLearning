@@ -13,20 +13,20 @@
 <body>
 <div class="w-70 px-0  course-container">
 <header class="navbar navbar-expand-lg navbar-light" >
-  <h5 class="mr-md-auto me-md-0"><%= link_to "eLearning", courses_index_path %></h5>
+  <h5 class="mr-md-auto me-md-0"><%= link_to "eLearning", courses_index_path, style: 'color: black;' %></h5>
 
   <%if user_signed_in? %>
     <span class="p-1 text-dark">
-            <%= link_to current_user.email, user_path(current_user) %>
+            <%= link_to current_user.email, user_path(current_user), style: 'color: black;' %>
   </span>
     <span class="p-1 text-dark">
-            <%= link_to "Sign out", destroy_user_session_path, method: :delete %></span>
+            <%= link_to "| Log out ", destroy_user_session_path, method: :delete, style: 'color: black;' %></span>
 
     <% else %>
   <span class="p-1 text-dark">
-             <%= link_to "Sign up", new_user_registration_path %></span>
+             <%= link_to "Sign up |", new_user_registration_path, style: 'color: black;' %></span>
   <span class="p-1 text-dark">
-            <%= link_to "Sign in", new_user_session_path %></span>
+            <%= link_to "Log in ", new_user_session_path, style: 'color: black;' %></span>
 
     <%end %>
 </header>

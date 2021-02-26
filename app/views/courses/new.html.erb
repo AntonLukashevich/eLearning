@@ -1,35 +1,7 @@
+<div align="tight">
+
+</div>
 <h3>New Course</h3>
-
-<%= form_for @course, html: {multipart: true} do |f| %>
-
-  <div class="form-group">
-    <div class="form-group">
-      <%= f.label "Title:" %><br />
-      <%= f.text_field :title,  class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label "Description:" %>
-      <%= f.text_area :description, class: 'form-control' %>
-    </div>
-
-
-    <div class="form-group">
-      <%= f.label "Type: " %>
-      <%=f.select :type_course, [['public'],['private'], ['individual']], class: 'form-select' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label "Image:" %>
-      <%= f.file_field :image, class: 'form-control' %>
-    </div>
-
-    <br>
-    <div class="actions">
-      <%= f.submit "Create" %>
-    </div>
-
-  </div>
-<% end %>
+<%= render "form" %>
 
 

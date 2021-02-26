@@ -29,8 +29,53 @@ body {
   padding-left: 1em;
   padding-top: 1em;
   padding-right: 1em;
+  padding-bottom: 3em;
 }
 
 .navbar{
   background-color: #D4E6F1;
 }
+
+.btn-outline-info{
+  border-color: #B7DFF8;
+
+}
+.btn-outline-info:hover{
+  background-color: #B7DFF8;
+
+}
+
+article.course{
+  margin-top: 1em;
+  padding: 1em 0;
+  border: 1px solid lightslategray;
+  border-radius: 5px;
+  //background-color: aliceblue;
+  //height: 10em;
+}
+
+section.course{
+  padding: 1em 0;
+}
+
+div.course-title{
+  padding-left: 1em;
+  font-size: x-large;
+}
+
+div.course{
+  display: inline-block;
+}
+
+div.course-d{
+  padding-right: 1em;
+  display: inline-block;
+}
+
+.img-show{
+  display: block;
+  float: left;
+  margin-right: 1em;
+}
+
+

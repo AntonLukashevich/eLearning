@@ -7,16 +7,21 @@
 
     <selection class="course clearfix" >
       <div>
-        <%= image_tag course.image.url(:course), class: 'img-thumbnail img-show' if course.image? %>
+        <%= link_to course_path(course) do %>
+        <%=image_tag course.image.url(:course), class: 'img-thumbnail img-show' if course.image? %>
+          <%end %>
       </div>
-      <div class="course-title"> <%= course.title %></div>
+      <div class="course-title"> <%= link_to course.title, course_path(course), style: 'color: black;' %>  | id: <%=course.id %></div>
+      <div class="summary" > <%= course.description %> </div>
     </selection>
 
-    <div align="right">
-      <small class="course">
-        <%= link_to 'Show', course_path(course) %> |
-        <%= link_to 'Destroy', course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %>
-      </small>
+    <div align="right" >
+      <div class="course">
+        <%= button_to 'Show', course_path(course), class: "btn btn-outline-info btn-sm", :method => "get" %>
+      </div>
+      <div class="course-d">
+        <%= button_to 'Destroy', course_path(course), class: "btn btn-outline-warning btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
     </div>
 
 

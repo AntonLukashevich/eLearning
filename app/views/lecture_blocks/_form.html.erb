@@ -1,0 +1,14 @@
+<%= form_with(model: @lecture_block, url: [@course, @lecture, @lecture_block]) do |f| %>
+  <div class="form-group">
+    <%= f.label 'Title:' %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <br>
+  <div class="form-group">
+    <%= f.label 'Content:' %>
+    <%= f.rich_text_area :content, class: 'editor' %>
+  </div>
+
+  <%= f.submit class: 'btn btn-success' %>
+
+<% end %>
