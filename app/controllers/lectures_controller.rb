@@ -3,7 +3,16 @@ class LecturesController < ApplicationController
 
   def index
     @course = Course.find(params[:course_id])
-    @lectures = @course.course_blocks.where(type: "Lecture")
+    @lectures = @course.course_blocks.where(type: "Lecture").order(:order)
+  end
+
+  def sort
+    @course = Course.find(params[:course_id])
+    params[:lecture].each_with_index do |id, index|
+      Lecture.where(id: id).update_all(order: index + 1)
+    end
+
+    head :ok
   end
 
   def new
@@ -30,7 +39,7 @@ class LecturesController < ApplicationController
 
   def update
     if @lecture.update(lecture_params)
-      redirect_to @lecture
+      redirect_to @course
     else
       render 'edit'
     end

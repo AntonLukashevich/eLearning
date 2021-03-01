@@ -34,6 +34,8 @@ gem 'pry-nav'
 gem 'carrierwave'
 gem "mini_magick"
 gem 'trix-rails', require: 'trix'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
+gem 'acts_as_list'
 
 gem "letter_opener", :group => :development
 

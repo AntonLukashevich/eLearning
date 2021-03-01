@@ -1,9 +1,11 @@
+<%= javascript_pack_tag 'change_order.js' %>
+
 <div align="right">
-  <%=link_to 'Back to Main', courses_path%>
+  <%= link_to 'Back to Main', courses_path %>
   | <%= link_to 'Edit', edit_course_path(@course) %>
 </div>
 <div>
-  <%=image_tag @course.image.url(:course), class: 'img-thumbnail img-show' if @course.image? %>
+  <%= image_tag @course.image.url(:course), class: 'img-thumbnail img-show' if @course.image? %>
   <h1><%= @course.title %></h1>
   <div class="description"> <%= @course.description %></div>
   Status: <%= @course.status %><br>
@@ -11,14 +13,26 @@
 </div>
 <br>
 <%# binding.pry %>
-<%=link_to 'Create new lecture of Course', new_course_lecture_path(@course)%>
+<%= link_to 'Create new lecture of Course', new_course_lecture_path(@course) %>
 <br>
+
 <div>
-  <% @course.course_blocks.each do |block| %>
-    <div>
-      <%= block.title%> | <%=block.id %> | <%= link_to 'Show', course_lecture_path(@course, block) %>
-      | <%= link_to 'Edit', edit_course_lecture_path(@course, block) %>
-      <br>
-    </div>
-  <%end %>
+  <ul id="blocks-list">
+<% @course.course_blocks.each do |block| %>
+      <li>
+        | id: <%= block.id %> | <%= block.order %>
+        |<%= link_to block.title, course_lecture_path(@course, block) %>
+        | <%= link_to 'Edit', edit_course_lecture_path(@course, block) %>
+      </li>
+<% end %>
+  </ul>
 </div>
+
+
+
+<!--<div id="blocks-list" class="list-group" data-url=" <%#= sort_course_lectures_path(@course) %>">-->
+  <%# @course.course_blocks.each do |block| %>
+<!--    | id: <%#= block.id %> | <%#= block.order %>|<%#= link_to block.title, course_lecture_path(@course, block), id: dom_id(block) %>-->
+<!--    | <%#= link_to 'Edit', edit_course_lecture_path(@course, block) %>-->
+  <%# end %>
+<!--</div>-->

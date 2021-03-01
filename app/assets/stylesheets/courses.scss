@@ -30,3 +30,18 @@ div.summary{
 .course-description{
   height: auto;
 }
+
+
+#blocks-list{
+  list-style: none;
+  padding-left: 0;
+
+  li{
+    cursor: pointer;
+    border: 1px solid #B7DFF8;
+    padding: 5px;
+    margin-bottom: 1px;
+    border-radius: 3px;
+    background-color: #D2EEFF;
+  }
+}
