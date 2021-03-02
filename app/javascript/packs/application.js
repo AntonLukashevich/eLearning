@@ -3,9 +3,9 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-
 //= require jquery3
-//= require rails-ujs
+
+//= require jquery-ui
 //= require jquery-ui/widget
 //= require jquery-ui/sortable
 //= require popper
@@ -23,14 +23,14 @@ import "channels"
 
 
 
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
 
 
 require("trix")
 require("@rails/actiontext")
 
 
+
+import "controllers"

@@ -35,7 +35,7 @@ gem 'carrierwave'
 gem "mini_magick"
 gem 'trix-rails', require: 'trix'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
-gem 'acts_as_list'
+gem 'acts_as_list', "~> 1.0"
 
 gem "letter_opener", :group => :development
 

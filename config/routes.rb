@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   resources :courses do
     #resources :course_blocks
     resources :lectures do
-      collection do
-        patch :sort
+
+      member do
+        patch :move
       end
         resources :lecture_blocks
     end

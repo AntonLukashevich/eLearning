@@ -258,7 +258,7 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
-  acts_as_list
+  acts_as_list (~> 1.0)
   bootsnap (>= 1.4.4)
   bootstrap
   byebug

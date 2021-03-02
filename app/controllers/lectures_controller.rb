@@ -1,18 +1,9 @@
 class LecturesController < ApplicationController
-  before_action :set_lecture, only: %i[show edit update destroy]
+  before_action :set_lecture, only: %i[show edit update destroy move]
 
   def index
     @course = Course.find(params[:course_id])
-    @lectures = @course.course_blocks.where(type: "Lecture").order(:order)
-  end
-
-  def sort
-    @course = Course.find(params[:course_id])
-    params[:lecture].each_with_index do |id, index|
-      Lecture.where(id: id).update_all(order: index + 1)
-    end
-
-    head :ok
+    @lectures = @course.course_blocks.where(type: "Lecture")
   end
 
   def new
@@ -50,6 +41,12 @@ class LecturesController < ApplicationController
     redirect_to users_path
   end
 
+  def move
+    @course = Course.find(params[:course_id])
+    @lecture = @course.course_blocks.find(params[:id])
+    @lecture.insert_at(params[:position].to_i)
+    head :ok
+  end
   private
 
   def lecture_params

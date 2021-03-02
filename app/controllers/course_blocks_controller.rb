@@ -1,5 +1,15 @@
 class CourseBlocksController < ApplicationController
 
+
+  def sort
+    @course = Course.find(params[:course_id])
+    params[:lecture].each_with_index do |id, index|
+      Lecture.where(id: id).update_all(order: index + 1)
+    end
+
+    head :ok
+  end
+
   def show
     @course = Course.find(params[:course_id])
     @course_block = @course.course_blocks.find(params[:id])

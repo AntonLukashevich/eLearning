@@ -2,7 +2,9 @@ class CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy]
 
   def index
+
     @courses  = Course.eager_load(:course_blocks)
+
   end
 
   def new
@@ -10,6 +12,13 @@ class CoursesController < ApplicationController
   end
 
   def show
+    #@authors = Course.includes(:users).find(:course_id)
+    @course_blocks = @course.lectures
+    respond_to do |format|
+      format.html
+      format.js
+      format.json {render :json => @course.to_json}
+    end
   end
 
   def edit
