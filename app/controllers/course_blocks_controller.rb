@@ -1,6 +1,5 @@
 class CourseBlocksController < ApplicationController
 
-
   def sort
     @course = Course.find(params[:course_id])
     params[:lecture].each_with_index do |id, index|

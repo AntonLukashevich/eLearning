@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_073359) do
+ActiveRecord::Schema.define(version: 2021_03_03_134156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 2021_03_02_073359) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.string "answer"
+    t.boolean "isCorrect"
+    t.bigint "question_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
   create_table "certificates", force: :cascade do |t|
@@ -117,6 +126,15 @@ ActiveRecord::Schema.define(version: 2021_03_02_073359) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "type"
+    t.text "question"
+    t.bigint "course_test_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_test_id"], name: "index_questions_on_course_test_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -162,6 +180,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_073359) do
   add_foreign_key "course_blocks", "courses"
   add_foreign_key "lecture_blocks", "course_blocks", column: "lecture_id"
   add_foreign_key "lecture_blocks", "course_blocks", column: "test_id"
+  add_foreign_key "questions", "course_blocks", column: "course_test_id"
   add_foreign_key "user_courses_lists", "courses"
   add_foreign_key "user_courses_lists", "users"
   add_foreign_key "users", "roles"

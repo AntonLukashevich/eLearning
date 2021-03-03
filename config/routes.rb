@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'lecture_blocks/index'
   get 'lectures/index'
   get 'organizations/index'
-  devise_for :users, controllers: {registrations: 'users' }
+  devise_for :users, controllers: { registrations: 'users' }
   get 'courses/index'
   get 'users/index'
   get 'roles/index'
@@ -15,32 +15,20 @@ Rails.application.routes.draw do
 
   resources :courses do
     #resources :course_blocks
-    resources :lectures do
+    resources :course_tests do
+      resources :radio_questions
+      resources :answers
+    end
 
+    resources :lectures do
       member do
         patch :move
       end
-        resources :lecture_blocks
+      resources :lecture_blocks
     end
   end
 
   resources :pictures, only: [:create, :destroy]
-
-  # resources :courses do
-  #     resources :lectures, controller: 'lectures', type: 'Lecture' do
-  #       resources :lecture_blocks
-  #     end
-  # end
-
   resources :organizations
   resources :roles
-
-
-  #resources :lectures
-
-
-  #resources :lecture_blocks
-  #resources :text_content, controller: 'lecture_blocks', type: 'TextContent'
-
-
 end

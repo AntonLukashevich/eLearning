@@ -10,7 +10,7 @@
 
 <%= link_to 'Add theme to lecture', new_course_lecture_lecture_block_path(@course, @lecture) %>
 <br><br>
-<div draggable="true">
+<div >
   <ul>
     <% @lecture.lecture_blocks.each do |block| %>
       <li>

@@ -4,7 +4,7 @@ class Course < ApplicationRecord
   has_many :user_courses_lists
   has_many :course_blocks
   has_many :lectures , dependent:  :delete_all
-  has_many :text_contents
+  has_many :course_tests , dependent:  :delete_all
 
   mount_uploader :image, ImageUploader
 

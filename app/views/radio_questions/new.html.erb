@@ -1,0 +1,8 @@
+<%= form_with(model: @question, url: [@course, @course_test, @question]) do |f| %>
+  <div class="form-group">
+    <%= f.label 'Question:' %>
+    <%= f.text_field :question, class: 'form-control' %>
+  </div>
+  <br>
+  <%= f.submit class: 'btn btn-success' %>
+<% end %>

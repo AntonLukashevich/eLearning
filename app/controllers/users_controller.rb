@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
-
   def index
     @users = User.all
   end
@@ -42,9 +41,10 @@ class UsersController < ApplicationController
   end
 
   private
+
   def user_params
 
-    permitted = params.require(:user).permit(:first_name, :last_name,:email, :password, :password_confirmation,
+    permitted = params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation,
                                              :role_id, :avatar)
 
     permitted.merge!(role_id: Role.where(name: 'user').last.id)
