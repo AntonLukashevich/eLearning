@@ -4,5 +4,15 @@
     <%= f.text_field :question, class: 'form-control' %>
   </div>
   <br>
+
+  <div class="form-group">
+    <%= f.fields_for :answers do |builder| %>
+      <div>
+        <%= builder.label 'Answer' %>
+        <%= builder.text_field :answer, class: 'form-control' %>
+        <%= builder.radio_button :is_correct, 'Correct Answer', :checked => true %>
+      </div>
+    <%end %>
+  </div>
   <%= f.submit class: 'btn btn-success' %>
 <% end %>

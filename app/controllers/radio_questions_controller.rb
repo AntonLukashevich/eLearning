@@ -1,9 +1,10 @@
 class RadioQuestionsController < ApplicationController
   def new
-    binding.pry
+    #binding.pry
     @course = Course.find(params[:course_id])
     @course_test = @course.course_tests.find(params[:course_test_id])
     @question = RadioQuestion.new
+    @question.answers.new
   end
 
   def create
@@ -21,6 +22,6 @@ class RadioQuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:question, :course_test_id)
+    params.require(params[:type].try(:downcase) || :question).permit(:question, :course_test_id, answer_attributes: [:answer, :isCorrect])
   end
 end
