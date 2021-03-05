@@ -1,6 +1,4 @@
 
-
-
 <%# binding.pry %>
 <% @courses.each do |course| %>
   <article class="course">
@@ -11,7 +9,9 @@
         <%=image_tag course.image.url(:course), class: 'img-thumbnail img-show' if course.image? %>
           <%end %>
       </div>
-      <div class="course-title"> <%= link_to course.title, course_path(course), style: 'color: black;' %>  | id: <%=course.id %></div>
+      <div class="course-title"> <%= link_to course.title, course_path(course), style: 'color: black;' %>
+        | id: <%=course.id %>| status: <%=course.status %>
+      </div>
       <div class="summary" > <%= course.description %> </div>
     </selection>
 

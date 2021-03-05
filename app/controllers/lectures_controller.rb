@@ -3,7 +3,7 @@ class LecturesController < ApplicationController
 
   def index
     @course = Course.find(params[:course_id])
-    @lectures = @course.lectures.where(type: "Lecture")
+    @lectures = @course.lectures
   end
 
   def new
@@ -38,7 +38,7 @@ class LecturesController < ApplicationController
 
   def destroy
     @lecture.destroy
-    redirect_to users_path
+    redirect_to course_path(@course)
   end
 
   def move
@@ -51,6 +51,13 @@ class LecturesController < ApplicationController
 
   def lecture_params
     params.require(:lecture).permit(:title, :description, :content)
+
+    #.to_h.tap do |n|
+    # binding.pry
+    #n["course_block_id"] = params["lecture_id"]
+    #n.except!(:lecture_id)
+    #end
+    #binding.pry
   end
 
   def set_lecture

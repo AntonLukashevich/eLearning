@@ -1,27 +1,49 @@
 <h4>Your account</h4>
+<div align="right"> <%= link_to 'Edit', edit_user_path(@user) %></div>
 
-<%=image_tag @user.avatar.url(:thumb), class: 'img-show' if  @user.avatar?%><br>
-First name: <%= @user.first_name %><br>
-Last name: <%= @user.last_name %><br>
-Email: <%= @user.email %><br>
-ID: <%= @user.id%><br>
-Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
+<div class="constants">
 
+  <div class="row">
 
+    <div class="col-2 border">
+      <div class="user-info">
+        <div class="img-show-user">
+          <%= image_tag @user.avatar.url(:thumb), class: 'img-show' if @user.avatar? %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-9 border">
+      <div class="user-info-data">
+        First name: <%= @user.first_name %><br>
+        Last name: <%= @user.last_name %><br>
+        Email: <%= @user.email %><br>
+        ID: <%= @user.id %><br>
+        Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-2 border">
+      <%= link_to "Create course", new_course_path %>
+    </div>
+    <div class="col-9 border">
+      <table>
+        <%#binding.pry %>
+        <% @user_courses.each do |course| %>
+          <tr>
+            <td><%= course.title %> | <%= link_to 'Show', course_path(course) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
 
 <br><br><br>
-<button><%= link_to "Create course", new_course_path %></button>
 
 
 
 
-<table>
-  <%#binding.pry %>
-  <% @user_courses.each do |course| %>
-    <tr>
-      <td><%= course.title %> | <%=link_to 'Show',course_path(course) %></td>
-
-    </tr>
-  <% end %>
-
-</table>

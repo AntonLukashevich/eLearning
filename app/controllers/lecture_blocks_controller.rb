@@ -2,7 +2,6 @@ class LectureBlocksController < ApplicationController
   before_action :set_lecture_block, only: %i[show edit update destroy]
 
   def index
-
   end
 
   def new
@@ -15,7 +14,6 @@ class LectureBlocksController < ApplicationController
   end
 
   def edit
-
   end
 
   def create
@@ -41,12 +39,7 @@ class LectureBlocksController < ApplicationController
   private
 
   def block_params
-    params.require(:lecture_block).permit(:title, :content, :lecture_id) #.to_h.tap do |n|
-    # binding.pry
-    #n["course_block_id"] = params["lecture_id"]
-    #n.except!(:lecture_id)
-    #end
-    #binding.pry
+    params.require(:lecture_block).permit(:title, :content, :lecture_id)
   end
 
   def set_lecture_block

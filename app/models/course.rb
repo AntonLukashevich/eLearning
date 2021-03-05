@@ -3,7 +3,7 @@ class Course < ApplicationRecord
   has_one :certificate
   has_many :user_courses_lists
   has_many :lectures , dependent:  :delete_all
-  has_many :course_tests , dependent:  :delete_all
+  has_many :testings , dependent:  :delete_all
 
   mount_uploader :image, ImageUploader
 

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   root 'courses#index', as: 'home'
 
   resources :users
-
   resources :courses do
     # #resources :course_blocks
     # resources :course_tests, :path =>'course_block' do
@@ -20,11 +19,12 @@ Rails.application.routes.draw do
     #   resources :answers
     # end
     #
+    resources :testings
+
     resources :lectures do
       member do
         patch :move
       end
-      resources :lecture_blocks
     end
   end
 
