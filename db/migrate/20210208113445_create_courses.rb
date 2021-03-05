@@ -19,6 +19,7 @@ class CreateCourses < ActiveRecord::Migration[6.1]
       t.string :type_course
       t.integer :rating
 
+
       t.timestamps
     end
   end

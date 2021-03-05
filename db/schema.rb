@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_134156) do
+ActiveRecord::Schema.define(version: 2021_03_05_084352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,35 +53,13 @@ ActiveRecord::Schema.define(version: 2021_03_03_134156) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "answers", force: :cascade do |t|
-    t.string "answer"
-    t.boolean "isCorrect"
-    t.bigint "question_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["question_id"], name: "index_answers_on_question_id"
-  end
-
-  create_table "certificates", force: :cascade do |t|
-    t.string "title"
-    t.date "date_graduation"
-    t.bigint "user_id", null: false
-    t.bigint "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_certificates_on_course_id"
-    t.index ["user_id"], name: "index_certificates_on_user_id"
-  end
-
   create_table "course_blocks", force: :cascade do |t|
-    t.integer "order"
-    t.string "type"
-    t.bigint "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "title"
     t.text "description"
     t.integer "position"
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_course_blocks_on_course_id"
   end
 
@@ -103,21 +81,14 @@ ActiveRecord::Schema.define(version: 2021_03_03_134156) do
     t.index ["user_id"], name: "index_courses_users_on_user_id"
   end
 
-  create_table "lecture_blocks", force: :cascade do |t|
+  create_table "lectures", force: :cascade do |t|
     t.string "title"
-    t.bigint "lecture_id"
-    t.bigint "test_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["lecture_id"], name: "index_lecture_blocks_on_lecture_id"
-    t.index ["test_id"], name: "index_lecture_blocks_on_test_id"
-  end
-
-  create_table "organizations", force: :cascade do |t|
-    t.string "name"
     t.text "description"
+    t.bigint "course_block_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "position"
+    t.index ["course_block_id"], name: "index_lectures_on_course_block_id"
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -126,30 +97,10 @@ ActiveRecord::Schema.define(version: 2021_03_03_134156) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "questions", force: :cascade do |t|
-    t.string "type"
-    t.text "question"
-    t.bigint "course_test_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_test_id"], name: "index_questions_on_course_test_id"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_courses_lists", force: :cascade do |t|
-    t.float "current_result"
-    t.boolean "certificate"
-    t.bigint "user_id", null: false
-    t.bigint "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_user_courses_lists_on_course_id"
-    t.index ["user_id"], name: "index_user_courses_lists_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -175,13 +126,7 @@ ActiveRecord::Schema.define(version: 2021_03_03_134156) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "certificates", "courses"
-  add_foreign_key "certificates", "users"
   add_foreign_key "course_blocks", "courses"
-  add_foreign_key "lecture_blocks", "course_blocks", column: "lecture_id"
-  add_foreign_key "lecture_blocks", "course_blocks", column: "test_id"
-  add_foreign_key "questions", "course_blocks", column: "course_test_id"
-  add_foreign_key "user_courses_lists", "courses"
-  add_foreign_key "user_courses_lists", "users"
+  add_foreign_key "lectures", "course_blocks"
   add_foreign_key "users", "roles"
 end

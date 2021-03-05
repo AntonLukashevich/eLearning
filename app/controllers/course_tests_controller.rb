@@ -20,7 +20,7 @@ class CourseTestsController < ApplicationController
   def create
 
     @course = Course.find(params[:course_id])
-    @course_test = @course.course_tests.build(test_params)
+    @course_test = @course.course_blocks.build(test_params)
 
     if @course_test.save
       redirect_to @course
@@ -34,7 +34,7 @@ class CourseTestsController < ApplicationController
   def set_test
     #binding.pry
     @course = Course.find(params[:course_id])
-    @course_test = @course.course_tests.find(params[:id])
+    @course_test = @course.course_blocks.find(params[:id])
   end
 
   def test_params

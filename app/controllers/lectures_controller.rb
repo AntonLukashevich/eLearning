@@ -3,7 +3,7 @@ class LecturesController < ApplicationController
 
   def index
     @course = Course.find(params[:course_id])
-    @lectures = @course.course_blocks.where(type: "Lecture")
+    @lectures = @course.lectures.where(type: "Lecture")
   end
 
   def new
@@ -43,18 +43,18 @@ class LecturesController < ApplicationController
 
   def move
     @course = Course.find(params[:course_id])
-    @lecture = @course.course_blocks.find(params[:id])
+    @lecture = @course.lectures.find(params[:id])
     @lecture.insert_at(params[:position].to_i)
     head :ok
   end
   private
 
   def lecture_params
-    params.require(:lecture).permit(:title, :description)
+    params.require(:lecture).permit(:title, :description, :content)
   end
 
   def set_lecture
     @course = Course.find(params[:course_id])
-    @lecture = @course.course_blocks.find(params[:id])
+    @lecture = @course.lectures.find(params[:id])
   end
 end
