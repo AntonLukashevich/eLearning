@@ -1,4 +1,4 @@
-<%= form_with(model: @question, url: [@course, @course_test, @question]) do |f| %>
+<%= form_with(model: @question, url: [@course, @testing, @question]) do |f| %>
   <div class="form-group">
     <%= f.label 'Question:' %>
     <%= f.text_field :question, class: 'form-control' %>
@@ -10,7 +10,9 @@
       <div>
         <%= builder.label 'Answer' %>
         <%= builder.text_field :answer, class: 'form-control' %>
-        <%= builder.radio_button :is_correct, 'Correct Answer', :checked => true %>
+        <%= builder.label 'Correct answer' %>
+        <%= builder.check_box :isCorrect  %>
+
       </div>
     <%end %>
   </div>

@@ -30,6 +30,6 @@
 <%= link_to 'Create new test of Course', new_course_testing_path(@course) %>
 <% @course.testings.each do |test| %>
   <div class="card card-body mb-1 mt-1">
-  <%= link_to test.title, course_testing_path(@course) %>
+  <%= link_to test.title, course_testing_path(@course, test) %>
   </div>
 <% end %>

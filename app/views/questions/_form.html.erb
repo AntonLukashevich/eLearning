@@ -1,1 +1,12 @@
-<
+<%= form_with(model: @question, url: [@course, @testing, @question]) do |f| %>
+  <div class="form-group">
+    <%= f.label 'Question:' %>
+    <%= f.text_field :question, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+  <%= f.rich_text_area :content %>
+  </div>
+  <br>
+
+  <%= f.submit class: 'btn btn-success' %>
+<% end %>

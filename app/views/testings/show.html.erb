@@ -1,2 +1,18 @@
+<div align="right">
+  <%=link_to 'Back', course_path(@course) %>
+</div>
+
 <h2><%=@testing.title %></h2>
 <%= @testing.description %>
+<br><br><br>
+<%= link_to 'add radio question', new_course_testing_question_path(@course,@testing)  %>
+<br>
+<div>All questions of the test:</div>
+<% @testing.questions.each do |q| %>
+  <div class="card card-body mb-1 mt-1">
+  <%=link_to q.question, course_testing_question_path(@course,@testing, q)%>
+     <%= link_to 'Edit', edit_course_testing_question_path(@course,@testing, q) %>
+     <%= link_to 'Destroy', course_testing_question_path(@course,@testing,q), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+  </div>
+<%end %>

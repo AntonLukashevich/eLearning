@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  answer: MyString
-  isCorect: false
-  references: 
+  answer: MyText
+  isCorrent: false
+  position: 1
+  question: one
 
 two:
-  answer: MyString
-  isCorect: false
-  references: 
+  answer: MyText
+  isCorrent: false
+  position: 1
+  question: two

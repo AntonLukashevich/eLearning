@@ -13,13 +13,12 @@ Rails.application.routes.draw do
 
   resources :users
   resources :courses do
-    # #resources :course_blocks
-    # resources :course_tests, :path =>'course_block' do
-    #   resources :radio_questions
-    #   resources :answers
-    # end
-    #
-    resources :testings
+
+    resources :testings do
+      resources :questions do
+        resources :answers
+      end
+    end
 
     resources :lectures do
       member do
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
 
   resources :pictures, only: [:create, :destroy]
   resources :organizations
