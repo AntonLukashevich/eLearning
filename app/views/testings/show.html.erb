@@ -5,7 +5,7 @@
 <h2><%=@testing.title %></h2>
 <%= @testing.description %>
 <br><br><br>
-<%= link_to 'add radio question', new_course_testing_question_path(@course,@testing)  %>
+<%= link_to 'add question', new_course_testing_question_path(@course,@testing)  %>
 <br>
 <div>All questions of the test:</div>
 <% @testing.questions.each do |q| %>

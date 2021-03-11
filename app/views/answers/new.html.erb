@@ -1,0 +1,8 @@
+<%= form_with(model: @answer) do |f| %>
+  <div class="form-group">
+    <%= f.label 'Answer:' %>
+    <%= f.text_field :answer, class: 'form-control' %>
+  </div>
+  <br>
+  <%= f.submit class: 'btn btn-success' %>
+<% end %>

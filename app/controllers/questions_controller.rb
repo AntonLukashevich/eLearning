@@ -15,6 +15,8 @@ class QuestionsController < ApplicationController
     @course = Course.find(params[:course_id])
     @testing = @course.testings.find(params[:testing_id])
     @question = Question.new
+    #@answer = Answer.new
+    @question.answers.build
   end
 
   def edit
@@ -26,7 +28,13 @@ class QuestionsController < ApplicationController
     @testing = @course.testings.find(params[:testing_id])
     @question = @testing.questions.build(question_params)
 
+    #@answer = Answer.new(answer_params)
+
+
+
     if @question.save
+      #@answer.question_id = @question.id
+      # @answer.save!
       redirect_to course_testing_path(@course, @testing)
     else
       render 'new'
@@ -49,7 +57,11 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:question, :type, :testing_id, :content)
+    params.require(:question).permit(:question, :type, :testing_id, :content, answers_attributes: Answer.attribute_names.map(&:to_sym).push(:_destroy) )
+  end
+
+  def answer_params
+    params.require(:answer).permit(:answer, :isCorrect, :position, :question_id)
   end
 
   def set_question

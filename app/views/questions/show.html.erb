@@ -4,3 +4,8 @@
 
 <%=@question.question %>
 <%=@question.content %>
+<div>
+  Answers:</div> <br>
+<%@question.answers.each do |answer| %>
+  <%=answer.answer %><br>
+<%end %>

@@ -10,13 +10,13 @@ Rails.application.routes.draw do
   get 'users/:id' => 'users#show'
 
   root 'courses#index', as: 'home'
-
+  resources :answers
   resources :users
   resources :courses do
 
     resources :testings do
       resources :questions do
-        resources :answers
+
       end
     end
 
