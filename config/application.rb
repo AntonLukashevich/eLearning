@@ -10,6 +10,7 @@ module ELearning
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    #Rails::Html::WhiteListSanitizer.allowed_tags << "iframe"
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -18,5 +19,8 @@ module ELearning
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.to_prepare do
+      ActionText::ContentHelper.allowed_tags << "iframe"
+    end
   end
 end

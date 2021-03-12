@@ -1,5 +1,5 @@
-<%= javascript_pack_tag 'type_answer.js' %>
-<%#= javascript_pack_tag 'answer_remove.js' %>
+<%= javascript_pack_tag 'add_remove_answer.js' %>
+
 <%= form_with(model: @question, url: [@course, @testing, @question]) do |f| %>
   <div class="form-group">
     <%= f.label 'Question:' %>

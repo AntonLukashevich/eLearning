@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-
+  resources :youtube
   resources :pictures, only: [:create, :destroy]
   resources :organizations
   resources :roles
