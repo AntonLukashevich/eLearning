@@ -1,28 +1,28 @@
 <%= javascript_pack_tag 'type_answer.js' %>
-<%= javascript_pack_tag 'answer_remove.js' %>
+<%#= javascript_pack_tag 'answer_remove.js' %>
 <%= form_with(model: @question, url: [@course, @testing, @question]) do |f| %>
   <div class="form-group">
     <%= f.label 'Question:' %>
     <%= f.text_field :question, class: 'form-control' %>
   </div>
+
   <div class="form-group">
-  <%= f.rich_text_area :content, class: 'editor' %>
+    <%= f.rich_text_area :content, class: 'editor' %>
   </div>
   <br>
-
-
-  <fieldset>
-  <%= f.fields_for :answers do |builder| %>
-    <div id="add-radio-answer" >
-      <%#= render 'answer', f: builder %>
-    </div>
-  <%end %>
-  </fieldset>
-  <%= link_to_add_answer('add answer', f, :answers, class:'btn btn-success' )  %>
+  <%= link_to_add_input_answer('add input answer', f, :answers, class: 'btn btn-success') %> |
+  <%= link_to_add_radio_answer('add radio answer', f, :answers, class: 'btn btn-success') %> |
+  <%= link_to_add_check_answer('add check answer', f, :answers, class: 'btn btn-success') %> |
   <br>
+  <table class="table">
+    <tbody class="fields">
+    <%= f.simple_fields_for :answers do |builder| %>
+        <%#= render 'answer', f: builder %>
+    <% end %>
+    </tbody>
+  </table>
   <br>
   <div class="form-actions">
-
     <%= f.submit class: 'btn btn-success' %>
   </div>
 <% end %>

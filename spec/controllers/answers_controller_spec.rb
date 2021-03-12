@@ -5,7 +5,7 @@ RSpec.describe 'AnswersController' do
   describe 'show' do
     let(:klass) { described_class }
     let(:local_answer) { Answer.new(answer: 'Foo', isCorrect: true) } # можно обращаться в базу
-    let(:local_answer_two) { build_stubbed(:answer) } # build_stubbed не имеет доступа к базе
+    #let(:local_answer_two) { build_stubbed(:answer) } # build_stubbed не имеет доступа к базе
 
     before do
       allow(Answer).to receive(:find).and_return(5)

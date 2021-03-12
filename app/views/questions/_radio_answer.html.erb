@@ -1,0 +1,12 @@
+<tr style="border: 1px solid black !important; padding: 1em;"  id="radio_answer">
+  <td>
+    <%= f.label 'Answer radio:' %>
+    <%= f.text_field :answer,as: :hidden , class: 'form-control' %>
+    <%= f.check_box :isCorrect, checked: true %>
+    <%= f.label 'is Correct answer' %>
+
+    <%= link_to 'delete', '#', remote: true, class: 'remove_fields' %>
+
+  </td>
+
+</tr>

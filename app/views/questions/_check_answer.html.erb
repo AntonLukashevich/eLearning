@@ -1,0 +1,9 @@
+<tr style="border: 1px solid black !important; padding: 1em;"  id="check_answer">
+  <td>
+    <%= f.label 'Answer check:' %>
+    <%= f.text_field :answer,as: :hidden , class: 'form-control' %>
+    <%= f.label 'is Correct answer' %>
+    <%= f.check_box :isCorrect, checked: true %>
+    <%= link_to 'delete', '#', remote: true, class: 'remove_fields' %>
+  </td>
+</tr>
