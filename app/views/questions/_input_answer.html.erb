@@ -1,13 +1,12 @@
 <%#= form_with(model: @answer) do |f| %>
-  <div class="nested-fields" style="border: 1px solid black; padding: 1em;">
-    <%= f.hidden_field :_destroy %>
+<tr style="border: 1px solid black !important; padding: 1em;">
+  <td>
     <%= f.label 'Answer input:' %>
-    <%= f.text_field :answer, class: 'form-control' %>
+    <%= f.text_field :answer,as: :hidden , class: 'form-control' %>
     <%= f.check_box :isCorrect, checked: true %>
-  </div>
-  <div>
-
     <%= link_to 'delete', '#', remote: true, class: 'remove_fields' %>
 
-  </div>
+  </td>
+
+</tr>
   <br>
