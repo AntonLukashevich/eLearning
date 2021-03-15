@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  title: MyString
-  date_graduation: 2021-02-08
-
-two:
-  title: MyString
-  date_graduation: 2021-02-08

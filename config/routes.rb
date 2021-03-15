@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'courses/index'
   get 'users/index'
   get 'roles/index'
+  get 'answers/index'
 
   get 'users/:id' => 'users#show'
 
