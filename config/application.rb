@@ -10,7 +10,7 @@ module ELearning
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-    #Rails::Html::WhiteListSanitizer.allowed_tags << "iframe"
+    Rails::Html::WhiteListSanitizer.allowed_tags << "iframe"
 
     # Configuration for the application, engines, and railties goes here.
     #

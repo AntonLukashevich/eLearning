@@ -20,8 +20,9 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import "app/javascript/youtube"
-import "youtube"
+import 'trix/dist/trix.css'
+//import "app/javascript/youtube"
+
 
 Rails.start()
 Turbolinks.start()
@@ -31,21 +32,4 @@ ActiveStorage.start()
 require("trix")
 require("@rails/actiontext")
 import "controllers"
-
-// $(document).on('turbolinks:load', function() {
-//
-//     $('form').on('click', '.remove_record', function(event) {
-//         $(this).prev('input[type=hidden]').val('1');
-//         $(this).closest('tr').hide();
-//         return event.preventDefault();
-//     });
-//
-//     $('form').on('click', '.add_fields', function(event) {
-//         var regexp, time;
-//         time = new Date().getTime();
-//         regexp = new RegExp($(this).data('id'), 'g');
-//         $('.fields').append($(this).data('fields').replace(regexp, time));
-//         return event.preventDefault();
-//     });
-//
-// });
+import "youtube"
