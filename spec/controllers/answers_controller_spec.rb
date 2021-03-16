@@ -1,10 +1,12 @@
 require 'spec_helper.rb'
 require "rails_helper"
 
-RSpec.describe 'AnswersController', type: :controller do
-
+RSpec.describe AnswersController, type: :controller do
+  #login_user
   before(:each) do
-    @controller = AnswersController.new
+    course = FactoryBot.create(:course)
+    testing = FactoryBot.create(:testing, course: course)
+    question = FactoryBot.create(:question, testing: testing)
   end
   describe 'show' do
     #let(:klass) { described_class }
@@ -22,20 +24,15 @@ RSpec.describe 'AnswersController', type: :controller do
     #     expect(klass.instance_variable_get(:@answer)).to eq(5)
     #   end
     # end
-    let(:answer) { Answer.create(id: 6, answer: "test answer") }
+    let(:answer) { create( :answer) }
+    let(:valid_session) { {} }
+
     context 'show' do
 
-
-      it 'should return a success response' do
-        get :show, params: {id: answer }
-        expect(response).to be_success
-      end
+      # it 'should return a success response' do
+      #   get :show, params: { id: answer }
+      #   expect(response.body).to be_success
+      # end
     end
-
   end
-
-  
-
 end
-
-#TODO: add factory_bot
