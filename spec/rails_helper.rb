@@ -4,6 +4,8 @@ require 'support/factory_bot'
 require 'shoulda/matchers'
 require_relative 'support/controller_macros'
 
+
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 require_relative "../config/environment"

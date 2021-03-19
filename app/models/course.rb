@@ -8,4 +8,5 @@ class Course < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   #validates :description, length: {maximum: 500, maximum: 10}
+   validates :title, presence: true, length: {minimum: 2}
 end

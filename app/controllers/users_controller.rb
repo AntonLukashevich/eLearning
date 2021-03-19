@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      sign_in @user
       redirect_to @user
     else
       render 'edit'

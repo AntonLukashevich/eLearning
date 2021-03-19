@@ -10,12 +10,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    # @course_blocks = @course.lectures
-    # respond_to do |format|
-    #   format.html
-    #   format.js
-    #   format.json { render :json => @course.to_json }
-    # end
   end
 
   def edit
