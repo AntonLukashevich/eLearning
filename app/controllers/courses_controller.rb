@@ -16,7 +16,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @user = User.find_by(params[:user_id])
+    @user = User.find(params[:user_id])
     @course = @user.courses.create(course_params)
 
     if @course.save

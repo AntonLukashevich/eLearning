@@ -68,7 +68,7 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe "GET #new" do
-    context 'show action' do
+    context 'action new' do
       before do
         allow(Course).to receive(:new).and_return(course)
         get :new
@@ -96,35 +96,30 @@ RSpec.describe CoursesController, type: :controller do
     context 'when params valid' do
       before do
         allow(User).to receive(:find).and_return(user)
-        allow(user).to receive(:courses).and_return(true)
-        allow(Course).to receive(:new).and_return(course)
+        allow(user.courses).to receive(:create).and_return(course)
+        post :create,  params:  {user_id: user, course: course_params}
       end
 
       it 'create a new course' do
-        post :create, params: course_params
         expect(assigns(:course)).to be(course)
       end
 
       it "redirects to the correct url: course_path(course)" do
-        post :create, params:  course_params
         expect(response).to redirect_to(course_path(course))
       end
     end
 
     context 'when params invalid' do
       before do
-        allow(User).to receive(:find).and_return(user)
-        allow(user).to receive(:courses)
-        allow(Course).to receive(:new).and_return(course)
+        post :create,  params:  {user_id: user, course: course_params_invalid}
       end
 
       it 'not creates a new course' do
-        post :create,  params:  course_params_invalid
         expect(assigns(:course)).to_not be(course)
       end
 
       it 'render template #new' do
-        post :create,  params:  course_params_invalid
+
         is_expected.to render_template :new
       end
 
@@ -132,7 +127,7 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'when valid params' do
+    context 'when params valid' do
       let(:params)  { {course_id: course.id }}
       it 'redirect to user after update' do
         patch :update , params: {id: course, course: course_params}
@@ -141,7 +136,7 @@ RSpec.describe CoursesController, type: :controller do
       end
     end
 
-    context 'when invalid params' do
+    context 'when params invalid' do
       it 'render template #edit' do
         get :edit , params: {id: course, course: course_params_invalid }
         expect(response).to render_template('edit')
@@ -154,7 +149,7 @@ RSpec.describe CoursesController, type: :controller do
     subject {delete :destroy, params: params}
     let(:params)  { { id: course.id, user_id: user.id }}
 
-    it 'delete user' do
+    it 'delete course' do
       course.reload
       expect { subject }.to change(Course, :count).by(-1)
     end
