@@ -43,7 +43,7 @@ RSpec.describe CoursesController, type: :controller do
         is_expected.to render_template :index
       end
 
-      it 'return users' do
+      it 'return courses' do
         expect(assigns(:courses)).to match_array(courses)
       end
 
@@ -57,11 +57,11 @@ RSpec.describe CoursesController, type: :controller do
         get :show, params: { id: course.id}
       end
 
-      it 'render show template if user found' do
+      it 'render show template if course found' do
         expect(response).to render_template('show')
       end
 
-      it 'return user' do
+      it 'return course' do
         expect(assigns(:course)).to eq(course)
       end
     end
@@ -143,7 +143,6 @@ RSpec.describe CoursesController, type: :controller do
       end
     end
   end
-
 
   describe 'DELETE #destroy' do
     subject {delete :destroy, params: params}

@@ -26,7 +26,7 @@ class TestingsController < ApplicationController
     else
       render 'new'
     end
-    binding.pry
+    #binding.pry
   end
 
   def update

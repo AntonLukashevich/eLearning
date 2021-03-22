@@ -39,7 +39,7 @@ RSpec.describe LecturesController, type: :controller do
         is_expected.to render_template :index
       end
 
-      it 'return users' do
+      it 'return lectures' do
         expect(assigns(:lectures)).to match_array(lectures)
       end
     end
@@ -54,7 +54,7 @@ RSpec.describe LecturesController, type: :controller do
         get :show, params: { course_id: course, id: lecture.id }
       end
 
-      it 'render show template if user found' do
+      it 'render show template if lecture found' do
         expect(response).to render_template('show')
       end
 
@@ -89,7 +89,7 @@ RSpec.describe LecturesController, type: :controller do
 
       end
 
-      it 'finds a specific course' do
+      it 'finds a specific lecture' do
         course.lectures.should_receive(:find).once.and_return(lecture)
         get :edit, params: { course_id: course, id: lecture.id }
       end
@@ -99,7 +99,6 @@ RSpec.describe LecturesController, type: :controller do
         expect(response).to render_template('edit')
       end
     end
-
   end
 
   describe 'POST #create' do
