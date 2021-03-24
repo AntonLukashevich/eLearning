@@ -1,0 +1,10 @@
+<%= form_with(model: @answer) do |f| %>
+  <div class="form-group">
+    <%= f.label 'Answer radio:' %>
+    <%= f.text_field :answer,as: :hidden , class: 'form-control' %>
+    <%= f.check_box :isCorrect, checked: true %>
+    <%= f.label 'is Correct answer' %>
+  </div>
+  <br>
+<%= f.submit %>
+<% end %>

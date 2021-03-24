@@ -1,2 +1,13 @@
+<div align="right">
+  <%=link_to 'Back', course_testing_path(@course, @testing) %>
+</div>
+
 <h3>Edit question</h3>
 <%=render 'questions/form' %>
+<br> <br>
+<% @question.answers.each  do |answer| %>
+  <div data-answer_id="<%=answer.id %>">  <%= answer.answer %> | <%=answer.isCorrect%> | <%= link_to 'EDIT', edit_answer_path(answer)%>
+    | <%= link_to 'Destroy', answer_path(answer), class: "btn btn-outline-warning btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<%end %>
+

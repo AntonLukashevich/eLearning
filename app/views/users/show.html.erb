@@ -34,7 +34,12 @@
         <%#binding.pry %>
         <% @user_courses.each do |course| %>
           <tr>
-            <td><%= course.title %> | <%= link_to 'Show', course_path(course) %></td>
+            <td>
+               -- <%= course.title %> | <%= link_to 'Show', course_path(course) %> | <%= course.status %>
+              <% if course.status == 'draft' %>
+              | <%=link_to 'to publish', to_publish_course_path(course), method: :patch, data: { confirm: 'Are you sure?' } %>
+               <% end %>
+            </td>
           </tr>
         <% end %>
       </table>

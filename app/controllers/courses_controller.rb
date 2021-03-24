@@ -16,7 +16,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
+    @user = current_user # User.find(params[:user_id])
     @course = @user.courses.create(course_params)
 
     if @course.save
@@ -37,6 +37,12 @@ class CoursesController < ApplicationController
   def destroy
     @course.destroy
     redirect_to courses_path
+  end
+
+  def to_publish
+    @course = Course.find(params[:id])
+    @course.update(:status => 'ready')
+    redirect_to user_path(current_user)
   end
 
   private

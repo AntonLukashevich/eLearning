@@ -57,7 +57,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:question, :type, :testing_id, :content, answers_attributes: Answer.attribute_names.map(&:to_sym).push(:_destroy) )
+    params.require(:question).permit(:question, :type_question, :testing_id, :content, answers_attributes: Answer.attribute_names.map(&:to_sym).push(:_destroy) )
   end
 
   def answer_params

@@ -9,6 +9,11 @@
   <div class="form-group">
     <%= f.rich_text_area :content, class: 'editor' %>
   </div>
+
+  <div class="form-group">
+    <%= f.select :type, [['radio'], ['input'], ['check']], class: "form-select"  %>
+  </div>
+
   <br>
   <%= link_to_add_input_answer('add input answer', f, :answers, class: 'btn btn-success') %> |
   <%= link_to_add_radio_answer('add radio answer', f, :answers, class: 'btn btn-success') %> |

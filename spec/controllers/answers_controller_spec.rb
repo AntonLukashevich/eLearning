@@ -36,3 +36,6 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 end
+
+#student1.stub(:name).and_return('John Smith') старый синтаксис заглушки
+# allow(student1).to receive(:name) { 'John Smith'} новый синтаксис заглушки

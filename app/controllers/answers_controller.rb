@@ -4,11 +4,15 @@ class AnswersController < ApplicationController
   end
 
   def show
-    @answer = Answer.find(params[:id])
+
   end
 
   def new
     @answer = Answer.new
+  end
+
+  def edit
+    @answer = Answer.find(params[:id])
   end
 
   def create
@@ -22,6 +26,20 @@ class AnswersController < ApplicationController
         render 'new'
       end
     end
+  end
+
+  def update
+    if @answer.update(answer_params)
+      redirect_to @answer
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @answer = Answer.find(params[:id])
+    @answer.destroy
+    #redirect_to
   end
 
   private

@@ -150,6 +150,9 @@ RSpec.describe LecturesController, type: :controller do
 
     context 'when params invalid' do
       before do
+        allow(Course).to receive(:find).and_return(course)
+        allow(course).to receive(:lectures).and_return(lectures)
+        allow(course.lectures).to receive(:find).and_return(lecture)
         patch :update, params: { course_id: course, id: lecture.id, lecture: lecture_params_invalid }
       end
 

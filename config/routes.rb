@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   resources :users
   resources :courses do
 
+    member do
+      patch :to_publish
+    end
+
     resources :testings do
       resources :questions do
 
