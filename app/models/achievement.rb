@@ -1,4 +1,4 @@
-class UserCoursesList < ApplicationRecord
+class Achievement < ApplicationRecord
   belongs_to :user
   belongs_to :course
 end

@@ -13,15 +13,19 @@ Rails.application.routes.draw do
   root 'courses#index', as: 'home'
   resources :answers
   resources :users
-  resources :courses do
 
+
+  resources :achievements
+
+  resources :courses do
     member do
       patch :to_publish
+      post :subscribe
+      delete :unsubscribe
     end
 
     resources :testings do
       resources :questions do
-
       end
     end
 

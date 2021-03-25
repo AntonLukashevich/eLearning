@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_070933) do
+ActiveRecord::Schema.define(version: 2021_03_24_112451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.integer "progress"
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_achievements_on_course_id"
+    t.index ["user_id"], name: "index_achievements_on_user_id"
+  end
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -152,6 +162,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_070933) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "achievements", "courses"
+  add_foreign_key "achievements", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"

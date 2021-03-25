@@ -1,8 +1,8 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[show edit update destroy to_publish]
 
   def index
-    @courses = Course.all
+    @courses = Course.all.where(status: 'ready')
   end
 
   def new
@@ -40,9 +40,34 @@ class CoursesController < ApplicationController
   end
 
   def to_publish
-    @course = Course.find(params[:id])
     @course.update(:status => 'ready')
     redirect_to user_path(current_user)
+  end
+
+  def subscribe
+    @course = Course.find(params[:id])
+    @user = current_user
+
+    if is_subscribed?(@user.id, @course.id)
+      redirect_to @course
+    else
+      @achievement = @course.achievements.create( :user_id => @user.id, :course_id => @course.id, :progress => 0,)
+      @achievement.save
+      redirect_to achievements_path
+    end
+  end
+
+  def unsubscribe
+    @course = Course.find(params[:id])
+    @user = current_user
+    @achievement = @course.achievements.where(:user_id => @user.id, :course_id => @course.id)
+    binding.pry
+    @achievement.destroy
+    redirect_to achievements_path
+  end
+
+  def is_subscribed?(user, course)
+    Achievement.where(:user_id => user, :course_id => course).exists?
   end
 
   private
@@ -55,5 +80,7 @@ class CoursesController < ApplicationController
   def set_course
     @course = Course.find(params[:id])
   end
+
+
 end
 

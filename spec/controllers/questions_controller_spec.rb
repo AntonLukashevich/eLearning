@@ -1,3 +1,4 @@
+require 'rails_helper'
 RSpec.describe QuestionsController, type: :controller do
   let(:course) {create :course}
   let(:testing) {create :testing}
@@ -20,7 +21,7 @@ RSpec.describe QuestionsController, type: :controller do
     {
       question:{
         question: "Question Test",
-        type: "radio",
+        type_question: "radio",
         answers_attributes: answer_params
       }
     }
@@ -29,7 +30,7 @@ RSpec.describe QuestionsController, type: :controller do
   let(:question_params_invalid) do
     {
       question:{
-        type: "radio",
+        type_question: "radio",
         answers_attributes: answer_params
       }
     }

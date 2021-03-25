@@ -1,0 +1,9 @@
+<% @achievements.each do |a| %>
+  <div>
+  <%= a.user.first_name %> ----
+  <%=link_to a.course.title, course_path(a.course) %> ----
+  progress <%=a.progress %> | <%= button_to 'Destroy', achievement_path(a), class: "btn btn-outline-warning btn-sm",
+                                           method: :delete, data: { confirm: 'Are you sure? All your achievements of course will be deleted!!! ' } %>
+  </div><br>
+<% end %>
+

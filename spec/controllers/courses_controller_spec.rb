@@ -35,7 +35,7 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #index' do
     context 'index action' do
       before do
-        allow(Course).to receive(:all).and_return(courses)
+        allow(Course).to receive(:all.where(status: 'ready')).and_return(courses)
         get :index # попадаем в action index
       end
 
