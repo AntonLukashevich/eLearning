@@ -47,6 +47,15 @@ class LecturesController < ApplicationController
     @lecture.insert_at(params[:position].to_i)
     head :ok
   end
+
+  def readed
+    @user = current_user
+    @course = Course.find(params[:course_id])
+    @lecture = @course.lectures.find(params[:id])
+    @lecture.readeds.create(:lecture_id => @lecture.id,:user_id => @user.id, :is_readed => true )
+    redirect_to @course
+  end
+
   private
 
   def lecture_params

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
 
   resources :achievements
+  resources :readeds
 
   resources :courses do
     member do
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     resources :lectures do
       member do
         patch :move
+        post :readed
       end
     end
   end

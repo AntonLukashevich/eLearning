@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_112451) do
+ActiveRecord::Schema.define(version: 2021_03_26_082132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 2021_03_24_112451) do
     t.index ["testing_id"], name: "index_questions_on_testing_id"
   end
 
+  create_table "readeds", force: :cascade do |t|
+    t.bigint "lecture_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "is_readed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lecture_id"], name: "index_readeds_on_lecture_id"
+    t.index ["user_id"], name: "index_readeds_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -169,6 +179,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_112451) do
   add_foreign_key "answers", "questions"
   add_foreign_key "course_blocks", "courses"
   add_foreign_key "questions", "testings"
+  add_foreign_key "readeds", "lectures"
+  add_foreign_key "readeds", "users"
   add_foreign_key "testings", "courses"
   add_foreign_key "users", "roles"
 end

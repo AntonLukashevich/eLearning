@@ -1,6 +1,6 @@
 
 
-<% @courses.each do |course| %>
+<% @courses.order(created_at: :asc).each do |course| %>
   <% if course.status == 'ready' %>
     <article class="course">
       <selection class="course clearfix" >

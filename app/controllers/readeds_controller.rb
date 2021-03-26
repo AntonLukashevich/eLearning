@@ -1,0 +1,2 @@
+class ReadedsController < ApplicationController
+end

@@ -10,6 +10,8 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @user = current_user
+    @readeds = Readed.all.where(:user_id => @user.id)
   end
 
   def edit
