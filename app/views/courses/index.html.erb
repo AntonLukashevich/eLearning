@@ -16,22 +16,21 @@
       </selection>
       <div align="right" >
         <div class="course">
-          <%= button_to 'Show', course_path(course), class: "btn btn-outline-info btn-sm", :method => "get" %>
+          <%= link_to 'Show', course_path(course), class: "btn btn-outline-info btn-sm" %>
         </div>
 
-        <% if (current_user == course.users) && user_signed_in? %>
-        <div class="course-d">
-          <%= button_to 'Destroy', course_path(course), class: "btn btn-outline-warning btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
-        </div>
-          <%end %>
-        <% if Achievement.where(:user_id => current_user, :course_id => course).exists?%>
-<!--          <div class="course">-->
-            <%#= link_to 'Unsubscribe', unsubscribe_course_path(course), method: :delete, data: { confirm: 'Are you sure? All your achievements of course will be deleted!!! ' }, class: "btn btn-outline-warning btn-sm" %>
-<!--          </div>-->
+        <% if user_signed_in? && Achievement.where(:user_id => @user.id, :course_id => course.id).first.present?%>
+          <%= link_to 'Subscribe', subscribe_course_path(course), method: :post %>
         <% else %>
-        <div class="course">
-          <%= link_to 'Subscribe', subscribe_course_path(course), method: :post, class: "btn btn-outline-warning btn-sm" %>
+        <div class="course-d">
+          <%= link_to 'Subscribe', subscribe_course_path(course), method: :post, class: "btn btn-outline-success btn-sm" %>
         </div>
+        <%end %>
+
+        <% if (current_user == course.users.first) && user_signed_in? %>
+          <div class="course">
+            <%= button_to 'Destroy', course_path(course), class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
         <%end %>
       </div>
     </article>

@@ -1,7 +1,7 @@
 <div align="right">
-  <%= link_to 'Back to Course', course_path(@course) %>
+  <%= link_to 'Back to Course', course_path(@course), class: "btn btn-outline-info btn-sm" %>
   <% if @course.users.include? current_user %>
-  | <%= link_to 'Edit', edit_course_lecture_path(@course) %>
+     <%= link_to 'Edit', edit_course_lecture_path(@course), class: "btn btn-outline-warning btn-sm" %>
   <% end %>
 </div>
 
@@ -15,6 +15,8 @@
 
 <div align="right">
   <% if !@course.users.include? current_user %>
-  | <%= link_to 'Next', readed_course_lecture_path(@course,@lecture), method: :post, class: "btn btn-outline-info btn-sm" %>
+    <% if !@readed.present? %>
+       <%= link_to 'Next', readed_course_lecture_path(@course, @lecture), method: :post, class: "btn btn-outline-info btn-sm" %>
+    <% end %>
   <% end %>
 </div>

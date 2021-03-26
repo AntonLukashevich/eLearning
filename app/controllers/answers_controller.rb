@@ -4,7 +4,6 @@ class AnswersController < ApplicationController
   end
 
   def show
-
   end
 
   def new
@@ -29,6 +28,7 @@ class AnswersController < ApplicationController
   end
 
   def update
+    @answer = Answer.find(params[:id]) 
     if @answer.update(answer_params)
       redirect_to @answer
     else
@@ -39,12 +39,11 @@ class AnswersController < ApplicationController
   def destroy
     @answer = Answer.find(params[:id])
     @answer.destroy
-    #redirect_to
   end
 
   private
 
   def answer_params
-    params.require(:question).permit(:answer, :isCorrect, :position, :question_id)
+    params.require(:answer).permit(:answer, :isCorrect, :position, :question_id)
   end
 end

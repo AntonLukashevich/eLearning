@@ -1,7 +1,9 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show edit update destroy to_publish]
+  before_action :set_course, only: %i[show edit update destroy to_publish subscribe unsubscribe]
+  before_action :set_user, only: %i[show create subscribe unsubscribe]
 
   def index
+    @user = current_user
     @courses = Course.all.where(status: 'ready')
   end
 
@@ -10,7 +12,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @user = current_user
+    #@user = current_user
     @readeds = Readed.all.where(:user_id => @user.id)
   end
 
@@ -18,7 +20,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @user = current_user # User.find(params[:user_id])
+    #@user = current_user # User.find(params[:user_id])
     @course = @user.courses.create(course_params)
 
     if @course.save
@@ -47,9 +49,6 @@ class CoursesController < ApplicationController
   end
 
   def subscribe
-    @course = Course.find(params[:id])
-    @user = current_user
-
     if is_subscribed?(@user.id, @course.id)
       redirect_to @course
     else
@@ -60,8 +59,6 @@ class CoursesController < ApplicationController
   end
 
   def unsubscribe
-    @course = Course.find(params[:id])
-    @user = current_user
     @achievement = @course.achievements.where(:user_id => @user.id, :course_id => @course.id)
     binding.pry
     @achievement.destroy
@@ -83,6 +80,8 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
   end
 
-
+  def set_user
+    @user = current_user
+  end
 end
 
