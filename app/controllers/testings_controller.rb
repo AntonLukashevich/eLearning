@@ -7,6 +7,7 @@ class TestingsController < ApplicationController
   end
 
   def show
+    @responses = Response.all.where(:user_id => @user)
   end
 
   def new
@@ -49,6 +50,7 @@ class TestingsController < ApplicationController
   end
 
   def set_testing
+    @user = current_user
     @course = Course.find(params[:course_id])
     @testing = @course.testings.find(params[:id])
   end

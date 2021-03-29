@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :certificates
   has_many :achievements
   has_many :readeds
+  has_many :responses
 
   mount_uploader :avatar, AvatarUploader
 

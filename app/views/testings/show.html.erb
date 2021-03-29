@@ -21,6 +21,20 @@
     <div class="card card-body mb-1 mt-1" >
       <%= q.question %>
       <%=link_to 'Answer', new_course_testing_question_response_path(@course,@testing,q)%>
+      <div align="right">
+        <% @responses.each do |r| %>
+          <% if r.user_id == @user.id && r.question_id == q.id%>
+            Answered:
+            <%if r.mark == 1 %>
+              <%= image_tag("galochka.png",:alt =>"true",style:'height:1vw;width:1vw;')%>
+            <%else %>
+              <%= image_tag("red_cross.png",:alt =>"false",style:'height:1vw;width:1vw;')%>
+            <%end %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
+
+
   <% end %>
 <%end %>

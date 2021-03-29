@@ -10,9 +10,5 @@ content: <%=@question.content %>
 <%@question.answers.each do |answer| %>
   <%=answer.answer %><br>
 
-
-  <% if @question.type_question == 'radio' %>
-    <%= answer.isCorrect %>
-  <% end %>
 <%end %>
 </div>
