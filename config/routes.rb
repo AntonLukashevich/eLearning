@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :achievements
   resources :readeds
 
+
   resources :courses do
     member do
       patch :to_publish
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
 
     resources :testings do
       resources :questions do
+        resources :responses
       end
     end
 

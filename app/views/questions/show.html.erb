@@ -2,10 +2,17 @@
   <%=link_to 'Back', course_testing_path(@course, @testing) %>
 </div>
 
-<%=@question.question %>
-<%=@question.content %>
+question: <%=@question.question %><br>
+content: <%=@question.content %>
+<br>
 <div>
-  Answers:</div> <br>
+  <br>Answers: <br>
 <%@question.answers.each do |answer| %>
   <%=answer.answer %><br>
+
+
+  <% if @question.type_question == 'radio' %>
+    <%= answer.isCorrect %>
+  <% end %>
 <%end %>
+</div>

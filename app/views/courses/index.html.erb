@@ -20,7 +20,7 @@
         </div>
 
         <% if user_signed_in? && Achievement.where(:user_id => @user.id, :course_id => course.id).first.present?%>
-          <%= link_to 'Subscribe', subscribe_course_path(course), method: :post %>
+          <%#= link_to 'Subscribe', subscribe_course_path(course), method: :post %>
         <% else %>
         <div class="course-d">
           <%= link_to 'Subscribe', subscribe_course_path(course), method: :post, class: "btn btn-outline-success btn-sm" %>

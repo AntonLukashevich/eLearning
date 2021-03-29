@@ -1,0 +1,8 @@
+<%= form_with(model: @response, url: [@course,@testing,@question,@response]) do |f| %>
+  <%= @question.question %><br>
+  <%=f.label 'Your answer:' %>
+  <%=f.text_field :response, class: 'form-control' %>
+  <div class="action">
+    <%=f.submit 'Send', class: 'btn btn-success' %>
+  </div>
+<% end %>

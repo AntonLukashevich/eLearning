@@ -1,0 +1,14 @@
+
+<% if @question.type_question == 'radio'  %>
+  <%= render 'responses/radio_response' %>
+<% end %>
+
+<% if @question.type_question == 'check'  %>
+  <%= render 'responses/check_response' %>
+<% end %>
+
+<% if @question.type_question == 'input'  %>
+  <%= render 'responses/input_response' %>
+<% end %>
+
+

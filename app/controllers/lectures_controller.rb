@@ -17,11 +17,7 @@ class LecturesController < ApplicationController
     @readed = Readed.where(:lecture_id => @lecture, :user_id => @user.id).first
   end
 
-  def is_readed?
-    @user = current_user
-    @readed = Readed.where(:lecture_id => @lecture, :user_id => @user.id).first
-    return @readed.is_readed
-  end
+
 
   def edit
   end
@@ -63,6 +59,12 @@ class LecturesController < ApplicationController
     #@lecture = @course.lectures.find(params[:id])
     @lecture.readeds.create(:lecture_id => @lecture.id,:user_id => @user.id, :is_readed => true )
     redirect_to @course
+  end
+
+  def is_readed?
+    @user = current_user
+    @readed = Readed.where(:lecture_id => @lecture, :user_id => @user.id).first
+    return @readed.is_readed
   end
 
   private
