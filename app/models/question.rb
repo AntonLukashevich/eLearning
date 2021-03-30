@@ -5,6 +5,5 @@ class Question < ApplicationRecord
   has_rich_text :content
 
   accepts_nested_attributes_for :answers, allow_destroy: true
-
   validates :question, presence: true
 end

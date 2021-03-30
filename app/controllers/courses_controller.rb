@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 
   def index
     @user = current_user
-    @courses = Course.all.where(status: 'ready').includes(:users)
+    @courses = Course.where(status: 'ready').includes(:users)
   end
 
   def new
@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @readeds = Readed.all.where(:user_id => @user.id)
+    @readeds = Readed.where(:user_id => @user.id)
   end
 
   def edit

@@ -1,8 +1,26 @@
-<%= form_with(model: @response, url: [@course,@testing,@question,@response]) do |f| %>
-  <%= @question.question %><br>
-  <%=f.collection_radio_buttons :response, @answers, :answer, :answer, style: "display:block;"  %>
+<%#= form_with(model: @response, url: [@course,@testing,@question,@response]) do |f| %>
+<!--  <%#= @question.question %><br>-->
+  <%#=f.collection_radio_buttons :response, @answers, :answer, :answer, style: "display:block;" do |r| %>
+<!--    <br>-->
+    <%#=r.radio_button %>
+    <%#=r.label %>
+  <%# end %>
 
-  <div class="action">
-    <%=f.submit 'Send', class: 'btn btn-success' %>
-  </div>
+
+<!--  <div class="action">-->
+    <%#=f.submit 'Send', class: 'btn btn-success' %>
+<!--  </div>-->
+<%# end %>
+
+<%= form_tag course_testing_question_responses_path(course_id: @course.id, testing_id: @testing.id, question_id: @question.id ) do %>
+  <%= @question.question %>
+  <% @answers.each do |a| %>
+    <br>
+    <%= fields_for :response  do |fa| %>
+      <%= radio_button_tag 'response[]', a.answer  %>
+      <%=label_tag a.answer %>
+    <%end %>
+  <%end %>
+  <br>
+  <%= submit_tag 'Send', class: 'btn btn-success' %>
 <% end %>

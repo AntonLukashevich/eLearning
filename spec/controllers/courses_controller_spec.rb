@@ -34,8 +34,10 @@ RSpec.describe CoursesController, type: :controller do
 
   describe 'GET #index' do
     context 'index action' do
+      let(:course_relation) { instance_double('ActiveRecord::Relation') }
       before do
-        allow(Course).to receive(:all).and_return(courses)
+        allow(Course).to receive(:where).with(:status => 'ready').and_return(course_relation)
+        allow(course_relation).to receive(:includes).with(:users).and_return(courses)
         get :index # попадаем в action index
       end
 

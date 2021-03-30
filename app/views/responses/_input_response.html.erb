@@ -1,8 +1,21 @@
-<%= form_with(model: @response, url: [@course,@testing,@question,@response]) do |f| %>
-  <%= @question.question %><br>
-  <%=f.label 'Your answer:' %>
-  <%=f.text_field :response, class: 'form-control' %>
-  <div class="action">
-    <%=f.submit 'Send', class: 'btn btn-success' %>
-  </div>
+<%#= form_with(model: @response, url: [@course,@testing,@question,@response]) do |f| %>
+<!--  <%#= @question.question %><br>-->
+  <%#=f.label 'Your answer:' %>
+  <%#=f.text_field :response, class: 'form-control' %>
+<!--  <div class="action">-->
+    <%#=f.submit 'Send', class: 'btn btn-success' %>
+<!--  </div>-->
+<%# end %>
+
+<%= form_tag course_testing_question_responses_path(course_id: @course.id, testing_id: @testing.id, question_id: @question.id ) do %>
+  <%= @question.question %>:
+  <% @answers.each do |a| %>
+    <br>
+    <%= fields_for :response  do |fa| %>
+      <%=text_field_tag 'response[]', '', class: 'form-control' %>
+
+    <%end %>
+  <%end %>
+  <br>
+  <%= submit_tag 'Send', class: 'btn btn-success' %>
 <% end %>
