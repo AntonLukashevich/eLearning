@@ -1,6 +1,8 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
 
-Rails.application.configure do
+require 'active_support/core_ext/integer/time'
+
+Rails.application.configure do # rubocop:todo Metrics/BlockLength
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -16,7 +18,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp', 'caching-dev.txt').exist? # rubocop:todo Rails/FilePath
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 
@@ -78,6 +80,4 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
-
-
 end

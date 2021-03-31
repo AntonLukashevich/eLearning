@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module ControllerMacros
   def login_user
     # Before each test, create and login the user
     before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
+      @request.env['devise.mapping'] = Devise.mappings[:user]
       role = FactoryBot.create(:role)
       course = FactoryBot.create(:course)
       testing = FactoryBot.create(:testing, course: course)
@@ -13,9 +15,7 @@ module ControllerMacros
     end
   end
 
-  def set_course
-
-  end
+  def set_course; end
 
   # Not used in this tutorial, but left to show an example of different user types
   # def login_admin

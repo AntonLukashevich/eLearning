@@ -19,7 +19,7 @@
           <%= link_to 'Show', course_path(course), class: "btn btn-outline-info btn-sm" %>
         </div>
 
-        <% if user_signed_in? && Achievement.where(:user_id => @user.id, :course_id => course.id).first.present?%>
+        <% if user_signed_in? && subscribe?(@user.id, course.id)%>
           <%#= link_to 'Subscribe', subscribe_course_path(course), method: :post %>
         <% else %>
         <div class="course-d">

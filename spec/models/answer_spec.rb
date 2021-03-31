@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe Answer, type: :model do
-
   # before(:all) do
   #   @answer = create(:answer)
   # end

@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 RSpec.describe TestingsController, type: :controller do
-  let(:course) {create :course}
-  let(:testings) {create_list :testing, 5}
-  let(:testing) {create :testing}
+  let(:course) { create :course }
+  let(:testings) { create_list :testing, 5 }
+  let(:testing) { create :testing }
 
   let(:testing_params) do
     {
       testing: {
-        title: "Faker::Name.name",
-        description: "Faker::Name.name",
+        title: 'Faker::Name.name',
+        description: 'Faker::Name.name',
         course_id: course
       }
     }
@@ -21,9 +23,6 @@ RSpec.describe TestingsController, type: :controller do
       }
     }
   end
-
-
-
 
   describe 'GET #index' do
     context 'index action' do
@@ -59,7 +58,6 @@ RSpec.describe TestingsController, type: :controller do
       it 'return testing' do
         expect(assigns(:testing)).to eq(testing)
       end
-
     end
   end
 
@@ -83,7 +81,6 @@ RSpec.describe TestingsController, type: :controller do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:testings).and_return(testings)
         allow(course.testings).to receive(:find).and_return(testing)
-
       end
 
       it 'finds a specific testing' do
@@ -110,7 +107,7 @@ RSpec.describe TestingsController, type: :controller do
         expect(assigns(:testing)).to be(testing)
       end
 
-      it "redirects to the correct url: course_path(course)" do
+      it 'redirects to the correct url: course_path(course)' do
         expect(response).to redirect_to(course_path(course))
       end
     end
@@ -140,7 +137,7 @@ RSpec.describe TestingsController, type: :controller do
     context 'when params valid' do
       it 'redirect to correct url after update' do
         patch :update, params: { course_id: course, id: testing, lecture: testing_params }
-        #lecture.reload
+        # lecture.reload
         expect(response).to redirect_to(course_path(course))
       end
     end
@@ -176,5 +173,4 @@ RSpec.describe TestingsController, type: :controller do
       end
     end
   end
-
 end

@@ -1,4 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe LecturesController, type: :controller do
   let(:course) { create :course }
@@ -10,7 +12,7 @@ RSpec.describe LecturesController, type: :controller do
       lecture: {
         title: Faker::Name.name,
         description: Faker::Name.name,
-        content: "content",
+        content: 'content',
         position: rand(1..5)
 
       }
@@ -21,7 +23,7 @@ RSpec.describe LecturesController, type: :controller do
     {
       lecture: {
         description: Faker::Name.name,
-        content: "content"
+        content: 'content'
 
       }
     }
@@ -61,7 +63,6 @@ RSpec.describe LecturesController, type: :controller do
       it 'return lecture' do
         expect(assigns(:lecture)).to eq(lecture)
       end
-
     end
   end
 
@@ -77,7 +78,6 @@ RSpec.describe LecturesController, type: :controller do
         expect(assigns(:lecture)).to be(lecture)
       end
     end
-
   end
 
   describe 'GET #edit' do
@@ -86,7 +86,6 @@ RSpec.describe LecturesController, type: :controller do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:lectures).and_return(lectures)
         allow(course.lectures).to receive(:find).and_return(lecture)
-
       end
 
       it 'finds a specific lecture' do
@@ -113,7 +112,7 @@ RSpec.describe LecturesController, type: :controller do
         expect(assigns(:lecture)).to be(lecture)
       end
 
-      it "redirects to the correct url: course_path(course)" do
+      it 'redirects to the correct url: course_path(course)' do
         expect(response).to redirect_to(course_path(course))
       end
     end
@@ -143,7 +142,7 @@ RSpec.describe LecturesController, type: :controller do
     context 'when params valid' do
       it 'redirect to correct url after update' do
         patch :update, params: { course_id: course, id: lecture, lecture: lecture_params }
-        #lecture.reload
+        # lecture.reload
         expect(response).to redirect_to(course_path(course))
       end
     end

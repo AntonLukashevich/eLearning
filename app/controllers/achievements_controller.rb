@@ -1,7 +1,8 @@
-class AchievementsController < ApplicationController
+# frozen_string_literal: true
 
+class AchievementsController < ApplicationController # rubocop:todo Style/Documentation
   def index
-    @achievements = Achievement.all.where(user_id: current_user)
+    @achievements = Achievement.where(user_id: current_user).includes(:user).includes(:course)
   end
 
   def new

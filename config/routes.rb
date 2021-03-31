@@ -1,4 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
+
+Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   get 'lecture_blocks/index'
   get 'lectures/index'
   get 'organizations/index'
@@ -14,10 +16,8 @@ Rails.application.routes.draw do
   resources :answers
   resources :users
 
-
   resources :achievements
   resources :readeds
-
 
   resources :courses do
     member do
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   end
 
   resources :youtube
-  resources :pictures, only: [:create, :destroy]
+  resources :pictures, only: %i[create destroy]
   resources :organizations
   resources :roles
 end

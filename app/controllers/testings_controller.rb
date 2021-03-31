@@ -1,33 +1,30 @@
-class TestingsController < ApplicationController
+# frozen_string_literal: true
+
+class TestingsController < ApplicationController # rubocop:todo Style/Documentation
   before_action :set_testing, only: %i[show edit update destroy]
+  before_action :set_course, only: %i[index new create]
 
   def index
-    @course = Course.find(params[:course_id])
     @testings = @course.testings
   end
 
   def show
-    @responses = Response.all.where(:user_id => @user)
+    @responses = Response.all.where(user_id: @user.id)
   end
 
   def new
-    @course = Course.find(params[:course_id])
     @testing = Testing.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
-    @course = Course.find(params[:course_id])
     @testing = @course.testings.build(testing_params)
-
     if @testing.save
       redirect_to @course
     else
       render 'new'
     end
-    #binding.pry
   end
 
   def update
@@ -51,7 +48,11 @@ class TestingsController < ApplicationController
 
   def set_testing
     @user = current_user
-    @course = Course.find(params[:course_id])
+    set_course
     @testing = @course.testings.find(params[:id])
+  end
+
+  def set_course
+    @course = Course.find(params[:course_id])
   end
 end

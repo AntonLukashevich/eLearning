@@ -1,0 +1,12 @@
+require: rubocop-rails
+
+Rails/FindBy:
+  Exclude:
+    - lib/example.rb
+
+Metrics/LineLength:
+  Max: 120
+
+
+Metrics/MethodLength:
+  Max: 30

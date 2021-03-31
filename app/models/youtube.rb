@@ -1,4 +1,6 @@
-class Youtube
+# frozen_string_literal: true
+
+class Youtube # rubocop:todo Style/Documentation
   include ActiveModel::Model
   include ActiveModel::Attributes
   include GlobalID::Identification
@@ -15,6 +17,6 @@ class Youtube
   end
 
   def to_trix_content_attachment_partial_path
-    "youtubes/thumbnail"
+    'youtubes/thumbnail'
   end
 end

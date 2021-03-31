@@ -1,4 +1,6 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+# frozen_string_literal: true
+
+class AvatarUploader < CarrierWave::Uploader::Base # rubocop:todo Style/Documentation
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -39,7 +41,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:

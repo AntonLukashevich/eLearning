@@ -1,4 +1,6 @@
-class CreateLectures < ActiveRecord::Migration[6.1]
+# frozen_string_literal: true
+
+class CreateLectures < ActiveRecord::Migration[6.1] # rubocop:todo Style/Documentation
   # def change
   #   create_table :lectures do |t|
   #     t.string :title

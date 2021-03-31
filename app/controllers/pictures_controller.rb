@@ -1,9 +1,11 @@
-class PicturesController < ApplicationController
+# frozen_string_literal: true
+
+class PicturesController < ApplicationController # rubocop:todo Style/Documentation
   def create
     @picture = Picture.new(picture_params)
     @picture.save
     respond_to do |format|
-      format.json { render :json => { url: @picture.picture.url(:big), picture_id: @picture.id } }
+      format.json { render json: { url: @picture.picture.url(:big), picture_id: @picture.id } }
     end
   end
 
@@ -11,7 +13,7 @@ class PicturesController < ApplicationController
     picture = Picture.find(params[:id])
     picture.destroy
     respond_to do |format|
-      format.json { render :json => { status: :ok } }
+      format.json { render json: { status: :ok } }
     end
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe Role, type: :model do
   describe 'validation' do
@@ -7,8 +9,8 @@ RSpec.describe Role, type: :model do
 
     it 'validates name length >= 3' do
       should validate_length_of :name
-      expect(FactoryBot.build(:role, name: "us").valid?).to eq(false)
-      expect(FactoryBot.build(:role, name: "use").valid?).to eq(true)
+      expect(FactoryBot.build(:role, name: 'us').valid?).to eq(false)
+      expect(FactoryBot.build(:role, name: 'use').valid?).to eq(true)
     end
   end
 
@@ -17,6 +19,4 @@ RSpec.describe Role, type: :model do
       should have_many :users
     end
   end
-
-
 end

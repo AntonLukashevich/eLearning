@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe QuestionsController, type: :controller do
-  let(:course) {create :course}
-  let(:testing) {create :testing}
-  let(:testings) {create_list :testing, 5}
-  let(:question){create :question}
-  let(:questions){create_list :question,5}
+  let(:course) { create :course }
+  let(:testing) { create :testing }
+  let(:testings) { create_list :testing, 5 }
+  let(:question) { create :question }
+  let(:questions) { create_list :question, 5 }
 
   let(:answer_params) do
     {
       answer: {
-        answer: "Test answer",
+        answer: 'Test answer',
         isCorrect: true,
         position: rand(1..5),
         question: question
@@ -19,9 +21,9 @@ RSpec.describe QuestionsController, type: :controller do
 
   let(:question_params) do
     {
-      question:{
-        question: "Question Test",
-        type_question: "radio",
+      question: {
+        question: 'Question Test',
+        type_question: 'radio',
         answers_attributes: answer_params
       }
     }
@@ -29,13 +31,12 @@ RSpec.describe QuestionsController, type: :controller do
 
   let(:question_params_invalid) do
     {
-      question:{
-        type_question: "radio",
+      question: {
+        type_question: 'radio',
         answers_attributes: answer_params
       }
     }
   end
-
 
   describe 'GET #index' do
     context 'index action' do
@@ -45,7 +46,7 @@ RSpec.describe QuestionsController, type: :controller do
         allow(course.testings).to receive(:find).and_return(testing)
         allow(testing).to receive(:questions).and_return(questions)
         allow(testing.questions).to receive(:find).and_return(question)
-        get :index, params: {course_id: course, testing_id: testing}
+        get :index, params: { course_id: course, testing_id: testing }
       end
 
       it 'render template #index' do
@@ -66,7 +67,7 @@ RSpec.describe QuestionsController, type: :controller do
         allow(course.testings).to receive(:find).and_return(testing)
         allow(testing).to receive(:questions).and_return(questions)
         allow(testing.questions).to receive(:find).and_return(question)
-        get :show, params: {course_id: course, testing_id: testing, id: question}
+        get :show, params: { course_id: course, testing_id: testing, id: question }
       end
 
       it 'render show template if testing found' do
@@ -86,7 +87,7 @@ RSpec.describe QuestionsController, type: :controller do
         allow(course).to receive(:testings).and_return(testings)
         allow(course.testings).to receive(:find).and_return(testing)
         allow(Question).to receive(:new).and_return(question)
-        get :new, params: {course_id: course, testing_id: testing}
+        get :new, params: { course_id: course, testing_id: testing }
       end
 
       it 'create a new testing' do
@@ -114,7 +115,6 @@ RSpec.describe QuestionsController, type: :controller do
         get :edit, params: { course_id: course, testing_id: testing.id, id: question }
         expect(response).to render_template('edit')
       end
-
     end
   end
 
@@ -125,15 +125,15 @@ RSpec.describe QuestionsController, type: :controller do
         allow(course).to receive(:testings).and_return(testings)
         allow(course.testings).to receive(:find).and_return(testing)
         allow(Question).to receive(:new).and_return(question)
-        post :create, params: {course_id: course, testing_id: testing, question: question_params}
+        post :create, params: { course_id: course, testing_id: testing, question: question_params }
       end
 
       it 'create a new question' do
         expect(assigns(:question)).to be(question)
       end
 
-      it "redirects to the correct url: course_path(course)" do
-        expect(response).to redirect_to(course_testing_path(course,testing))
+      it 'redirects to the correct url: course_path(course)' do
+        expect(response).to redirect_to(course_testing_path(course, testing))
       end
     end
 
@@ -142,7 +142,7 @@ RSpec.describe QuestionsController, type: :controller do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:testings).and_return(testings)
         allow(course.testings).to receive(:find).and_return(testing)
-        post :create, params: {course_id: course, testing_id: testing, question: question_params_invalid}
+        post :create, params: { course_id: course, testing_id: testing, question: question_params_invalid }
       end
 
       it 'create a new question' do
@@ -152,7 +152,6 @@ RSpec.describe QuestionsController, type: :controller do
       it 'render template #new' do
         is_expected.to render_template :new
       end
-
     end
   end
 
@@ -164,11 +163,11 @@ RSpec.describe QuestionsController, type: :controller do
         allow(course.testings).to receive(:find).and_return(testing)
         allow(testing).to receive(:questions).and_return(questions)
         allow(testing.questions).to receive(:find).and_return(question)
-        patch :update, params: {course_id: course, testing_id: testing, id: question, question: question_params}
+        patch :update, params: { course_id: course, testing_id: testing, id: question, question: question_params }
       end
 
       it 'redirect to correct url after update' do
-        expect(response).to redirect_to(course_testing_path(course,testing))
+        expect(response).to redirect_to(course_testing_path(course, testing))
       end
     end
 
@@ -179,16 +178,15 @@ RSpec.describe QuestionsController, type: :controller do
         allow(course.testings).to receive(:find).and_return(testing)
         allow(testing).to receive(:questions).and_return(questions)
         allow(testing.questions).to receive(:find).and_return(question)
-        patch :update, params: {course_id: course, testing_id: testing, id: question, question: question_params_invalid}
+        patch :update,
+              params: { course_id: course, testing_id: testing, id: question, question: question_params_invalid }
       end
 
       it 'render template #edit' do
         expect(response).to render_template('edit')
       end
-
     end
   end
-
 
   describe 'DELETE #destroy' do
     context 'action destroy' do
