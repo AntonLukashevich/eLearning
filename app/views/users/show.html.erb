@@ -19,7 +19,7 @@
         Last name: <%= @user.last_name %><br>
         Email: <%= @user.email %><br>
         ID: <%= @user.id %><br>
-        Role: <%= Role.where(:id => @user.role_id).pluck(:name).first %>
+        Role: <%= @user.role_id%>
       </div>
     </div>
 

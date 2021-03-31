@@ -48,19 +48,21 @@ RSpec.describe LecturesController, type: :controller do
   end
 
   describe 'GET #show' do
-    context 'action show' do
+    fcontext 'action show' do
       before do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:lectures).and_return(lectures)
         allow(course.lectures).to receive(:find).and_return(lecture)
-        get :show, params: { course_id: course, id: lecture.id }
+
       end
 
       it 'render show template if lecture found' do
+        get :show, params: { course_id: course, id: lecture.id }
         expect(response).to render_template('show')
       end
 
       it 'return lecture' do
+        get :show, params: { course_id: course, id: lecture.id }
         expect(assigns(:lecture)).to eq(lecture)
       end
     end

@@ -2,7 +2,7 @@
 
 class AchievementsController < ApplicationController # rubocop:todo Style/Documentation
   def index
-    @achievements = Achievement.where(user_id: current_user).includes(:user).includes(:course)
+    @achievements = Achievement.where(user_id: current_user).includes(:user, :course)
   end
 
   def new
