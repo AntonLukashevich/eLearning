@@ -5,8 +5,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   before_action :set_user, only: %i[show create subscribe unsubscribe]
 
   def index
-    @user = current_user
-    @courses = Course.where(status: 'ready').includes(:users).includes(:achievements).by_created_at
+    @courses = Course.includes(:users, :achievements).where(status: 'ready').by_created_at
   end
 
   def new

@@ -8,4 +8,6 @@ class Lecture < ApplicationRecord
   has_rich_text :content
 
   validates :title, presence: true
+
+  scope :by_position, -> { order(position: :asc) }
 end

@@ -6,7 +6,7 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
     @response = Response.new
   end
 
-  def create # rubocop:todo Metrics/AbcSize
+  def create
     @user = current_user
     set_course_testing_question_answers
     params[:response].each do |r|
@@ -16,7 +16,7 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
     current_answers = @question.answers.where(isCorrect: true).pluck(:answer)
     responses = @question.responses.pluck(:response)
     @question.responses.update_all(mark: 1) if current_answers == responses # rubocop:todo Rails/SkipsModelValidations
-    redirect_to course_testing_path(@course, @testing)
+    # redirect_to course_testing_path(@course, @testing)
   end
 
   private

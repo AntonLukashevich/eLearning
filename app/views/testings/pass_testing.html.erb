@@ -1,0 +1,63 @@
+<div align="right">
+  <%=link_to 'Back', course_path(@course) %>
+</div>
+
+<h2><%=@testing.title %></h2>
+<%= @testing.description %>
+<br>
+
+<% @questions.order(created_at: :asc).each do |q| %>
+    <div class="card card-body mb-1 mt-1" >
+      <%= q.question %><br>
+      <div>
+        <%= q.content %>
+      </div>
+
+      <% if q.type_question == 'radio'  %>
+        <%= form_tag course_testing_question_responses_path(course_id: @course.id, testing_id: @testing.id, question_id: q.id ) do %>
+
+          <% q.answers.each do |a| %>
+            <br>
+            <%= fields_for :response  do |fa| %>
+              <%= radio_button_tag 'response[]', a.answer  %>
+              <%=label_tag a.answer %>
+            <%end %>
+          <%end %>
+          <br>
+          <%= submit_tag 'Send', class: 'btn btn-success' %>
+        <% end %>
+      <% end %>
+
+      <% if q.type_question == 'check'  %>
+        <%= form_tag course_testing_question_responses_path(course_id: @course.id, testing_id: @testing.id, question_id: q.id ) do %>
+
+        <% q.answers.each do |a| %>
+          <br>
+          <%= fields_for :response  do |fa| %>
+            <%= check_box_tag 'response[]', a.answer  %>
+            <%=label_tag a.answer %>
+          <%end %>
+        <%end %>
+        <br>
+        <%= submit_tag 'Send', class: 'btn btn-success' %>
+      <% end %>
+      <%end %>
+
+      <% if q.type_question == 'input'  %>
+      <%= form_tag course_testing_question_responses_path(course_id: @course.id, testing_id: @testing.id, question_id: q.id ) do %>
+        <% q.answers.each do |a| %>
+          <br>
+          <%= fields_for :response  do |fa| %>
+            <%=text_field_tag 'response[]', '', class: 'form-control' %>
+          <%end %>
+        <%end %>
+        <br>
+        <%= submit_tag 'Send', class: 'btn btn-success' %>
+      <% end %>
+      <%end %>
+    </div>
+<% end %>
+<%= will_paginate @questions%>
+<div align="right">
+  <%=link_to 'Pass test', course_path(@course), class: 'btn btn-success' %>
+</div>

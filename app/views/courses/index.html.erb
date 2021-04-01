@@ -19,7 +19,7 @@
           <%= link_to 'Show', course_path(course), class: "btn btn-outline-info btn-sm" %>
         </div>
 
-        <% if user_signed_in? && subscribe?(@user.id, course.id)%>
+        <% if user_signed_in? && subscribe?(current_user, course)%>
           <%#= link_to 'Subscribe', subscribe_course_path(course), method: :post %>
         <% else %>
         <div class="course-d">

@@ -2,7 +2,6 @@
 
 class CreateUsersCourses < ActiveRecord::Migration[6.1] # rubocop:todo Style/Documentation
   # def change
-  #   create_table :courses_users do |t| # rubocop:todo Rails/CreateTableWithTimestamps
   #     t.belongs_to :user
   #     t.belongs_to :course
   #   end
@@ -10,8 +9,8 @@ class CreateUsersCourses < ActiveRecord::Migration[6.1] # rubocop:todo Style/Doc
 
   def up
     create_table :courses_users do |t| # rubocop:todo Rails/CreateTableWithTimestamps
-    t.belongs_to :user
-    t.belongs_to :course
+      t.belongs_to :user
+      t.belongs_to :course
     end
   end
 

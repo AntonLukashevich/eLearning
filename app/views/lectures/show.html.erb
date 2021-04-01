@@ -1,6 +1,6 @@
 <div align="right">
   <%= link_to 'Back to Course', course_path(@course), class: "btn btn-outline-info btn-sm" %>
-  <% if @course.users.include? current_user %>
+  <% if author?(@course) %>
      <%= link_to 'Edit', edit_course_lecture_path(@course), class: "btn btn-outline-warning btn-sm" %>
   <% end %>
 </div>
@@ -14,7 +14,7 @@
 </div>
 
 <div align="right">
-  <% if !@course.users.include? current_user %>
+  <% if !author?(@course) %>
     <% if !@readed.present? %>
        <%= link_to 'Next', readed_course_lecture_path(@course, @lecture), method: :post, class: "btn btn-outline-info btn-sm" %>
     <% end %>

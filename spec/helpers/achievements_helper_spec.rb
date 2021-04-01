@@ -13,5 +13,4 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe AchievementsHelper, type: :helper do
-
 end

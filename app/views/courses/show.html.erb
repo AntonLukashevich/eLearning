@@ -29,7 +29,7 @@
 <br>
 
 <div data-controller="drag" data-drag-url="course_id/lectures/id/move">
-  <% @course.lectures.order(position: :asc).each do |block| %>
+  <% @course.lectures.by_position.each do |block| %>
     <div data-id="<%= block.id %>" data-course_id="<%= @course.id %>" class="card card-body mb-1 mt-1">
       <%= link_to block.title, course_lecture_path(@course, block), :locals => { id: dom_id(block), course_id: dom_id(@course)  }, class: 'lecture' %>
       <% if @course.users.include? current_user %>
@@ -55,7 +55,13 @@
   </div>
 <% end %>
 <% @course.testings.each do |test| %>
+  <% if @course.users.include? current_user %>
   <div class="card card-body mb-1 mt-1">
   <%= link_to test.title, course_testing_path(@course, test), style: "color: black;" %>
   </div>
+  <% else %>
+    <div class="card card-body mb-1 mt-1">
+    <%= link_to ' Pass ' + test.title, pass_testing_course_testing_path(@course, test), style: "color: black;" %>
+    </div>
+  <% end %>
 <% end %>

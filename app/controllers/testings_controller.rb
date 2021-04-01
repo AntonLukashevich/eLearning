@@ -40,6 +40,12 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
     redirect_to course_path(@course)
   end
 
+  def pass_testing
+    @course = Course.find(params[:course_id])
+    @testing = @course.testings.find(params[:id])
+    @questions = @testing.questions.includes(:answers).paginate(page: params[:page], per_page: 1)
+  end
+
   private
 
   def testing_params

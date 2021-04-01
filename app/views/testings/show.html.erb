@@ -5,13 +5,13 @@
 <h2><%=@testing.title %></h2>
 <%= @testing.description %>
 <br><br><br>
-<% if @course.users.include? current_user %>
+<% if author?(@course) %>
   <%= link_to 'Add question', new_course_testing_question_path(@course,@testing), class: 'btn btn-info btn-sm'  %>
 <%end %>
 <br>
 <div>All questions of the test:</div>
 <% @testing.questions.order(created_at: :asc).each do |q| %>
-  <% if @course.users.include? current_user %>
+  <% if author?(@course) %>
     <div class="card card-body mb-1 mt-1" >
 
       <%= link_to 'Edit', edit_course_testing_question_path(@course,@testing, q) %>
@@ -34,7 +34,5 @@
         <% end %>
       </div>
     </div>
-
-
   <% end %>
 <%end %>

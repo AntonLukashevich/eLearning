@@ -12,5 +12,4 @@ class AddImageToCourse < ActiveRecord::Migration[6.1]
   def down
     remove_column :courses, :image
   end
-
 end

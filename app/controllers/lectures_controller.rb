@@ -13,8 +13,7 @@ class LecturesController < ApplicationController # rubocop:todo Style/Documentat
   end
 
   def show
-    @user = current_user
-    @readed = Readed.where(lecture_id: @lecture, user_id: @user.id).first
+    @readed = Readed.where(lecture_id: @lecture, user_id: current_user.id).first
   end
 
   def edit; end
@@ -43,7 +42,7 @@ class LecturesController < ApplicationController # rubocop:todo Style/Documentat
 
   def move
     @lecture.insert_at(params[:position].to_i)
-    head :ok #???
+    head :ok # ???
   end
 
   def readed

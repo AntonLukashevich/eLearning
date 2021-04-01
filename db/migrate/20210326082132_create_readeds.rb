@@ -24,5 +24,4 @@ class CreateReadeds < ActiveRecord::Migration[6.1]
   def down
     drop_table :readeds
   end
-
 end

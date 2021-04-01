@@ -2,7 +2,7 @@
 
 class QuestionsController < ApplicationController # rubocop:todo Style/Documentation
   before_action :set_question, only: %i[show edit update destroy edit]
-  before_action :set_course_testing, only:  %i[index new create]
+  before_action :set_course_testing, only: %i[index new create]
 
   def index
     @questions = @testing.questions

@@ -53,7 +53,6 @@ RSpec.describe LecturesController, type: :controller do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:lectures).and_return(lectures)
         allow(course.lectures).to receive(:find).and_return(lecture)
-
       end
 
       it 'render show template if lecture found' do

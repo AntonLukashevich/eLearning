@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AddDeviseToUsers < ActiveRecord::Migration[6.1] # rubocop:todo Style/Documentation
-  def self.up # rubocop:todo Metrics/MethodLength
+  def self.up
     change_table :users do |t| # rubocop:todo Rails/BulkChangeTable
       ## Database authenticatable
       t.string :email,              null: false, default: ''

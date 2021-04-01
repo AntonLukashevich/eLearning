@@ -1,5 +1,5 @@
 <% if @achievements.present? %>
-
+  <%#binding.pry %>
   <div class="divTable">
     <div class="divTableBody">
       <div class="divTableRow">
@@ -38,9 +38,10 @@
       <tr>
         <td> <%= index + 1 %></td>
         <td><%=link_to a.course.title, course_path(a.course) %></td>
-        <td><%= readed_lectures(a.course) %>/<%= lectures(a.course) %></td>
-        <td>Tests</td>
-        <td><%= a.progress %></td>
+        <% amount, full_progress = lectures_stats(a.course) %>
+        <td><%= amount %>/<%= a.course.lectures.size %></td>
+        <td>/<%= a.course.testings.size %></td>
+        <td><%= a.progress %>/<%= full_progress %></td>
 
         <td><%= button_to 'Unsubscribe', achievement_path(a), class: "btn btn-outline-warning btn-sm",
                           method: :delete, data: { confirm: 'Are you sure? All your achievements of course will be deleted!!! ' } %></td>
