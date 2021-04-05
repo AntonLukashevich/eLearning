@@ -62,6 +62,7 @@
   <% else %>
     <div class="card card-body mb-1 mt-1">
     <%= link_to test.title, pass_testing_course_testing_path(@course, test), style: "color: black;" %>
+      <div align="right"><%= link_to 'Result: ', course_testing_path(@course, test), style: "color: grey;" %><%= testing_progress(test) %>%</div>
     </div>
   <% end %>
 <% end %>

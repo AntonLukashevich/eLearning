@@ -13,4 +13,27 @@ module CoursesHelper # rubocop:todo Style/Documentation
     #   end
     # end
   end
+
+  def testing_progress(test)
+    # amount of correct responses / amount of correct answer
+    responses = Response.where(user_id: current_user.id)
+    count_answers = 0
+    count_responses = 0
+    questions = test.questions
+    questions.each do |q|
+      count_answers += q.answers.where(isCorrect: true).size
+      responses.each do |r|
+        if (q.id == r.question_id && r.mark == 1) && r.present?
+          count_responses +=1
+        end
+      end
+    end
+
+    result = (count_responses.to_f/count_answers) *100
+    return result
+  end
+
+
+
+
 end

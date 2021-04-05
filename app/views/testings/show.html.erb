@@ -13,14 +13,13 @@
 <% @testing.questions.order(created_at: :asc).each do |q| %>
   <% if author?(@course) %>
     <div class="card card-body mb-1 mt-1" >
-
+      <%=link_to 'Answer', new_course_testing_question_response_path(@course,@testing,q)%>
       <%= link_to 'Edit', edit_course_testing_question_path(@course,@testing, q) %>
       <%= link_to 'Destroy', course_testing_question_path(@course,@testing,q), method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
   <%else %>
     <div class="card card-body mb-1 mt-1" >
       <%= q.question %>
-      <%=link_to 'Answer', new_course_testing_question_response_path(@course,@testing,q)%>
       <div align="right">
         <% @responses.each do |r| %>
           <% if r.user_id == @user.id && r.question_id == q.id%>

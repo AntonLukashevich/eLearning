@@ -74,7 +74,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def set_course
-    @course = Course.includes(:lectures, :testings, :users).find(params[:id])
+    @course = Course.includes( :testings, :users).find(params[:id])
   end
 
   def set_user
