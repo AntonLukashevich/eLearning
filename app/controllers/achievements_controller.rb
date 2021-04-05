@@ -23,7 +23,12 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
 
   def destroy
     @achievement = Achievement.find(params[:id])
+    course = @achievement.course
+
+    destroy_readed(course)
+    destroy_responses(course)
     @achievement.destroy
+    
     redirect_to courses_path
   end
 
@@ -32,4 +37,29 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
   def achievement_params
     params.require(:achievement).permit(:process, :user_id, :course_id)
   end
+
+  def destroy_readed(course)
+    readeds = Readed.where(user_id: current_user.id)
+    course.lectures.each do |lec|
+      readeds.each do |r|
+        if r.lecture_id == lec.id
+          r.destroy
+        end
+      end
+    end
+  end
+
+  def destroy_responses(course)
+    responses = Response.where(user_id: current_user.id)
+    course.testings.each do |t|
+      t.questions.each do |q|
+        responses.each do |r|
+          if r.question_id == q.id
+            r.destroy
+          end
+        end
+      end
+    end
+  end
+
 end
