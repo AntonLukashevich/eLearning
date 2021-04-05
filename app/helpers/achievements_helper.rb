@@ -1,22 +1,83 @@
 # frozen_string_literal: true
 
 module AchievementsHelper # rubocop:todo Style/Documentation
-  def lectures_stats(course)
-    lectures = course.lectures
-    testings = course.testings
+  def course_stats(course)
 
-    lectures_count = 0
+    lectures = course.lectures
+    lectures_count = readed_lectures(lectures)
+    lecture_progress = 100* (lectures_count.to_f/ lectures.size)
+
+
+    testings = course.testings.includes(:questions)
+    responses_count, full_count_questions = passed_tests(testings)
+    test_progress = 100 * (responses_count.to_f/ full_count_questions)
+
+
+    current_progress = (test_progress + lecture_progress)/2
+
+    @achievements.each do |ach|
+      ach.update(progress: current_progress)
+    end
+
+    [lecture_progress.to_i, test_progress.to_i]
+  end
+
+
+
+  private
+
+  # amount readed lectures by current user
+  def readed_lectures(lectures)
+    count = 0
     readeds = Readed.where(user_id: current_user.id)
     lectures.each do |lec|
       readeds.each do |r|
-        lectures_count += 1 if r.lecture_id == lec.id
+        count += 1 if r.lecture_id == lec.id
       end
     end
-
-    full_lectures_count = lectures.size
-    full_testings_count = testings.size
-    progress = full_lectures_count + full_testings_count
-
-    [lectures_count, progress]
+    return count
   end
+
+  # current user's testing stats
+  def passed_tests(testings)
+    all_questions = []
+    full_count_questions = 0
+
+    testings.each do |t|
+      all_questions << t.questions
+      full_count_questions += all_current_answers(t)
+    end
+    all_questions.flatten!
+
+    responses_count = all_current_responses(all_questions)
+
+    return [responses_count, full_count_questions]
+  end
+
+  # amount of correct test answers from all testings
+  def all_current_answers(testing)
+
+    count = 0
+    testing.questions.each do |q|
+      count += q.answers.where(isCorrect: true).size
+    end
+    return count
+  end
+
+  # amount of correct test answers by user
+  def all_current_responses(questions)
+    responses = Response.where(user_id: current_user.id)
+    count = 0
+    questions.each do |q|
+      responses.each do |r|
+        if (q.id == r.question_id && r.mark == 1)
+          count +=1
+        end
+      end
+    end
+    return count
+  end
+
+
 end
+

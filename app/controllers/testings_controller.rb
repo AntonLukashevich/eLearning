@@ -9,7 +9,8 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
   end
 
   def show
-    @responses = Response.all.where(user_id: @user.id)
+    @responses = Response.where(user_id: @user.id)
+
   end
 
   def new
@@ -46,6 +47,8 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
     @questions = @testing.questions.includes(:answers).paginate(page: params[:page], per_page: 1)
   end
 
+
+
   private
 
   def testing_params
@@ -61,4 +64,20 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
   def set_course
     @course = Course.find(params[:course_id])
   end
+
+  def test_result
+    set_testing
+    questions = @testing.questions
+    result = 0
+
+    questions.each do |q|
+      @responses.each do |r|
+        if (q.id == r.question_id && r.mark == 1)
+          result +=1
+        end
+      end
+    end
+    return result
+  end
+
 end

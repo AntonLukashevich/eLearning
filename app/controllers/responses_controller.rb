@@ -10,6 +10,7 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
     @user = current_user
     set_course_testing_question_answers
     params[:response].each do |r|
+
       Response.create(response: r, mark: 0, user_id: @user.id, question_id: @question.id)
     end
 
@@ -31,4 +32,8 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
     @question = @testing.questions.find(params[:question_id])
     @answers = @question.answers
   end
+
+  def retake
+  end
+
 end
