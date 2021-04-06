@@ -5,12 +5,21 @@ module AchievementsHelper # rubocop:todo Style/Documentation
 
     lectures = course.lectures
     lectures_count = readed_lectures(lectures)
-    lecture_progress = 100* (lectures_count.to_f/ lectures.size)
+
+    if lectures.size > 0
+      lecture_progress = 100* (lectures_count.to_f/ lectures.size)
+    else
+      lecture_progress = 100
+    end
 
 
     testings = course.testings.includes(:questions)
     responses_count, full_count_questions = passed_tests(testings)
-    test_progress = 100 * (responses_count.to_f/ full_count_questions)
+    if full_count_questions > 0
+      test_progress = 100 * (responses_count.to_f/ full_count_questions)
+    else
+      test_progress = 100
+    end
 
 
     current_progress = (test_progress + lecture_progress)/2

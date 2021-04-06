@@ -1,27 +1,5 @@
 <% if @achievements.present? %>
   <%#binding.pry %>
-  <div class="divTable">
-    <div class="divTableBody">
-      <div class="divTableRow">
-        <div class="divTableCell">Courses</div>
-        <div class="divTableCell">Lectures</div>
-        <div class="divTableCell">Tests</div>
-        <div class="divTableCell">Progress</div>
-        <div class="divTableCell">Unsubscribe</div>
-      </div>
-      <% @achievements.each do |a| %>
-      <div class="divTableRow">
-        <div class="divTableCell"><%=link_to a.course.title, course_path(a.course) %></div>
-        <div class="divTableCell">Lectures</div>
-        <div class="divTableCell">Tests</div>
-        <div class="divTableCell"><%= a.progress %></div>
-        <div class="divTableCell"><%= button_to 'Unsubscribe', achievement_path(a), class: "btn btn-outline-warning btn-sm",
-                                                method: :delete, data: { confirm: 'Are you sure? All your achievements of course will be deleted!!! ' } %></div>
-      </div>
-      <% end %>
-    </div>
-  </div>
-
   <table class="table table-striped" style="margin-top: 2em;">
     <thead class="thead-dark">
     <tr>
