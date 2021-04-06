@@ -21,23 +21,23 @@ class LecturesController < ApplicationController # rubocop:todo Style/Documentat
   def create
     @lecture = @course.lectures.build(lecture_params)
     if @lecture.save
-      redirect_to @course
+      redirect_to @course, success: 'The lecture saved!'
     else
-      render 'new'
+      render 'new', danger: 'Error! Check input info...'
     end
   end
 
   def update
     if @lecture.update(lecture_params)
-      redirect_to @course
+      redirect_to @course, success: 'Changes saved!'
     else
-      render 'edit'
+      render 'edit', danger: 'Error! Check input info...'
     end
   end
 
   def destroy
     @lecture.destroy
-    redirect_to course_path(@course)
+    redirect_to course_path(@course), info: 'The lecture deleted.'
   end
 
   def move

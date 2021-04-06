@@ -16,13 +16,13 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
     set_question(@testing)
     set_answers(@question)
     params[:response].each do |r|
-
       Response.create(response: r, mark: 0, user_id: @user.id, question_id: @question.id)
     end
 
     current_answers = @question.answers.where(isCorrect: true).pluck(:answer)
     responses = @question.responses.pluck(:response)
     @question.responses.update_all(mark: 1) if current_answers == responses # rubocop:todo Rails/SkipsModelValidations
+    flash.now[:info] = 'Your answer saved'
     # redirect_to course_testing_path(@course, @testing)
   end
 

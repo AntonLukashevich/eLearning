@@ -33,3 +33,10 @@ require("trix")
 require("@rails/actiontext")
 import "controllers"
 import "youtube"
+
+
+$(document).on('turbolinks:load', function() {
+    setTimeout(function() {
+        $('.alert').fadeOut('slow','swing');
+    }, 5000);
+})

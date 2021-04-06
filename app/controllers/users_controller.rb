@@ -21,24 +21,25 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to user_path(@user)
+      sign_in @user
+      redirect_to user_path(@user), success: 'Your profile created'
     else
-      render 'new'
+      render 'new', danger: 'Error! Something went wrong... Check your input info.'
     end
   end
 
   def update
     if @user.update(user_params)
       sign_in @user
-      redirect_to @user
+      redirect_to @user, success: 'Your profile updated'
     else
-      render 'edit'
+      render 'edit', danger: 'Error! Something went wrong... Check your input info.'
     end
   end
 
   def destroy
     @user.destroy
-    redirect_to users_path
+    redirect_to users_path, info: 'Profile deleted.'
   end
 
   private

@@ -1,8 +1,20 @@
-<%= form_for @user, html: {multipart: true} do |f| %>
 
+<% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <h3><% t('common.errors') %></h3>
+    <ul>
+      <% @user.errors.full_messages.each.each do |m| %>
+        <li><%= m %></li>
+      <% end %>
+    </ul>
+  </div>
+<%end %>
+
+
+<%= form_for @user, html: {multipart: true} do |f| %>
   <div >
     <div class="form-group">
-      <%= f.label :email %><br />
+      <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
     </div>
 
@@ -10,22 +22,22 @@
       <%= f.label :password %>
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
+      <% end %>
       <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :password_confirmation %><br />
+      <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :first_name %><br />
+      <%= f.label :first_name %>
       <%= f.text_field :first_name, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :last_name %><br />
+      <%= f.label :last_name %>
       <%= f.text_field :last_name, class: 'form-control' %>
 
     </div>

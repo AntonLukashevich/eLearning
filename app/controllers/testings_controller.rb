@@ -22,23 +22,23 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
   def create
     @testing = @course.testings.build(testing_params)
     if @testing.save
-      redirect_to @course
+      redirect_to @course, success: 'The test saved!'
     else
-      render 'new'
+      render 'new', danger: 'Error! Check input info...'
     end
   end
 
   def update
     if @testing.update(testing_params)
-      redirect_to @course
+      redirect_to @course, success: 'Changes saved!'
     else
-      render 'edit'
+      render 'edit', danger: 'Error! Check input info...'
     end
   end
 
   def destroy
     @testing.destroy
-    redirect_to course_path(@course)
+    redirect_to course_path(@course), info: 'The test deleted.'
   end
 
   def pass_testing

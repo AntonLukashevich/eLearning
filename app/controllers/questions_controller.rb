@@ -20,23 +20,23 @@ class QuestionsController < ApplicationController # rubocop:todo Style/Documenta
   def create
     @question = @testing.questions.build(question_params)
     if @question.save
-      redirect_to course_testing_path(@course, @testing)
+      redirect_to course_testing_path(@course, @testing), success: 'Question saved!'
     else
-      render 'new'
+      render 'new', danger: 'Error! Check input info...'
     end
   end
 
   def update
     if @question.update(question_params)
-      redirect_to course_testing_path(@course, @testing)
+      redirect_to course_testing_path(@course, @testing), success: 'Changes saved!'
     else
-      render 'edit'
+      render 'edit', danger: 'Error! Check input info...'
     end
   end
 
   def destroy
     @question.destroy
-    redirect_to course_testing_path(@course, @testing)
+    redirect_to course_testing_path(@course, @testing), info: 'The question deleted.'
   end
 
   private

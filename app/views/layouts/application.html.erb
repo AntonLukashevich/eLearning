@@ -42,6 +42,15 @@
 </div>
 <div class="w-70 bg-light">
   <div class="course-container">
+    <div class="row" >
+      <div class="col-md-12">
+        <% flash.each do |name, message|%>
+          <div class="alert alert-<%= name %> alert-dismissible fade show">
+            <%= message %>
+          </div>
+        <%end %>
+      </div>
+    </div>
     <%= yield %>
   </div>
 </div>
