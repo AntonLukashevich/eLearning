@@ -3,6 +3,7 @@
 class UsersController < ApplicationController # rubocop:todo Style/Documentation
   before_action :set_user, only: %i[show edit update destroy]
 
+
   def index
     @users = User.all.includes(:achievements)
   end

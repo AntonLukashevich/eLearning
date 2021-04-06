@@ -13,7 +13,7 @@ class LecturesController < ApplicationController # rubocop:todo Style/Documentat
   end
 
   def show
-    @readed = Readed.where(lecture_id: @lecture, user_id: current_user.id).first
+    @readed = Readed.where(lecture_id: @lecture.id, user_id: current_user.id).first
   end
 
   def edit; end

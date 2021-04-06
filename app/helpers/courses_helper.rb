@@ -29,8 +29,8 @@ module CoursesHelper # rubocop:todo Style/Documentation
       end
     end
 
-    result = (count_responses.to_f/count_answers) *100
-    return result
+    @result = (count_responses.to_f/count_answers) *100
+    return @result
   end
 
 

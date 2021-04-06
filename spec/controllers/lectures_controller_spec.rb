@@ -6,6 +6,8 @@ RSpec.describe LecturesController, type: :controller do
   let(:course) { create :course }
   let(:lectures) { create_list :lecture, 5 }
   let(:lecture) { create :lecture }
+  let(:current_user) { create :user}
+  let(:readed) { create :readed, user_id: current_user.id}
 
   let(:lecture_params) do
     {
@@ -49,10 +51,15 @@ RSpec.describe LecturesController, type: :controller do
 
   describe 'GET #show' do
     context 'action show' do
+      let(:readeds_relation) { instance_double('ActiveRecord::Relation') }
+
       before do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:lectures).and_return(lectures)
         allow(course.lectures).to receive(:find).and_return(lecture)
+
+        allow(Readed).to receive(:where).with(lecture_id: lecture, user_id: current_user).and_return(readeds_relation)
+        allow(readeds_relation).to receive(:first).and_return(readed)
       end
 
       it 'render show template if lecture found' do
@@ -148,7 +155,7 @@ RSpec.describe LecturesController, type: :controller do
       end
     end
 
-    context 'when params invalid' do
+    fcontext 'when params invalid' do
       before do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:lectures).and_return(lectures)

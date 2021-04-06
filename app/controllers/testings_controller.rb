@@ -47,7 +47,20 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
     @questions = @testing.questions.includes(:answers).paginate(page: params[:page], per_page: 1)
   end
 
+  def retake
+    @course = Course.find(params[:course_id])
+    @testing = @course.testings.find(params[:id])
 
+    @testing.questions.each do |q|
+      q.responses.each do |r|
+        if r.user_id == current_user.id && r.present?
+          r.destroy
+        end
+      end
+    end
+
+    redirect_to pass_testing_course_testing_path(@course, @testing)
+  end
 
   private
 

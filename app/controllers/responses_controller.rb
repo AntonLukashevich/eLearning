@@ -2,13 +2,19 @@
 
 class ResponsesController < ApplicationController # rubocop:todo Style/Documentation
   def new
-    set_course_testing_question_answers
+    set_course
+    set_testing(@course)
+    set_question(@testing)
+    set_answers(@question)
     @response = Response.new
   end
 
   def create
     @user = current_user
-    set_course_testing_question_answers
+    set_course
+    set_testing(@course)
+    set_question(@testing)
+    set_answers(@question)
     params[:response].each do |r|
 
       Response.create(response: r, mark: 0, user_id: @user.id, question_id: @question.id)
@@ -20,20 +26,30 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
     # redirect_to course_testing_path(@course, @testing)
   end
 
+
+
   private
 
   def response_params
     params.require(:response).permit(:question_id, :user_id, :response)
   end
 
-  def set_course_testing_question_answers
+  def set_course
     @course = Course.find(params[:course_id])
-    @testing = @course.testings.find(params[:testing_id])
-    @question = @testing.questions.find(params[:question_id])
-    @answers = @question.answers
   end
 
-  def retake
+  def set_testing(course)
+    @testing = course.testings.find(params[:testing_id])
   end
+
+  def set_question(testing)
+    @question = testing.questions.find(params[:question_id])
+  end
+
+  def set_answers(question)
+    @answers = question.answers
+  end
+
+
 
 end

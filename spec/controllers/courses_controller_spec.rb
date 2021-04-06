@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe CoursesController, type: :controller do
   let(:user) { create :user }
   let(:role) { create :role }
-  let(:courses) { create_list :course, 5 }
+  let(:courses) { create_list :course, 5 , status: 'ready'}
   let(:course) { create :course }
 
   let(:course_params) do
@@ -57,16 +57,19 @@ RSpec.describe CoursesController, type: :controller do
 
   describe 'GET #show' do
     context 'show action' do
+      let(:readeds_relation) { instance_double('ActiveRecord::Relation') }
       before do
         allow(Course).to receive(:find).and_return(course)
-        get :show, params: { id: course.id }
+        allow(Readed).to receive(:where).with(user_id: user.id).and_return(readeds_relation)
       end
 
       it 'render show template if course found' do
+        get :show, params: { id: course.id }
         expect(response).to render_template('show')
       end
 
       it 'return course' do
+        get :show, params: { id: course.id }
         expect(assigns(:course)).to eq(course)
       end
     end

@@ -62,7 +62,8 @@
   <% else %>
     <div class="card card-body mb-1 mt-1">
     <%= link_to test.title, pass_testing_course_testing_path(@course, test), style: "color: black;" %>
-      <div align="right"><%= link_to 'Result: ', course_testing_path(@course, test), style: "color: grey;" %><%= testing_progress(test) %>%</div>
+      <div align="right"><%= link_to 'Result: ', course_testing_path(@course, test), style: "color: grey;" %><%= testing_progress(test) %>%
+      | <%= link_to 'Retake', retake_course_testing_path(@course,test), method: :delete, data: { confirm: 'Are you sure?' }  %></div>
     </div>
   <% end %>
 <% end %>

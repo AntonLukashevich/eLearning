@@ -28,7 +28,7 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
     destroy_readed(course)
     destroy_responses(course)
     @achievement.destroy
-    
+
     redirect_to courses_path
   end
 

@@ -29,9 +29,11 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
     resources :testings do
       member do
         get :pass_testing
+        delete :retake
       end
       resources :questions do
-        resources :responses
+        resources :responses do
+        end
       end
     end
 
