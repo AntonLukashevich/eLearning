@@ -41,6 +41,8 @@ gem 'rubocop-rails', require: false
 gem 'simple_form'
 gem 'trix-rails', require: 'trix'
 gem 'will_paginate-bootstrap4'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

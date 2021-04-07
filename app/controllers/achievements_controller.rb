@@ -1,9 +1,28 @@
 # frozen_string_literal: true
 
 class AchievementsController < ApplicationController # rubocop:todo Style/Documentation
+
   def index
     @achievements = Achievement.includes(:user, :course).where(user_id: current_user)
   end
+
+  def certificate
+    @achievement = Achievement.includes(:user, :course).find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: " #{current_user.first_name} #{current_user.last_name}, #{Time.now()}", ##{@course.title},
+               page_size: 'A4',
+               template: "achievements/show.pdf.erb",
+               layout: "pdf.html.erb",
+               orientation: "Portrait",
+               lowquality: true,
+               zoom: 1,
+               dpi: 75
+      end
+    end
+  end
+
 
   def new
     @achievement = Achievement.new

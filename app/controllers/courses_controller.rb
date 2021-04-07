@@ -22,7 +22,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     @course = @user.courses.create(course_params)
 
     if @course.save
-      redirect_to @course, success: 'The course created!'
+      redirect_to @course, success: 'The course created!-*'
     else
       render 'new', danger: 'Error! Something went wrong... Check your input info.'
     end

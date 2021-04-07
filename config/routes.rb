@@ -16,7 +16,11 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   resources :answers
   resources :users
 
-  resources :achievements
+  resources :achievements do
+    member do
+      get :certificate
+    end
+  end
   resources :readeds
 
   resources :courses do
