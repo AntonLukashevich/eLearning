@@ -24,9 +24,9 @@
 
         <td><%= button_to 'Unsubscribe', achievement_path(a), class: "btn btn-outline-warning btn-sm",
                           method: :delete, data: { confirm: 'Are you sure? All your achievements of course will be deleted!!! ' } %></td>
-        <% if a.progress >= 90 %>
-          <td><%=link_to 'get certificate', certificate_achievement_path(a, format: :pdf) %></td>
-        <%end %>
+        <td><% if a.progress >= 90 %>
+          <%=link_to 'Certificate', certificate_achievement_path(a, format: :pdf), target: :_blank, class: "btn btn-success btn-sm" %>
+        <%end %></td>
       </tr>
     <% end %>
     </tbody>
