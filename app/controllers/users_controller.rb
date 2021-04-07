@@ -54,4 +54,13 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
   def set_user
     @user ||= User.find(params[:id])
   end
+
+
+  def user_avatar(user)
+    user = current_user
+    if user.avatar.nil?
+      user.update[:avatar => 'default-avatar.jpeg']
+    end
+  end
+
 end

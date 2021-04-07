@@ -8,7 +8,11 @@
     <div class="col-2 border">
       <div class="user-info">
         <div class="img-show-user">
-          <%= image_tag @user.avatar.url(:thumb), class: 'img-show' if @user.avatar? %>
+          <% if @user.avatar?  %>
+            <%= image_tag @user.avatar.url(:thumb), class: 'img-show'  %>
+          <%else %>
+            <%= image_tag ("default-avatar.png") %>
+          <% end %>
         </div>
       </div>
     </div>

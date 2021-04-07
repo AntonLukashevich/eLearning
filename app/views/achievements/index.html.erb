@@ -9,6 +9,7 @@
       <th scope="col">Tests</th>
       <th scope="col">Progress</th>
       <th scope="col">Unsubscribe</th>
+      <th scope="col">Certificate</th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +24,9 @@
 
         <td><%= button_to 'Unsubscribe', achievement_path(a), class: "btn btn-outline-warning btn-sm",
                           method: :delete, data: { confirm: 'Are you sure? All your achievements of course will be deleted!!! ' } %></td>
+        <% if a.progress >= 90 %>
+          <td>get certificate</td>
+        <%end %>
       </tr>
     <% end %>
     </tbody>
