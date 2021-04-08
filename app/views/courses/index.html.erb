@@ -29,7 +29,7 @@
 
         <% if (current_user == course.users.first) && user_signed_in? %>
           <div class="course">
-            <%= button_to 'Destroy', course_path(course), class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= button_to 'Destroy', course_path(course), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %>
           </div>
         <%end %>
       </div>

@@ -16,26 +16,27 @@
 <body>
 <div class="w-70 px-0  course-container">
 <header class="navbar navbar-expand-lg navbar-light" >
-  <h5 class="mr-md-auto me-md-0"><%= link_to "eLearning", courses_index_path, style: 'color: black;' %></h5>
+  <h5 class="mr-md-auto me-md-0"><%= link_to image_tag("favicon.png",:alt =>"guitars",style:'height:2vw;width:2vw;', class: "rounded-circle"), courses_index_path, style: 'color: black;' %>
+    <%= link_to "Learning", courses_index_path, style: 'color: black;' %></h5>
 
   <%if user_signed_in? %>
     <span class="p-1 text-dark">
-            <%= link_to 'Achievements', achievements_path, style: 'color: black;' %>
-  </span> |
-    <span class="p-1 text-dark">
-            <%= link_to 'My Courses', my_courses_courses_path, style: 'color: black;' %>
-  </span> |
-    <span class="p-1 text-dark">
-            <%= link_to current_user.email, user_path(current_user), style: 'color: black;' %>
+            <%= link_to 'Achievements', achievements_path,  class: 'btn btn-info btn-nav-bar' %>
   </span>
     <span class="p-1 text-dark">
-            <%= link_to "| Log out ", destroy_user_session_path, method: :delete, style: 'color: black;' %></span>
+            <%= link_to 'My Courses', my_courses_courses_path,  class: 'btn btn-info btn-nav-bar' %>
+  </span>
+    <span class="p-1 text-dark">
+            <%= link_to current_user.email, user_path(current_user),  class: 'btn btn-info btn-nav-bar' %>
+  </span>
+    <span class="p-1 text-dark">
+            <%= link_to "Log out ", destroy_user_session_path, method: :delete, class: 'btn btn-warning btn-nav-bar' %></span>
 
     <% else %>
   <span class="p-1 text-dark">
-             <%= link_to "Sign up |", new_user_registration_path, style: 'color: black;' %></span>
+             <%= link_to "Sign up ", new_user_registration_path, class: 'btn btn-success btn-nav-bar' %></span>
   <span class="p-1 text-dark">
-            <%= link_to "Log in ", new_user_session_path, style: 'color: black;' %></span>
+            <%= link_to "Log in ", new_user_session_path, class: 'btn btn-success btn-nav-bar' %></span>
 
     <%end %>
 </header>
