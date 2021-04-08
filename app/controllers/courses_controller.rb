@@ -48,7 +48,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def to_publish
     @course.update(status: 'ready')
-    redirect_to user_path(current_user), success: 'The course published.'
+    redirect_to my_courses_courses_path(), success: 'The course published.'
   end
 
   def subscribe
