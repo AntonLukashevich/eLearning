@@ -30,6 +30,10 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       delete :unsubscribe
     end
 
+    collection do
+      get :my_courses
+    end
+
     resources :testings do
       member do
         get :pass_testing

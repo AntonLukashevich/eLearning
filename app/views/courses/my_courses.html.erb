@@ -1,0 +1,52 @@
+
+
+<table class="table table-hover">
+  <thead>
+  <tr bgcolor="#85C1E9">
+    <th scope="col"><b><%= link_to '+', new_course_path, class: 'btn btn-sm' %></b></th>
+    <th scope="col">Course</th>
+    <th scope="col">Status</th>
+    <th scope="col" align="center">Lectures</th>
+    <th scope="col" align="center">Tests</th>
+    <th scope="col" align="center">Rating</th>
+    <th scope="col" align="center">Publish</th>
+    <th scope="col" align="center">Edit</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @courses.present? %>
+  <% @courses.each_with_index do |course, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td> <%= link_to course.title, course_path(course), style: 'color: black;' %></td>
+      <td align="center"><%= course.status %></td>
+      <td align="center"><%= course.lectures.size %></td>
+      <td align="center"><%= course.testings.size %></td>
+      <td align="center"><%= course.rating %></td>
+      <td align="center">
+        <% if course.status == 'draft' %>
+          <%=link_to 'To publish ' , to_publish_course_path(course),
+                     method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-publish' %>
+        <%else %>
+             &#10004 (как снять с публикации???)
+      <% end %>
+      </td>
+      <td>
+        <% if course.status == 'draft' %>
+          <%=link_to 'Edit', edit_course_path(course), class: 'btn btn-editor' %>
+        <%else %>
+          &#10006
+        <% end %>
+      </td>
+
+    </tr>
+  <% end %>
+
+  <%else %>
+    <tr align="center">
+      <td colspan="8">You don't any origins courses</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

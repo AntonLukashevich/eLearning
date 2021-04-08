@@ -8,6 +8,11 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     @courses = Course.includes(:users, :achievements).where(status: 'ready').by_created_at
   end
 
+  def my_courses
+    @user ||= current_user
+    @courses = @user.courses
+  end
+
   def new
     @course = Course.new
   end
@@ -22,7 +27,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     @course = @user.courses.create(course_params)
 
     if @course.save
-      redirect_to @course, success: 'The course created!-*'
+      redirect_to my_courses_courses_path, success: 'The course created!'
     else
       render 'new', danger: 'Error! Something went wrong... Check your input info.'
     end

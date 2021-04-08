@@ -9,7 +9,7 @@
       <div class="user-info">
         <div class="img-show-user">
           <% if @user.avatar?  %>
-            <%= image_tag @user.avatar.url(:thumb), class: 'img-show'  %>
+            <%= image_tag @user.avatar.url(:thumb)%>
           <%else %>
             <%= image_tag ("default-avatar.png") %>
           <% end %>
