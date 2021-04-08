@@ -24,7 +24,11 @@ div.description {
 }
 
 div.summary {
-  padding: 1em;
+  height: 11em;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  //background: linear-gradient(180deg, transparent, #EFEFEF 30%);
 }
 
 .course-description {
