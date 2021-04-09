@@ -18,7 +18,9 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def show
-    @readeds = Readed.where(user_id: @user.id)
+    if user_signed_in?
+      @readeds = Readed.where(user_id: @user.id)
+    end
   end
 
   def edit; end

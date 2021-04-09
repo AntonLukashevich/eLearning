@@ -38,10 +38,12 @@
         </div>
       <% end %>
       <div align="right">
+        <% if @readeds.present?%>
         <% @readeds.each do |r| %>
           <% if r.user_id == @user.id && r.lecture_id == block.id%>
             Readed: <%= image_tag("galochka.png",:alt =>"guitars",style:'height:1vw;width:1vw;')%>
           <% end %>
+        <% end %>
         <% end %>
       </div>
     </div>
