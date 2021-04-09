@@ -5,6 +5,9 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   get 'lectures/index'
   get 'organizations/index'
   devise_for :users, controllers: { registrations: 'users' }
+  ActiveAdmin.routes(self)
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   get 'courses/index'
   get 'users/index'
   get 'roles/index'
@@ -15,7 +18,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   root 'courses#index', as: 'home'
   resources :answers
   resources :users
-
+  resources :admin
   resources :achievements do
     member do
       get :certificate

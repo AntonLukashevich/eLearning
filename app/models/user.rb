@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   belongs_to :role
   has_and_belongs_to_many :courses # rubocop:todo Rails/HasAndBelongsToMany
-  has_many :certificates # rubocop:todo Rails/HasManyOrHasOneDependent
+  #has_many :certificates # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :achievements # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :readeds # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :responses # rubocop:todo Rails/HasManyOrHasOneDependent

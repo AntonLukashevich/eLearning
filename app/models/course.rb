@@ -3,7 +3,7 @@
 class Course < ApplicationRecord
   include ActiveModel::AttributeAssignment
   has_and_belongs_to_many :users # rubocop:todo Rails/HasAndBelongsToMany
-  has_one :certificate # rubocop:todo Rails/HasManyOrHasOneDependent
+  #has_one :certificate # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :lectures, dependent:  :delete_all
   has_many :testings, dependent:  :delete_all
   has_many :achievements # rubocop:todo Rails/HasManyOrHasOneDependent
