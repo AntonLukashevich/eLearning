@@ -155,7 +155,7 @@ RSpec.describe LecturesController, type: :controller do
       end
     end
 
-    fcontext 'when params invalid' do
+    context 'when params invalid' do
       before do
         allow(Course).to receive(:find).and_return(course)
         allow(course).to receive(:lectures).and_return(lectures)

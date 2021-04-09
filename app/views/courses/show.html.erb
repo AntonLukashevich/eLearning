@@ -15,7 +15,7 @@
     Type: <%= @course.type_course %><br>
     Authors:
     <% @course.users.each do |author| %>
-      <%= author.first_name %> <%= author.last_name %>
+      <%= author.email %>
     <% end %>
   </div>
 </div>
@@ -27,7 +27,7 @@
   </div>
 <% end %>
 <br>
-
+<h5>Lectures:</h5>
 <div data-controller="drag" data-drag-url="course_id/lectures/id/move">
   <% @course.lectures.by_position.each do |block| %>
     <div data-id="<%= block.id %>" data-course_id="<%= @course.id %>" class="card card-body mb-1 mt-1">
@@ -56,6 +56,7 @@
     <%= link_to 'Create new test of Course', new_course_testing_path(@course), class: "btn btn-info btn-sm" %>
   </div>
 <% end %>
+<h5>Test:</h5>
 <% @course.testings.each do |test| %>
   <% if @course.users.include? current_user %>
   <div class="card card-body mb-1 mt-1">
@@ -64,8 +65,12 @@
   <% else %>
     <div class="card card-body mb-1 mt-1">
     <%= link_to test.title, pass_testing_course_testing_path(@course, test), style: "color: black;" %>
-      <div align="right"><%= link_to 'Result: ', course_testing_path(@course, test), style: "color: grey;" %><%= testing_progress(test) %>%
-      | <%= link_to 'Retake', retake_course_testing_path(@course,test), method: :delete, data: { confirm: 'Are you sure?' }  %></div>
-    </div>
-  <% end %>
+        <div align="right">
+          <% if user_signed_in? %>
+            <%= link_to 'Result: ', course_testing_path(@course, test), style: "color: grey;" %><%= testing_progress(test) %>%
+          | <%= link_to 'Retake', retake_course_testing_path(@course,test), method: :delete, data: { confirm: 'Are you sure?' }  %>
+          <% end%>
+        </div>
+      </div>
+  <% end%>
 <% end %>

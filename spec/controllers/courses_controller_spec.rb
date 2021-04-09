@@ -90,8 +90,8 @@ RSpec.describe CoursesController, type: :controller do
 
   describe 'GET #edit' do
     it 'finds a specific course' do
-      Course.should_receive(:find).once.and_return(course)
       get :edit, params: { id: course.id }
+      Course.should_receive(:find).once.and_return(course)
     end
 
     it 'renders the edit view' do

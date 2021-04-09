@@ -3,6 +3,7 @@
 class TestingsController < ApplicationController # rubocop:todo Style/Documentation
   before_action :set_testing, only: %i[show edit update destroy]
   before_action :set_course, only: %i[index new create]
+  before_action :authenticate_user!
 
   def index
     @testings = @course.testings

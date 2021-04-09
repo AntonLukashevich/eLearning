@@ -3,6 +3,7 @@
 class LecturesController < ApplicationController # rubocop:todo Style/Documentation
   before_action :set_lecture, only: %i[show edit update destroy move readed]
   before_action :set_course, only: %i[index new create]
+  before_action :authenticate_user!
 
   def index
     @lectures = @course.lectures
