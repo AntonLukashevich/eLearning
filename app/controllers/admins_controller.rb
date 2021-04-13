@@ -21,7 +21,7 @@ class AdminsController < ApplicationController
 
 
   def users
-    @users = User.includes(:role, :achievements).where(role_id: 1)
+    @users = User.includes(:role, :achievements, :certificates, :courses).where(role_id: 1)
   end
 
   def courses
