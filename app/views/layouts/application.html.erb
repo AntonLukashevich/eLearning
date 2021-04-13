@@ -20,6 +20,11 @@
     <%= link_to "Learning", courses_index_path, style: 'color: black;' %></h5>
 
   <%if user_signed_in? %>
+    <% if current_user.role_id == 2 %>
+    <span class="mr-md-auto me-md-0" >
+            <%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info btn-nav-bar' %>
+  </span>
+      <% end %>
     <span class="p-1 text-dark">
             <%= link_to 'Achievements', achievements_path,  class: 'btn btn-info btn-nav-bar' %>
   </span>

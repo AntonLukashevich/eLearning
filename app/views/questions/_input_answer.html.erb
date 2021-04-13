@@ -1,11 +1,11 @@
 <tr style="border: 1px solid black !important; padding: 1em;" id="input_answer">
   <td>
     <%= f.label 'Answer input:' %>
-    <%= f.text_field :answer,as: :hidden , class: 'form-control' %>
+    <%= f.text_field :answer, as: :hidden, class: 'form-control' %>
     <%= f.check_box :isCorrect, checked: true %>
-    <%= link_to 'delete', '#', remote: true, class: 'remove_fields' %>
+    <%= link_to 'delete', '#', remote: true, class: 'btn btn-info remove_fields' %>
 
   </td>
 
 </tr>
-  <br>
+<br>

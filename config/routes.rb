@@ -13,6 +13,16 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   get 'users/:id' => 'users#show'
 
   root 'courses#index', as: 'home'
+  resources :admins do
+    get 'users', on: :collection
+    get 'courses', on: :collection
+
+    member do
+      post :nominate
+      post :fire
+    end
+  end
+
   resources :answers
   resources :users
 

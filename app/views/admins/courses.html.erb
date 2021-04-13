@@ -1,0 +1,44 @@
+<h3>Courses list</h3>
+<div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
+<table class="table table-striped" style="margin-top: 2em;">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">ID</th>
+    <th scope="col">Title</th>
+    <th scope="col">Authors</th>
+    <th scope="col">Type</th>
+    <th scope="col">Status</th>
+    <th scope="col">Rating</th>
+    <th scope="col">Subscriptions</th>
+    <th scope="col">Certificates</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @courses.each_with_index do |course, index| %>
+    <tr>
+      <td> <%= index + 1 %></td>
+      <td><%=link_to course.id  %></td>
+      <td><%= course.title  %></td>
+      <td>
+        <% course.users.each do |user| %>
+          <%= user.email %><br>
+        <%end %>
+      </td>
+      <td><%= course.type_course  %></td>
+      <td><%= course.status  %></td>
+      <td ><%= course.rating %></td>
+      <td><%= course.achievements.size%></td>
+      <td><%= %>???</td>
+      <td>
+        <%= link_to 'Show', course_path(course) %>
+        <%= link_to 'Edit', edit_course_path(course) %>
+        <%= link_to 'Destroy', course_path(course),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
