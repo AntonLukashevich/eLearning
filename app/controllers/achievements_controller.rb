@@ -8,7 +8,9 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
 
   def certificate
     @achievement = Achievement.includes(:user, :course).find(params[:id])
-
+    if !Certificate.where(user_id: @achievement.user.id, course_id: @achievement.course.id, result: @achievement.progress).present?
+      Certificate.create!(user_id: @achievement.user.id, course_id: @achievement.course.id, result: @achievement.progress)
+    end
     respond_to do |format|
       format.html
       format.pdf do

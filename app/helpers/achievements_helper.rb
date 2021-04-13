@@ -24,7 +24,7 @@ module AchievementsHelper # rubocop:todo Style/Documentation
 
     ach = course.achievements.find_by(user_id: current_user.id)
     ach.update(progress: current_progress)
-    
+
 
     [lecture_progress.to_i, test_progress.to_i]
   end
