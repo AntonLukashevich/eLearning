@@ -22,9 +22,9 @@ module AchievementsHelper # rubocop:todo Style/Documentation
 
     current_progress = (test_progress + lecture_progress)/2
 
-    @achievements.each do |ach|
-      ach.update(progress: current_progress)
-    end
+    ach = course.achievements.find_by(user_id: current_user.id)
+    ach.update(progress: current_progress)
+    
 
     [lecture_progress.to_i, test_progress.to_i]
   end

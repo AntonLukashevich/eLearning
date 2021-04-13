@@ -8,6 +8,7 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
 
   def certificate
     @achievement = Achievement.includes(:user, :course).find(params[:id])
+
     respond_to do |format|
       format.html
       format.pdf do
