@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController # rubocop:todo Style/Documentation
+  load_and_authorize_resource
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_course, only: %i[show edit update destroy to_publish subscribe unsubscribe]
   before_action :set_user, only: %i[show create subscribe unsubscribe]
