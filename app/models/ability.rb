@@ -26,7 +26,9 @@ class Ability
         can [:read, :subscribe], Course
       end
 
-
+    if user.role_id == 2 # user.role == 'admin'
+      can :manage, :all
+    end
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
