@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
+  require 'sidekiq/web'
+
+  mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
+
   get 'lecture_blocks/index'
   get 'lectures/index'
   get 'organizations/index'
@@ -36,9 +40,16 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   resources :courses do
     member do
       patch :to_publish
+      patch :request_to
+      patch :to_draft
       post :subscribe
       delete :unsubscribe
+
+      get :authors
+      post :new_author
+      delete :delete_author
     end
+
 
     collection do
       get :my_courses
@@ -67,4 +78,6 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   resources :pictures, only: %i[create destroy]
   resources :organizations
   resources :roles
+
+
 end

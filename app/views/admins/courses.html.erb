@@ -1,6 +1,7 @@
-<h3>Courses list</h3>
 <div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
-<table class="table table-striped" style="margin-top: 2em;">
+<h3>Courses list:</h3>
+<div >
+<table class="table table-striped" style="margin-top: 2em; overflow-y: auto; ">
   <thead class="thead-dark">
   <tr>
     <th scope="col">#</th>
@@ -18,7 +19,7 @@
   <tbody>
   <% @courses.each_with_index do |course, index| %>
     <tr>
-      <td> <%= index + 1 %></td>
+      <td><b> <%= index + 1 %></b></td>
       <td><%=link_to course.id  %></td>
       <td><%= course.title  %></td>
       <td>
@@ -42,3 +43,49 @@
   <% end %>
   </tbody>
 </table>
+</div>
+<br><br><br><br><br><br>
+<h4>Requests to publish:</h4>
+<% if Course.where( status: 'for_publication').present? %>
+<table class="table table-striped" style="margin-top: 2em;">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">ID</th>
+    <th scope="col">Title</th>
+    <th scope="col">Authors</th>
+    <th scope="col">Type</th>
+    <th scope="col">Status</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @courses.each_with_index do |course, index| %>
+    <% if course.status == 'for_publication' %>
+    <tr>
+      <td> <%= index + 1 %></td>
+      <td><%=link_to course.id  %></td>
+      <td><%= course.title  %></td>
+      <td>
+        <% course.users.each do |user| %>
+          <%= user.email %><br>
+        <%end %>
+      </td>
+      <td><%= course.type_course  %></td>
+      <td><%= course.status  %></td>
+
+      <td>
+        <%= link_to 'Show', course_path(course), class: 'btn btn-info btn-sm' %>
+        <%= link_to 'To publish', to_publish_course_path(course),method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-success btn-sm' %>
+        <%= link_to 'To draft', to_draft_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+      </td>
+    </tr>
+    <% end %>
+  <% end %>
+
+  </tbody>
+</table>
+  <%else %>
+  <div align="center"><i>No one requests</i></div>
+<% end %>
+<br><br><br><br><br><br>

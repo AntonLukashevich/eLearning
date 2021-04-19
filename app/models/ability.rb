@@ -11,7 +11,7 @@ class Ability
 
       if user.role_id == 1 # user.role == 'user'
         can [:read, :create, :subscribe, :unsubscribe, :my_courses ], Course
-        can [:update, :destroy, :to_publish], Course do |course|
+        can [:update, :destroy, :request_to, :authors, :delete_author, :new_author], Course do |course|
           course.users.include?(user)
         end
 

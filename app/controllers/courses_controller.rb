@@ -25,7 +25,9 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     end
   end
 
-  def edit; end
+  def edit
+    binding.pry
+  end
 
   def create
     @course = @user.courses.create(course_params)
@@ -38,7 +40,9 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def update
+
     if @course.update(course_params)
+      binding.pry
       redirect_to @course, success: 'Changes saved.'
     else
       render 'edit', danger: 'Error! Something went wrong... Check your input info.'
@@ -51,8 +55,21 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def to_publish
-    @course.update(status: 'ready')
-    redirect_to my_courses_courses_path(), success: 'The course published.'
+    AddCourseToPublicationWorker.perform_async(@course.id)
+    redirect_to courses_admins_path(), info: 'The course will be publish soon'
+  end
+
+  def request_to
+    RequestToPublishCourseWorker.perform_async(@course.id)
+    #@course.update(status: 'ready')
+    redirect_to my_courses_courses_path(), info: 'The request has been sen. Wait for an answer...'
+  end
+
+  def to_draft
+    NayToPublicationCourseWorker.perform_async(@course.id)
+
+    #@course.update(status: 'draft')
+    redirect_to courses_admins_path(), info: 'The request rejected.'
   end
 
   def subscribe
@@ -73,6 +90,24 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def subscribed?(user, course)
     Achievement.where(user_id: user, course_id: course).exists?
+  end
+
+  def authors
+    @users = User.all - @course.users
+  end
+
+  def new_author
+    @course = Course.find(params[:id])
+    @user = User.find(params[:user_id])
+    @course.users << @user
+    redirect_to authors_course_path(@course)
+  end
+
+  def delete_author
+    @course = Course.find(params[:id])
+    @user = User.find(params[:user_id])
+    @course.users.delete(@user)
+    redirect_to authors_course_path(@course)
   end
 
   private

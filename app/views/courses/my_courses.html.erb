@@ -26,7 +26,7 @@
       <td align="center"><%= course.rating %></td>
       <td align="center">
         <% if course.status == 'draft' %>
-          <%=link_to 'To publish ' , to_publish_course_path(course),
+          <%=link_to 'To publish ' , request_to_course_path(course),
                      method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-publish' %>
         <%else %>
              &#10004 (как снять с публикации???)
