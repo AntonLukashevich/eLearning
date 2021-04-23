@@ -1,3 +1,58 @@
+
+
+<div class="row pb-3">
+  <div class="col">
+    <div class="card container" style="min-height:460px">
+      <h3>начатые, но ещё не завершённые</h3><br>
+
+      <% @started_courses.each do |s_course| %>
+        <div class="card p-1"><%= s_course.course.title %>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: <%= s_course.progress %>%;" aria-valuenow="#{<%= s_course.progress %>}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card container" style="min-height:460px">
+      <h3>Курсы в организациях</h3><br>
+      <i class="fa fa-css3 w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+      <p>Standard CSS only</p>
+      <p>Easy to learn</p>
+      <p>No need for jQuery</p>
+      <p>No JavaScript library</p>
+    </div>
+  </div>
+</div>
+
+<div class="row pd-3">
+  <div class="col">
+      <div class="card container" style="min-height:460px">
+        <h3>с наибольшим рейтенгом</h3><br>
+        <i class="fa fa-desktop w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <p>Built-in responsiveness</p>
+        <p>Mobile first fluid grid</p>
+        <p>Fits any screen sizes</p>
+        <p>PC Tablet and Mobile</p>
+      </div>
+  </div>
+
+  <div class="col">
+    <div class="card container" style="min-height:460px">
+      <h3>Курсы не в организациях</h3><br>
+      <i class="fa fa-css3 w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+      <p>Standard CSS only</p>
+      <p>Easy to learn</p>
+      <p>No need for jQuery</p>
+      <p>No JavaScript library</p>
+    </div>
+  </div>
+</div>
+
+
+
 <% @courses.order(created_at: :asc).each do |course| %>
   <% if course.status == 'ready' %>
     <article class="course">
@@ -40,3 +95,8 @@
 <% end %>
 <br>
 <hr>
+
+
+
+
+

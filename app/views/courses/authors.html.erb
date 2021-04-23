@@ -2,17 +2,20 @@
   <%= link_to 'Back to Course', course_path(@course), class: "btn btn-outline-info btn-sm",  style: "color: black;" %>
 </div>
 <h6>You can add another authors:</h6>
-
+<table >
 <% @users.each do |user| %>
-  <%=user.email %> | <%= link_to 'add to authors', new_author_course_path(user_id: user.id),  method: :post %><br>
-<% end %>
+  <tr>
+    <td><%=user.email %></td> <td><%= link_to 'add to authors', new_author_course_path(user_id: user.id),  method: :post, class: 'btn btn-sm btn-info' %></td>
+    </tr>
+  <% end %>
+</table>
 <br><br>
 
 <h5>Authors:</h5>
 <table class="table table-striped" style="margin-top: 2em; overflow-y: auto; ">
   <thead class="thead-dark">
   <tr>
-    <th scope="col"><%= link_to 'Add', new_author_course_path(@course), method: :post, class: 'btn btn-success btn-sm'%></th>
+    <th scope="col">#</th>
     <th scope="col">ID</th>
     <th scope="col">Author</th>
     <th scope="col">Actions</th>
