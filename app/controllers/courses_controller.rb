@@ -9,9 +9,8 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   def index
     @courses = Course.includes(:users, :achievements).where(status: 'ready').by_created_at
     @started_courses = Achievement.includes(:user, :course).where(user_id: current_user).order(progress: :asc).limit(7)
-
     # @org_courses
-    # @new_courses
+    @new_courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at.limit(5)
     # @chosen_courses
     #
   end

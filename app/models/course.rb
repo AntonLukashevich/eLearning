@@ -14,4 +14,5 @@ class Course < ApplicationRecord
   validates :title, presence: true, length: { minimum: 2 }
 
   scope :by_created_at, -> { order(created_at: :asc) }
+  scope :by_last_created_at, -> { order(created_at: :desc) }
 end
