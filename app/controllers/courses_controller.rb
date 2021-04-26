@@ -7,12 +7,9 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   before_action :set_user, only: %i[show create subscribe unsubscribe]
 
   def index
-
-    @started_courses = Achievement.includes(:user, :course).where(user_id: current_user).order(progress: :asc).limit(7)
-    # @org_courses
-    @new_courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at.limit(5)
-    # @chosen_courses
-    #
+    @started_courses = Achievement.includes(:user, :course).where(user_id: current_user).order(progress: :asc).limit(4)
+    @new_courses = Course.includes(:users).where(status: 'ready').by_last_created_at.limit(5)
+    @rating_courses = Course.where(status: 'ready').order(rating: :desc).limit(5)
   end
 
   def new
@@ -120,7 +117,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def course_params
     permitted = params.require(:course).permit(:title, :description, :type_course, :rating, :status, :user_id, :image)
-    permitted.merge!(status: 'draft')
+    permitted.merge!(status: 'draft', rating: 0)
   end
 
   def set_course

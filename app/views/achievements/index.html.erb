@@ -10,6 +10,7 @@
       <th scope="col">Progress</th>
       <th scope="col">Unsubscribe</th>
       <th scope="col">Certificate</th>
+      <th scope="col">Rating</th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +28,14 @@
         <td><% if a.progress >= 90 %>
           <%=link_to 'Certificate', certificate_achievement_path(a, format: :pdf), target: :_blank, class: "btn btn-success btn-sm" %>
         <%end %></td>
+        <td><% if a.progress >= 90 && a.rating == 0%>
+            <%=render 'rating', achievement: a %>
+            <% else %>
+            <select name="select" disabled style="height: 27px;"> <!--Supplement an id here instead of using 'name'-->
+              <option value="value1" selected></option>
+            </select>
+            <button class="btn btn-success disabled btn-sm">ok</button>
+          <%end %></td>
       </tr>
     <% end %>
     </tbody>

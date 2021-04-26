@@ -1,0 +1,4 @@
+<%= form_for achievement do |f| %>
+  <%= f.select :rating, [ [-5], [-4], [-3], [-2], [-1], [1], [2], [3], [4], [5]], { class: "form-control" }, style: "height: 27px" %>
+  <%= f.submit 'ok', class: 'btn btn-success btn-sm',style: "height: 29px" %>
+<% end %>

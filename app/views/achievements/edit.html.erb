@@ -1,0 +1,11 @@
+<%= form_for @achievement do |f| %>
+  <div class="form-group">
+    <div class="form-group">
+      <%= f.label "rating: " %>
+      <%= f.select :rating, [ [-5], [-4], [-3], [-2], [-1], [1], [2], [3], [4], [5]], class: "form-select" %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'ok', class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

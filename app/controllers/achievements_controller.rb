@@ -31,6 +31,10 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
     @achievement = Achievement.new
   end
 
+  def edit
+    @achievement = Achievement.find(params[:id])
+  end
+
   def create
     @user = current_user # User.find(params[:user_id])
     @course = Course.find(params[:course_id])
@@ -40,6 +44,16 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
       redirect_to @course
     else
       render 'new'
+    end
+  end
+
+  def update
+    @achievement = Achievement.find(params[:id])
+    if @achievement.update(achievement_rating)
+      RatingWorker.perform_async(@achievement.id)
+      redirect_to achievements_path, success: 'Changes saved.'
+    else
+      render 'edit', danger: 'Error! Something went wrong... Check your input info.'
     end
   end
 
@@ -57,7 +71,11 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
   private
 
   def achievement_params
-    params.require(:achievement).permit(:process, :user_id, :course_id)
+    params.require(:achievement).permit(:process, :user_id, :course_id, :rating)
+  end
+
+  def achievement_rating
+    params.require(:achievement).permit(:rating)
   end
 
   def destroy_readed(course)
