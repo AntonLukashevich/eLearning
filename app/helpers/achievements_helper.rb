@@ -13,6 +13,7 @@ module AchievementsHelper # rubocop:todo Style/Documentation
     end
 
     testings = course.testings.includes(:questions)
+
     responses_count, full_count_questions = passed_tests(testings)
     if full_count_questions > 0
       test_progress = 100 * (responses_count.to_f/ full_count_questions)
@@ -62,10 +63,14 @@ module AchievementsHelper # rubocop:todo Style/Documentation
 
   # amount of correct test answers from all testings
   def all_current_answers(testing)
-
     count = 0
-    testing.questions.each do |q|
-      count += q.answers.where(isCorrect: true).size
+    questions = Question.includes(:answers).where(testing_id: testing.id)
+    questions.each do |q|
+      q.answers.each do |answer|
+        if answer.isCorrect
+          count += 1
+        end
+      end
     end
     return count
   end
@@ -83,7 +88,5 @@ module AchievementsHelper # rubocop:todo Style/Documentation
     end
     return count
   end
-
-
 end
 
