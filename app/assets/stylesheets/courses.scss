@@ -32,6 +32,14 @@ div.summary {
   //background: linear-gradient(180deg, transparent, #EFEFEF 30%);
 }
 
+div.summary-publication {
+  height: 11em;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  //background: linear-gradient(180deg, transparent, #EFEFEF 30%);
+}
+
 .course-description {
   height: auto;
 }

@@ -53,6 +53,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
 
     collection do
       get :my_courses
+      get :publications
     end
 
     resources :testings do

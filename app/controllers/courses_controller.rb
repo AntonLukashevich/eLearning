@@ -7,17 +7,12 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   before_action :set_user, only: %i[show create subscribe unsubscribe]
 
   def index
-    @courses = Course.includes(:users, :achievements).where(status: 'ready').by_created_at
+
     @started_courses = Achievement.includes(:user, :course).where(user_id: current_user).order(progress: :asc).limit(7)
     # @org_courses
     @new_courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at.limit(5)
     # @chosen_courses
     #
-  end
-
-  def my_courses
-    @user ||= current_user
-    @courses = @user.courses
   end
 
   def new
@@ -31,12 +26,10 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def edit
-    binding.pry
   end
 
   def create
     @course = @user.courses.create(course_params)
-
     if @course.save
       redirect_to my_courses_courses_path, success: 'The course created!'
     else
@@ -44,8 +37,12 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     end
   end
 
-  def update
+  def my_courses
+    @user ||= current_user
+    @courses = @user.courses
+  end
 
+  def update
     if @course.update(course_params)
       binding.pry
       redirect_to @course, success: 'Changes saved.'
@@ -72,7 +69,6 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def to_draft
     NayToPublicationCourseWorker.perform_async(@course.id)
-
     #@course.update(status: 'draft')
     redirect_to courses_admins_path(), info: 'The request rejected.'
   end
@@ -113,6 +109,11 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     @user = User.find(params[:user_id])
     @course.users.delete(@user)
     redirect_to authors_course_path(@course)
+  end
+
+
+  def publications
+    @courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at
   end
 
   private

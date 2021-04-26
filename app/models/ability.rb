@@ -10,7 +10,7 @@ class Ability
       user ||= User.new # guest user (not logged in)
 
       if user.role_id == 1 # user.role == 'user'
-        can [:read, :create, :subscribe, :unsubscribe, :my_courses ], Course
+        can [:read, :create, :subscribe, :unsubscribe, :my_courses, :publications ], Course
         can [:update, :destroy, :request_to, :authors, :delete_author, :new_author], Course do |course|
           course.users.include?(user)
         end
