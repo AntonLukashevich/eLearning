@@ -13,10 +13,11 @@ class User < ApplicationRecord
   has_many :achievements # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :readeds # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :responses # rubocop:todo Rails/HasManyOrHasOneDependent
-
+  has_many :individuals
   mount_uploader :avatar, AvatarUploader
 
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
 
-
+  @@role = Role.where(name: 'admin').first
+  scope :followers, -> { where.not(role_id: @@role.id) }
 end

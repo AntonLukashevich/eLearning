@@ -41,7 +41,6 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def update
     if @course.update(course_params)
-      binding.pry
       redirect_to @course, success: 'Changes saved.'
     else
       render 'edit', danger: 'Error! Something went wrong... Check your input info.'

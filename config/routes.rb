@@ -38,18 +38,17 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   resources :readeds
 
   resources :courses do
+    resources :individuals
     member do
       patch :to_publish
       patch :request_to
       patch :to_draft
       post :subscribe
       delete :unsubscribe
-
       get :authors
       post :new_author
       delete :delete_author
     end
-
 
     collection do
       get :my_courses

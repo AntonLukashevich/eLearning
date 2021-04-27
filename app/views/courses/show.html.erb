@@ -12,7 +12,10 @@
     <%= @course.description %>
   </div>
   <div class="course-info">
-    Type: <%= @course.type_course %><br>
+    Type: <%= @course.type_course %>
+    <% if @course.type_course == 'individual' && (can? :update, @course) %>
+      <%= link_to 'Add followers', course_individuals_url(@course) %>
+    <% end %><br>
     <%= link_to 'Authors:', authors_course_path(@course) %>
     <% @course.users.each do |author| %>
       <%= author.email %>
