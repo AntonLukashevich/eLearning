@@ -38,7 +38,12 @@ class LecturesController < ApplicationController # rubocop:todo Style/Documentat
 
   def destroy
     @lecture.destroy
-    redirect_to course_path(@course), info: 'The lecture deleted.'
+    respond_to do |format|
+      format.js
+      format.html { redirect_to course_path(@course), info: 'The lecture deleted.' }
+      format.json
+    end
+
   end
 
   def move

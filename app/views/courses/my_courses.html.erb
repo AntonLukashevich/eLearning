@@ -3,7 +3,10 @@
 <table class="table table-hover">
   <thead>
   <tr bgcolor="#85C1E9">
-    <th scope="col"><b><%= link_to '+', new_course_path, class: 'btn btn-sm' %></b></th>
+    <th scope="col"><b><%= link_to new_course_path, class: 'btn btn-sm' do %>
+        &#10010
+      <% end %>
+        </b></th>
     <th scope="col">Course</th>
     <th scope="col">Status</th>
     <th scope="col" align="center">Lectures</th>

@@ -39,7 +39,11 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
 
   def destroy
     @testing.destroy
-    redirect_to course_path(@course), info: 'The test deleted.'
+    respond_to do |format|
+      format.js
+      redirect_to course_path(@course), info: 'The test deleted.'
+      format.json
+    end
   end
 
   def pass_testing
