@@ -1,4 +1,4 @@
-<div class="row mb-2">
+<div class="row pb-3">
   <div class="col-11">
     <%= link_to 'Back to Main', courses_path, class: "btn btn-outline-info btn-sm", style: "color: black;" %>
   </div>
@@ -22,7 +22,11 @@
     <% if @course.type_course == 'individual' && (can? :update, @course) %>
       <%= link_to 'Add followers', course_individuals_url(@course) %>
     <% end %><br>
+    <% if (can? :update, @course) %>
     <%= link_to 'Authors:', authors_course_path(@course) %>
+    <%else %>
+      Authors:
+    <%end %>
     <% @course.users.each do |author| %>
       <%= author.email %>
     <% end %>
@@ -36,7 +40,6 @@
       new lecture &#10010
     <% end %>
   </div>
-
 <% end %>
 <br>
 <% if subscribe?(current_user, @course) || (can? :update, @course) %>
@@ -46,22 +49,26 @@
       <% @course.lectures.by_position.each do |block| %>
         <div data-id="<%= block.id %>" data-course_id="<%= @course.id %>" class="card card-body mt-1" id="lecture-<%= block.id %>">
           <div class="row">
-            <div class="col-11 pl-2 pt-2"> <%= link_to block.title, course_lecture_path(@course, block), :locals => { id: dom_id(block), course_id: dom_id(@course) }, class: 'lecture' %></div>
+            <div class="col-11 pl-2 pt-2">
+              <%= link_to block.title, course_lecture_path(@course, block), :locals => { id: dom_id(block), course_id: dom_id(@course) }, class: 'lecture' %>
+            </div>
             <% if @course.users.include? current_user %>
               <div class="col-1 pt-2 pb-0" align="right">
                 <%= link_to course_lecture_path(@course, block), method: :delete, data: { confirm: 'Delete the lecture?' },
                             style: "text-decoration: none;", remote: true do %>
                   <p>&#128465</p>
                 <% end %>
+              </div>
             <% end %>
             <% if @readeds.present? %>
-              <% @readeds.each do |r| %>
-                <% if r.user_id == @user.id && r.lecture_id == block.id %>
-                  Readed: <%= image_tag("galochka.png", :alt => "guitars", style: 'height:1vw;width:1vw;') %>
+              <div class="col-1 pt-2 pb-0" align="right">
+                <% @readeds.each do |r| %>
+                  <% if r.user_id == @user.id && r.lecture_id == block.id %>
+                    &#10004
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             <% end %>
-            </div>
           </div>
         </div>
       <% end %>
@@ -69,7 +76,7 @@
     <br><br><br>
   <% end %>
   <% if can? :update, @course %>
-    <div align="right" >
+    <div align="right">
       <%= link_to new_course_testing_path(@course), class: "btn btn-info btn-sm" do %>
         new test &#10010
       <% end %>
@@ -77,19 +84,31 @@
   <% end %>
   <% if @course.testings.size > 0 %>
     <h5>Test:</h5>
-    <ul class="list-group" >
+    <ul class="list-group">
       <% @course.testings.each do |test| %>
         <% if @course.users.include? current_user %>
-          <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 1em; margin-top: 5px;"  id="test-<%= test.id %>">
-                <%= link_to test.title, course_testing_path(@course, test), style: "color: black;" %>
-                <%= link_to course_testing_path(@course, test), method: :delete, data: { confirm: 'Delete the test?' },
-                            style: "text-decoration: none;", remote: true do %>
-                  <p>&#128465</p>
-                <% end %>
+          <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 1em; margin-top: 5px;" id="test-<%= test.id %>">
+            <%= link_to test.title, course_testing_path(@course, test), style: "color: black;" %>
+            <%= link_to course_testing_path(@course, test), method: :delete, data: { confirm: 'Delete the test?' },
+                        style: "text-decoration: none;", remote: true do %>
+              <p>&#128465</p>
+            <% end %>
           </li>
         <% else %>
-          <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 1em; margin-top: 5px;"  id="test-<%= test.id %>">
-            <%= link_to test.title, pass_testing_course_testing_path(@course, test), style: "color: black;" %>
+          <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 1em; margin-top: 5px;" id="test-<%= test.id %>">
+            <% if testing_progress(test) > 0 %>
+              <%= test.title %>
+            <% else %>
+              <%= link_to test.title, pass_testing_course_testing_path(@course, test), style: "color: black;" %>
+            <% end %>
+            <% if user_signed_in? %>
+              <div>
+              <%= link_to 'Result: ', course_testing_path(@course, test), style: "color: grey;" %><%= testing_progress(test) %>%
+              <%= link_to retake_course_testing_path(@course,test), class: 'btn btn-info btn-sm', method: :delete, data: { confirm: 'Do you want retake the Test?' } do %>
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true">Retake</span>
+                <% end %>
+              </div>
+            <% end%>
           </li>
         <% end %>
       <% end %>
