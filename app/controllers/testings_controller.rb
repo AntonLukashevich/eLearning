@@ -31,7 +31,7 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
 
   def update
     if @testing.update(testing_params)
-      redirect_to @course, success: 'Changes saved!'
+      redirect_to course_testing_path(@course,@testing), success: 'Changes saved!'
     else
       render 'edit', danger: 'Error! Check input info...'
     end

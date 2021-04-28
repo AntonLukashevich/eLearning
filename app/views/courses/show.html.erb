@@ -49,8 +49,9 @@
             <div class="col-11 pl-2 pt-2"> <%= link_to block.title, course_lecture_path(@course, block), :locals => { id: dom_id(block), course_id: dom_id(@course) }, class: 'lecture' %></div>
             <% if @course.users.include? current_user %>
               <div class="col-1 pt-2 pb-0" align="right">
-                <%= link_to course_lecture_path(@course, block), method: :delete, data: { confirm: 'Delete the lecture?' }, remote: true do %>
-                  <p>&#10006</p>
+                <%= link_to course_lecture_path(@course, block), method: :delete, data: { confirm: 'Delete the lecture?' },
+                            style: "text-decoration: none;", remote: true do %>
+                  <p>&#128465</p>
                 <% end %>
             <% end %>
             <% if @readeds.present? %>
@@ -81,16 +82,16 @@
         <% if @course.users.include? current_user %>
           <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 1em; margin-top: 5px;"  id="test-<%= test.id %>">
                 <%= link_to test.title, course_testing_path(@course, test), style: "color: black;" %>
-                <%= link_to course_testing_path(@course, test), method: :delete, data: { confirm: 'Delete the test?' }, remote: true do %>
-                  <p>&#10006</p>
+                <%= link_to course_testing_path(@course, test), method: :delete, data: { confirm: 'Delete the test?' },
+                            style: "text-decoration: none;", remote: true do %>
+                  <p>&#128465</p>
                 <% end %>
           </li>
         <% else %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-
+          <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 1em; margin-top: 5px;"  id="test-<%= test.id %>">
+            <%= link_to test.title, pass_testing_course_testing_path(@course, test), style: "color: black;" %>
           </li>
         <% end %>
-
       <% end %>
     </ul>
   <% end %>
@@ -98,3 +99,4 @@
   <%= link_to 'Subscribe', subscribe_course_path(@course), method: :post, class: "btn btn-success btn-sm" %>
 <% end %>
 <hr>
+

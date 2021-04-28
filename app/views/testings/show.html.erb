@@ -1,21 +1,56 @@
-<div align="right">
-  <%=link_to 'Back', course_path(@course), class: 'btn btn-outline-info btn-sm' %>
+<div class="row">
+  <div class="col-4">
+    <%=link_to 'Back', course_path(@course), class: 'btn btn-outline-info btn-sm' %>
+  </div>
+  <div class="col-4" align="center">
+    <h2>TEST: <%=@testing.title %></h2>
+  </div>
+  <% if can? :update, @course %>
+    <div class="col-4" align="right">
+      <%= link_to edit_course_testing_path(@course, @testing), class: "btn-outline-warning btn-sm", style: "color: black; text-decoration: none; " do %>
+        &#9999
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
-<h2><%=@testing.title %></h2>
-<%= @testing.description %>
-<br><br><br>
-<% if author?(@course) %>
-  <%= link_to 'Add question', new_course_testing_question_path(@course,@testing), class: 'btn btn-info btn-sm'  %>
-<%end %>
+<div>
+  <u>Description: </u><%= @testing.description %>
+</div>
+
 <br>
-<div>All questions of the test:</div>
+
+<div class="row">
+  <div class="col-10 pl-5">
+    <h5>Questions list:</h5>
+  </div>
+  <div class="col-2">
+    <% if author?(@course) %>
+      <%= link_to 'Add Question', new_course_testing_question_path(@course,@testing), class: 'btn btn-info btn-sm'  %>
+    <%end %>
+  </div>
+</div>
+
 <% @testing.questions.order(created_at: :asc).each do |q| %>
   <% if author?(@course) %>
-    <div class="card card-body mb-1 mt-1" >
-      <%=link_to 'Answer', new_course_testing_question_response_path(@course,@testing,q)%>
-      <%= link_to 'Edit', edit_course_testing_question_path(@course,@testing, q) %>
-      <%= link_to 'Destroy', course_testing_question_path(@course,@testing,q), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <div class="card card-body mb-1 mt-1" id="question-<%= q.id %>">
+      <div class="row">
+        <div class="col-10 quiz-title">
+          <%=link_to q.question, course_testing_question_path(@course,@testing,q), style: "color: black;"%>
+        </div>
+        <div class="col-1" align="right">
+          <%= link_to edit_course_testing_question_path(@course,@testing, q),
+                      class: 'btn-outline-warning btn-sm', style: "color: black; text-decoration: none;" do %>
+            &#9999
+          <% end %>
+        </div>
+        <div class="col-1">
+          <%= link_to  course_testing_question_path(@course,@testing,q), method: :delete, data: { confirm: 'Are you sure?' },
+                       class: 'btn-outline-info btn-sm', style: "color: black; text-decoration: none;", remote: true do %>
+            &#128465
+          <% end %>
+        </div>
+      </div>
     </div>
   <%else %>
     <div class="card card-body mb-1 mt-1" >
@@ -35,3 +70,4 @@
     </div>
   <% end %>
 <%end %>
+

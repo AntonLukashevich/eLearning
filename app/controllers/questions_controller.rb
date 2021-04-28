@@ -36,7 +36,11 @@ class QuestionsController < ApplicationController # rubocop:todo Style/Documenta
 
   def destroy
     @question.destroy
-    redirect_to course_testing_path(@course, @testing), info: 'The question deleted.'
+    respond_to do |format|
+      format.js
+      redirect_to course_testing_path(@course, @testing), info: 'The question deleted.'
+      format.json
+    end
   end
 
   private

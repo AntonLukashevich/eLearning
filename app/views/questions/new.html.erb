@@ -1,5 +1,5 @@
-<div align="right">
-  <%=link_to 'Back', course_testing_path(@course, @testing) %>
+<div class="pb-3">
+  <%=link_to 'Back', course_testing_path(@course, @testing),  class: 'btn btn-outline-info btn-sm' %>
 </div>
 <h3>New Question</h3>
 <%=render 'questions/form' %>

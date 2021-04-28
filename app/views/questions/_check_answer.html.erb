@@ -1,9 +1,18 @@
 <tr style="border: 1px solid black !important; padding: 1em;"  id="check_answer">
   <td>
-    <%= f.label 'Answer check:' %>
-    <%= f.text_field :answer,as: :hidden , class: 'form-control' %>
-    <%= f.label 'is Correct answer' %>
-    <%= f.check_box :isCorrect, checked: true %>
-    <%= link_to 'delete', '#', remote: true, class: 'remove_fields' %>
+    <div class="row">
+      <div class="col-1" align="center"> True?</div>
+      <div class="col-10"><%= f.label 'Answer check:' %></div>
+      <div class="col-1"></div>
+    </div>
+    <div class="row">
+      <div class="col-1" align="center"> <%= f.check_box :isCorrect, checked: true %></div>
+      <div class="col-10"><%= f.text_field :answer, as: :hidden, class: 'form-control' %></div>
+      <div class="col-1" align="left">
+        <%= link_to '#', remote: true, class: 'btn btn-sm remove_fields' do %>
+          &#128465
+        <% end %>
+      </div>
+    </div>
   </td>
 </tr>

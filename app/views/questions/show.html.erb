@@ -1,14 +1,19 @@
-<div align="right">
-  <%=link_to 'Back', course_testing_path(@course, @testing) %>
+<div class="col pb-2">
+  <%=link_to 'Back', course_testing_path(@course, @testing), class: 'btn btn-outline-info btn-sm' %>
 </div>
 
 question: <%=@question.question %><br>
 content: <%=@question.content %>
 <br>
 <div>
-  <br>Answers: <br>
-<%@question.answers.each do |answer| %>
-  <%=answer.answer %><br>
-
-<%end %>
+  Correct answers:
+  <ul>
+    <%@question.answers.each do |answer| %>
+      <% if answer.isCorrect %>
+        <li>
+          <%=answer.answer %><br>
+        </li>
+      <%end %>
+    <%end %>
+  </ul>
 </div>
