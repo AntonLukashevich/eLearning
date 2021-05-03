@@ -1,0 +1,98 @@
+
+
+<h3>Registration organization list</h3>
+
+<div align="right"><%= link_to 'Admin Panel', admins_path, class: 'btn btn-info' %></div>
+
+<table class="table table-striped" style="margin-top: 2em;">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">ID</th>
+    <th scope="col">Title</th>
+    <th scope="col">Status</th>
+    <th scope="col">Requester</th>
+    <th scope="col">Purpose</th>
+    <th scope="col">Actions</th>
+    <th scope="col">Confirm registration</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @organizations.each_with_index do |org, index| %>
+    <tr>
+      <td> <%= index + 1 %></td>
+      <td><%=  org.id %></td>
+      <td>
+        <div>
+          <%= link_to org.title, organization_path(org), style: "color: black"%>
+          <i class="icon fas fa-info-circle" data-toggle="modal" data-target="#myModalDescription"></i>
+        </div>
+        <div class="modal" id="myModalDescription">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Description</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <p><%=org.description %></p>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </td>
+      <td><%= org.status %></td>
+      <td><%= org.user.email %></td>
+      <td align="center">
+        <i class="icon far fa-caret-square-up" data-toggle="modal" data-target="#myModalPurpose"></i>
+        <div class="modal" id="myModalPurpose">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Purposes</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <p><%=org.purpose %></p>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </td>
+            <td>
+      <%#= link_to 'Show', user_path(user) %>
+      <%#= link_to 'Edit', edit_user_path(user) %>
+      <%#= link_to 'Destroy', user_path(user),  method: :delete, data: { confirm: 'Are you sure?' } %>
+      <!--      </td>-->
+      <!--      <td><%#=link_to 'Nominate', nominate_admin_path(user), class: 'btn btn-warning', method: :post,                     data: { confirm: 'Are you sure?' }  %></td>-->
+    <td>
+      <%= link_to "Confirm", response_organization_path(org, response_status: 'confirmed' ), method: :patch, class: 'btn btn-success btn-sm' %>
+      <%= link_to "Reject", response_organization_path(org,response_status: 'rejected'), class: 'btn btn-warning btn-sm' %>
+    </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+

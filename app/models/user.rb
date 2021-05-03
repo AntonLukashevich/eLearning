@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :readeds # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :responses # rubocop:todo Rails/HasManyOrHasOneDependent
   has_many :individuals
+  has_many :organizations
   mount_uploader :avatar, AvatarUploader
 
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }

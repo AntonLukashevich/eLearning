@@ -1,0 +1,25 @@
+<%= form_for @organization do |f| %>
+  <div >
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :purpose %>
+      <%= f.text_field :purpose, class: 'form-control' %>
+    </div>
+
+    <br>
+    <div class="actions">
+      <%= f.submit class: 'btn btn-success' %><br>
+    </div>
+
+  </div>
+  <hr color="#ffffff">
+<% end %>

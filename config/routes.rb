@@ -20,13 +20,18 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   resources :admins do
     get 'users', on: :collection
     get 'courses', on: :collection
-
+    get 'organizations', on: :collection
     member do
       post :nominate
       post :fire
     end
   end
 
+  resources :organizations do
+    member do
+      patch :response
+    end
+  end
   resources :answers
   resources :users
 

@@ -1,7 +1,8 @@
 class AdminsController < ApplicationController
 
   def index
-    @admins = User.where(role_id: 2)
+    @role = Role.where(name: 'admin').first
+    @admins = User.where(role_id: @role.id)
   end
 
   def nominate
@@ -16,6 +17,10 @@ class AdminsController < ApplicationController
     @user_role = Role.where(name: 'user').first
     @user.update(role_id: @user_role.id)
     redirect_to action: :index
+  end
+
+  def organizations
+    @organizations = Organization.where(status: 'awaiting')
   end
 
 
