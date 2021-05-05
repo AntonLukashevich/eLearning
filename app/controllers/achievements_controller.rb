@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AchievementsController < ApplicationController # rubocop:todo Style/Documentation
-
   def index
     @achievements = Achievement.includes(:course).where(user_id: current_user)
   end
@@ -25,7 +24,6 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
       end
     end
   end
-
 
   def new
     @achievement = Achievement.new
@@ -82,7 +80,7 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
     readeds = Readed.where(user_id: current_user.id)
     course.lectures.each do |lec|
       readeds.each do |r|
-        if r.lecture_id == lec.id
+        if (r.lecture_id == lec.id)
           r.destroy
         end
       end
@@ -101,5 +99,4 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
       end
     end
   end
-
 end

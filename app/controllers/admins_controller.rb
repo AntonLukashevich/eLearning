@@ -1,5 +1,4 @@
 class AdminsController < ApplicationController
-
   def index
     @role = Role.where(name: 'admin').first
     @admins = User.where(role_id: @role.id)
