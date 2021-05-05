@@ -12,8 +12,9 @@
 </div>
 
 <div>
-  <%#= image_tag @organization.image.url(:organization), class: 'img-thumbnail img-show' if @organization.image? %>
-  <h1>Organization: <%= @organization.title %></h1>
+  <%= image_tag @organization.image.url(:organization), class: 'img-thumbnail img-show' if @organization.image? %>
+  <%= image_tag ("organization-default.jpeg"), class: 'img-thumbnail img-show-course' if !@organization.image? %>
+  <h1>Organization: <strong><%= @organization.title %></strong></h1>
   <div class="description">
     <%= @organization.description %>
   </div>
@@ -36,13 +37,24 @@
 
 </div>
 
-<div class="row pt-2">
-  <div class="col-4">
-    <%= link_to organization_staffs_path(@organization), style: "color: black;" do %>
-      Staff <i class=" icon fas fa-th-list"></i>
+<div class="row pt-2 ml-1">
+  <div class="col-4" >
+    Staff
+    <% if @organization.user_id == current_user.id %>
+      <%= link_to organization_staffs_path(@organization), style: "color: black;" do %>
+         <i class=" icon fas fa-th-list"></i>
+      <% end %>
+    <%end %>
+    <div style="min-height:100px; height: 300px; overflow-y: scroll;">
+    <% @staffs.each do |staff|%>
+      <div class="card pt-1 pl-1">
+        <i><%= staff.email %></i>
+      </div>
     <% end %>
+    </div>
   </div>
   <div class="col-8">
     Courses
   </div>
 </div>
+<hr>

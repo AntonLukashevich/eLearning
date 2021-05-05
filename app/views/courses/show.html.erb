@@ -13,6 +13,7 @@
 
 <div>
   <%= image_tag @course.image.url(:course), class: 'img-thumbnail img-show' if @course.image? %>
+  <%= image_tag ("course-default.png"), class: 'img-thumbnail img-show' if !@course.image? %>
   <h1>Course: <%= @course.title %></h1>
   <div class="description">
     <%= @course.description %>

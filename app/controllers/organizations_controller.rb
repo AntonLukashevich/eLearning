@@ -7,8 +7,9 @@ class OrganizationsController < ApplicationController # rubocop:todo Style/Docum
   end
 
   def show
-    @organization = Organization.includes(:managers).find(params[:id])
+    @organization = Organization.includes(:managers, :staffs).find(params[:id])
     @managers = @organization.managers
+    @staffs = @organization.staffs
   end
 
   def new
@@ -18,12 +19,26 @@ class OrganizationsController < ApplicationController # rubocop:todo Style/Docum
   end
 
   def create
+    @organization = Organization.find(params[:id])
     @organization = current_user.organizations.build(org_params)
     @organization.status = 'awaiting'
     if @organization.save
       redirect_to organizations_path, success: "Application sent! Wait admin response."
     else
       render 'new', danger: 'Error! Something went wrong... Check your input info.'
+    end
+  end
+
+  def edit
+    @organization = Organization.find(params[:id])
+  end
+
+  def update
+    @organization = Organization.find(params[:id])
+    if @organization.update(org_params)
+      redirect_to @organization, success: 'Changes saved.'
+    else
+      render 'edit', danger: 'Error! Something went wrong... Check your input info.'
     end
   end
 
