@@ -15,6 +15,12 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
 
   def show
     @user_courses = User.find(params[:id]).courses
+    @staffs = Staff.includes(:organization).where(email: current_user.email)
+    @organizations = []
+    @staffs.each do |staff|
+      @organizations << staff.organization
+    end
+    #binding.pry
   end
 
   def edit; end
