@@ -26,16 +26,17 @@ class OrganizationsController < ApplicationController # rubocop:todo Style/Docum
     end
   end
 
-  def response
-    @organization = Organization.find(params[:id])
-    #binding.pry
-    #redirect_to organizations_path
+  def response_to_request
+    OrganizationRegistrationWorker.perform_async(params[:id],params[:response_status])
+    # @organization = Organization.find(params[:id])
+    # @organization.update(status: params[:response_status].to_s)
+    redirect_to organizations_admins_path
   end
 
   private
 
   def org_params
-    params.require(:organization).permit(:title, :description, :status, :user_id, :purpose)
+    params.require(:organization).permit(:title, :description, :status, :user_id, :purpose, :image)
   end
 
   def set_organization

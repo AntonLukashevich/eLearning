@@ -1,0 +1,44 @@
+<div class="row pb-3">
+  <div class="col-11">
+    <%= link_to 'Back to Main', courses_path, class: "btn btn-outline-info btn-sm", style: "color: black;" %>
+  </div>
+  <% if can? :update, @organization %>
+    <div class="col-1" align="right">
+      <%= link_to edit_organization_path(@organization), class: "btn-outline-warning btn-sm", style: "color: black; text-decoration: none; " do %>
+        &#9999
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <%#= image_tag @organization.image.url(:organization), class: 'img-thumbnail img-show' if @organization.image? %>
+  <h1>Organization: <%= @organization.title %></h1>
+  <div class="description">
+    <%= @organization.description %>
+  </div>
+  <div class="row">
+
+  </div>
+  <div class="course-info">
+      Creator:
+    <%= @organization.user.email  %>
+  </div>
+  <div class="course-info">
+    Managers:
+    <%= @organization.user.email  %>
+    <%= link_to organization_managers_path(@organization) do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+  </div>
+
+</div>
+
+<div class="row pt-2">
+  <div class="col-4">
+    Staff
+  </div>
+  <div class="col-8">
+    Courses
+  </div>
+</div>

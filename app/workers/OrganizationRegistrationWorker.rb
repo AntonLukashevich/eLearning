@@ -1,4 +1,4 @@
-class OrganizationRegistration
+class OrganizationRegistrationWorker
   include Sidekiq::Worker
 
   def perform(organization_id, response_status)

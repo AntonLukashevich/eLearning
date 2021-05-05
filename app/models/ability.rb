@@ -15,6 +15,10 @@ class Ability
           course.users.include?(user)
         end
 
+        can [:update, :destroy, :read, :create ], Organization do |org|
+          org.user.id == user.id
+        end
+
         cannot [:subscribe], Course do |course|
           course.users.include?(user)
         end
@@ -22,6 +26,7 @@ class Ability
         can :manage, User, id: user.id
       else
         can [:show], User
+        can [:show], Organization
         cannot [:index], User
         can [:read, :subscribe], Course
       end

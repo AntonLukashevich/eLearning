@@ -1,5 +1,12 @@
-<h3>Users list</h3>
-<div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
+<div class="row">
+  <div class="col">
+    <h3>Users list</h3>
+  </div>
+  <div class="col">
+    <div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
+  </div>
+
+</div>
 
 <table class="table table-striped" style="margin-top: 2em;">
   <thead class="thead-dark">
@@ -27,10 +34,10 @@
       <td><%= user.role.name  %></td>
       <td><%= user.first_name  %></td>
       <td><%= user.last_name  %></td>
-      <td ><%= user.courses.size %></td>
+      <td><%= user.courses.size %></td>
       <td><%= user.achievements.size%></td>
       <td><%= user.certificates.size%></td>
-      <td><%= %>???</td>
+      <td><%= user.organizations.size %></td>
       <td>
       <%= link_to 'Show', user_path(user) %>
       <%= link_to 'Edit', edit_user_path(user) %>

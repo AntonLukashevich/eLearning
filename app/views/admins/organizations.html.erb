@@ -1,5 +1,8 @@
 
 
+
+
+
 <h3>Registration organization list</h3>
 
 <div align="right"><%= link_to 'Admin Panel', admins_path, class: 'btn btn-info' %></div>
@@ -79,15 +82,14 @@
           </div>
         </div>
       </td>
-            <td>
-      <%#= link_to 'Show', user_path(user) %>
-      <%#= link_to 'Edit', edit_user_path(user) %>
-      <%#= link_to 'Destroy', user_path(user),  method: :delete, data: { confirm: 'Are you sure?' } %>
-      <!--      </td>-->
-      <!--      <td><%#=link_to 'Nominate', nominate_admin_path(user), class: 'btn btn-warning', method: :post,                     data: { confirm: 'Are you sure?' }  %></td>-->
+      <td>
+        <%= link_to 'Show', organization_path(org) %>
+        <%= link_to 'Edit', edit_organization_path(org) %>
+        <%= link_to 'Destroy', organization_path(org),  method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Managers', organization_managers_path(org) %>
     <td>
-      <%= link_to "Confirm", response_organization_path(org, response_status: 'confirmed' ), method: :patch, class: 'btn btn-success btn-sm' %>
-      <%= link_to "Reject", response_organization_path(org,response_status: 'rejected'), class: 'btn btn-warning btn-sm' %>
+      <%= link_to "Confirm", response_to_request_organization_path(org, response_status: 'confirmed'),method: :patch, class: 'btn btn-success btn-sm' %>
+      <%= link_to "Reject", response_to_request_organization_path(org,response_status: 'rejected'), method: :patch, class: 'btn btn-warning btn-sm' %>
     </td>
     </tr>
   <% end %>

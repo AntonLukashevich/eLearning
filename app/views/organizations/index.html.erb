@@ -1,6 +1,9 @@
 <h1>Organizations#index</h1>
 <p>Find me in app/views/organizations/index.html.erb</p>
-
+<ul>
 <% @organizations.each do |org| %>
-  <%= org.title %> | <%= org.status %><br>
+    <li>
+      <%= org.title %> | <%= org.status %>
+    </li>
 <% end %>
+</ul>

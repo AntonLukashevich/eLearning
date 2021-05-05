@@ -29,8 +29,9 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
 
   resources :organizations do
     member do
-      patch :response
+      patch :response_to_request
     end
+    resources :managers
   end
   resources :answers
   resources :users
