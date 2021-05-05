@@ -32,6 +32,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       patch :response_to_request
     end
     resources :managers
+    resources :staffs
   end
   resources :answers
   resources :users

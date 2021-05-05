@@ -1,0 +1,5 @@
+<li class="list-group-item d-flex justify-content-between align-items-center" id="staff-<%= staff.id %>" >
+  <%= staff.email %>
+  <%= link_to "remove", organization_staff_path(@organization, staff), method: :delete, remote: true, data: {confirm: "Are tou sure?"},
+              class: 'btn btn-info btn-sm'  %>
+</li>

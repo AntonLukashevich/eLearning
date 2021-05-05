@@ -16,7 +16,8 @@ class ManagersController < ApplicationController
     respond_to do |format|
       if @manager.save
         format.js
-        format.html{ redirect_to organization_path(@organization), success: 'The manager added to organization'}
+        format.html{ redirect_to organization_managers_path(@organization), success: 'The manager added to organization'}
+        format.json
       end
     end
   end
@@ -28,10 +29,9 @@ class ManagersController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.html { redirect_to organization_managers_path(@organization), info: 'The follower deleted!' }
+      format.html { redirect_to organization_managers_path(@organization), info: 'The user removed!' }
       format.json
     end
-
   end
 
   private

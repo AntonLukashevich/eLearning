@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_090848) do
+ActiveRecord::Schema.define(version: 2021_05_05_114105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,15 @@ ActiveRecord::Schema.define(version: 2021_05_05_090848) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "staffs", force: :cascade do |t|
+    t.string "email"
+    t.bigint "organization_id", null: false
+    t.boolean "registered"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_staffs_on_organization_id"
+  end
+
   create_table "testings", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -268,6 +277,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_090848) do
   add_foreign_key "readeds", "users"
   add_foreign_key "responses", "questions"
   add_foreign_key "responses", "users"
+  add_foreign_key "staffs", "organizations"
   add_foreign_key "testings", "courses"
   add_foreign_key "users", "roles"
 end

@@ -26,9 +26,11 @@
   </div>
   <div class="course-info">
     Managers:
-    <%= @organization.user.email  %>
-    <%= link_to organization_managers_path(@organization) do %>
-      <i class="fas fa-plus"></i>
+    <% @managers.each do |manager|%>
+      <%= manager.user.email %>
+    <% end %>
+    <%= link_to organization_managers_path(@organization), style: "color: black;" do %>
+      <i class=" icon fas fa-th-list"></i>
     <% end %>
   </div>
 
@@ -36,7 +38,9 @@
 
 <div class="row pt-2">
   <div class="col-4">
-    Staff
+    <%= link_to organization_staffs_path(@organization), style: "color: black;" do %>
+      Staff <i class=" icon fas fa-th-list"></i>
+    <% end %>
   </div>
   <div class="col-8">
     Courses

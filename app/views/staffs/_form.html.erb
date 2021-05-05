@@ -1,0 +1,4 @@
+<%= form_with(model: @staff, url: [@organization, @staff], local: true) do |f| %>
+  <%=f.collection_select :email, User.order(:email), :email, :email%>
+  <%= f.submit 'Add', class: 'btn btn-success btn-sm' %>
+<% end %>
