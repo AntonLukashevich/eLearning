@@ -10,7 +10,9 @@
     </div>
   <% end %>
 </div>
-
+<% if !(@organization.status == 'confirmed') && user_signed_in? %>
+  <div class="alert-warning rounded border border-warning p-1 mb-3" style="">To manage the organization, wait for the confirmation of registration from the admins</div>
+<% end %>
 <div>
   <%= image_tag @organization.image.url(:organization), class: 'img-thumbnail img-show' if @organization.image? %>
   <%= image_tag ("organization-default.jpeg"), class: 'img-thumbnail img-show-course' if !@organization.image? %>
@@ -22,12 +24,12 @@
 
   </div>
   <div class="course-info">
-      Creator:
-    <%= @organization.user.email  %>
+    Creator:
+    <%= @organization.user.email %>
   </div>
   <div class="course-info">
     Managers:
-    <% @managers.each do |manager|%>
+    <% @managers.each do |manager| %>
       <%= manager.user.email %>
     <% end %>
   </div>
@@ -35,28 +37,44 @@
 </div>
 
 <div class="row pt-2 ml-1">
-  <div class="col-4" >
+  <div class="col-4">
     Staff
-    <% if @organization.status == 'confirm' %>
+    <% if @organization.status == 'confirmed' %>
       <% if @organization.user_id == current_user.id %>
         <%= link_to organization_staffs_path(@organization), style: "color: black;" do %>
           <i class="icon fas fa-user-plus"></i>
         <% end %>
-      <%end %>
+      <% end %>
     <% else %>
       <i class="icon-disabled fas fa-user-plus"></i>
     <% end %>
 
     <div style="min-height:100px; height: 300px; overflow-y: scroll;">
-    <% @staffs.each do |staff|%>
-      <div class="card pt-1 pl-1">
-        <i><%= staff.email %></i>
-      </div>
-    <% end %>
+      <% @staffs.each do |staff| %>
+        <div class="card pt-1 pl-1">
+          <i><%= staff.email %></i>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="col-8">
-    Courses
+    Courses:
+    <% if @organization.status == 'confirmed' %>
+      <% if @organization.user_id == current_user.id %>
+        <%= link_to new_course_path, style: "color: black;" do %>
+          <i class="icon far fa-plus-square"></i>
+        <% end %>
+      <% end %>
+    <% else %>
+      <i class="icon-disabled far fa-plus-square"></i>
+    <% end %>
+    <div style="min-height:100px; height: 300px; overflow-y: scroll;">
+      <% @org_courses.each do |course| %>
+        <div class="card pt-1 pl-1">
+          <i><%= course.course.title %></i>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 <hr>

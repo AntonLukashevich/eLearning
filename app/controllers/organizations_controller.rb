@@ -7,9 +7,10 @@ class OrganizationsController < ApplicationController # rubocop:todo Style/Docum
   end
 
   def show
-    @organization = Organization.includes(:managers, :staffs).find(params[:id])
+    @organization = Organization.includes(:managers, :staffs, :org_courses).find(params[:id])
     @managers = @organization.managers
     @staffs = @organization.staffs
+    @org_courses = @organization.org_courses
   end
 
   def new
