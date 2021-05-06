@@ -30,9 +30,6 @@
     <% @managers.each do |manager|%>
       <%= manager.user.email %>
     <% end %>
-    <%= link_to organization_managers_path(@organization), style: "color: black;" do %>
-      <i class=" icon fas fa-th-list"></i>
-    <% end %>
   </div>
 
 </div>
@@ -40,11 +37,16 @@
 <div class="row pt-2 ml-1">
   <div class="col-4" >
     Staff
-    <% if @organization.user_id == current_user.id %>
-      <%= link_to organization_staffs_path(@organization), style: "color: black;" do %>
-         <i class=" icon fas fa-th-list"></i>
-      <% end %>
-    <%end %>
+    <% if @organization.status == 'confirm' %>
+      <% if @organization.user_id == current_user.id %>
+        <%= link_to organization_staffs_path(@organization), style: "color: black;" do %>
+          <i class="icon fas fa-user-plus"></i>
+        <% end %>
+      <%end %>
+    <% else %>
+      <i class="icon-disabled fas fa-user-plus"></i>
+    <% end %>
+
     <div style="min-height:100px; height: 300px; overflow-y: scroll;">
     <% @staffs.each do |staff|%>
       <div class="card pt-1 pl-1">

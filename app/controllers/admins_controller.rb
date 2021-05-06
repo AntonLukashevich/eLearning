@@ -19,7 +19,8 @@ class AdminsController < ApplicationController
   end
 
   def organizations
-    @organizations = Organization.where(status: 'awaiting')
+    @request_organizations = Organization.where.not(status: 'confirmed')
+    @organizations = Organization.where(status: 'confirmed')
   end
 
 

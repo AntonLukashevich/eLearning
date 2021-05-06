@@ -119,7 +119,11 @@
         <div class="col-sm-6 mb-3">
           <div class="card h-100">
             <div class="card-body">
-              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Organizations</i></h6>
+              <h6 class="d-flex align-items-center mb-3">
+                <i class="material-icons text-info mr-2">
+                  <%= link_to 'Organizations', organizations_path, style: "color: #17a2b8;"%>
+                </i>
+              </h6>
               <div style="min-height:100px; height: 300px; overflow-y: scroll;">
                 <% @organizations.each do |org| %>
                   <div class="card pl-2 pb-1 pt-1 mb-1">

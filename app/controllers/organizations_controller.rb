@@ -3,7 +3,7 @@
 class OrganizationsController < ApplicationController # rubocop:todo Style/Documentation
   #before_action :set_organization, only: %i[show edit update destroy]
   def index
-    @organizations = Organization.all
+    @organizations = Organization.where(user_id: current_user.id)
   end
 
   def show
@@ -19,7 +19,7 @@ class OrganizationsController < ApplicationController # rubocop:todo Style/Docum
   end
 
   def create
-    @organization = Organization.find(params[:id])
+    #@organization = Organization.find(params[:id])
     @organization = current_user.organizations.build(org_params)
     @organization.status = 'awaiting'
     if @organization.save

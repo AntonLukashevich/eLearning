@@ -1,10 +1,3 @@
-
-
-
-
-
-<h3>Registration organization list</h3>
-
 <div align="right"><%= link_to 'Admin Panel', admins_path, class: 'btn btn-info' %></div>
 
 <table class="table table-striped" style="margin-top: 2em;">
@@ -21,7 +14,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @organizations.each_with_index do |org, index| %>
+  <% @request_organizations.each_with_index do |org, index| %>
     <tr>
       <td> <%= index + 1 %></td>
       <td><%=  org.id %></td>
@@ -86,7 +79,7 @@
         <%= link_to 'Show', organization_path(org) %>
         <%= link_to 'Edit', edit_organization_path(org) %>
         <%= link_to 'Destroy', organization_path(org),  method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Managers', organization_managers_path(org) %>
+
     <td>
       <%= link_to "Confirm", response_to_request_organization_path(org, response_status: 'confirmed'),method: :patch, class: 'btn btn-success btn-sm' %>
       <%= link_to "Reject", response_to_request_organization_path(org,response_status: 'rejected'), method: :patch, class: 'btn btn-warning btn-sm' %>
@@ -96,5 +89,53 @@
   </tbody>
 </table>
 
+<br>
+<hr>
+<br>
+<div >
+  <table class="table table-striped" style="margin-top: 2em; overflow-y: auto; ">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Status</th>
+      <th scope="col">Staff</th>
+      <th scope="col">Managers</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @organizations.each_with_index do |org, index| %>
+      <tr>
+        <td><b> <%= index + 1 %></b></td>
+        <td><%=link_to org.id  %></td>
+        <td><%= org.title  %></td>
+        <td><%= org.status %></td>
+        <td><%=org.staffs.size  %></td>
+        <td>
+          <%=org.managers.size %> <%= link_to organization_managers_path(org), style: "color: black;" do %>
+            <i class=" icon fas fa-user-plus"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to organization_path(org), style: "color: black;" do %>
+            <i class="icon fas fa-tv"></i>
+          <% end %>
+          <%= link_to edit_organization_path(org ),  style: "color: black;" do %>
+            <i class="icon far fa-credit-card"></i>
+          <% end %>
+          <%= link_to organization_path(org),
+                      method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
+            <i class="icon fas fa-trash-alt"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+<hr>
 
 
