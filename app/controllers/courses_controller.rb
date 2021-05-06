@@ -112,6 +112,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     @courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at
   end
 
+
   private
 
   def course_params

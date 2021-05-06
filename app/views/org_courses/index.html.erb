@@ -1,0 +1,23 @@
+<div align="left" class="row pb-5">
+  <div class="col">
+    <%=link_to 'Back', course_path(@course), class: 'btn btn-info btn-sm' %>
+  </div>
+</div>
+
+<h5>Organizations</h5>
+<div class="row">
+  <div class="col-8" style="border-right: 1px solid grey">
+    <% if @org_courses.exists? %>
+      <ul class="list-group">
+        <%= render @org_courses %>
+      </ul>
+    <% else %>
+      <h6 align="center"><i>No organization, add --></i></h6>
+    <%end %>
+  </div>
+  <div class="col-4">
+    <div id='new-org-course'>
+      <%=link_to 'Add organization ->', new_course_org_course_path(@course), remote: true, class: 'btn btn-success btn-sm' %>
+    </div>
+  </div>
+</div>

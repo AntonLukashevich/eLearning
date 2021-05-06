@@ -1,5 +1,4 @@
 class ManagersController < ApplicationController
-
   def index
     @organization = Organization.find(params[:organization_id])
     @managers = @organization.managers

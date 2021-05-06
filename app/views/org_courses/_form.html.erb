@@ -1,0 +1,4 @@
+<%= form_with(model: @org_course, url: [@course, @org_course], local: true) do |f| %>
+  <%=f.collection_select :organization_id, Organization.order(:title), :id, :title%>
+  <%= f.submit 'Add', class: 'btn btn-success btn-sm' %>
+<% end %>

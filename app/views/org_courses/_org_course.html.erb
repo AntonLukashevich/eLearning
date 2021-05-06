@@ -1,0 +1,5 @@
+<li class="list-group-item d-flex justify-content-between align-items-center" id="org-course-<%= org_course.id %>" >
+  <%= org_course.organization.title %>
+  <%= link_to "remove", course_org_course_path(@course, org_course), method: :delete, remote: true, data: {confirm: "Are tou sure?"},
+              class: 'btn btn-info btn-sm'  %>
+</li>

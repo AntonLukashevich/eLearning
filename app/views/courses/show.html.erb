@@ -21,8 +21,12 @@
   <div class="course-info">
     Type: <%= @course.type_course %>
     <% if @course.type_course == 'individual' && (can? :update, @course) %>
-      <%= link_to 'Add followers', course_individuals_url(@course) %>
-    <% end %><br>
+      <%= link_to 'Add followers', course_individuals_path(@course) %>
+    <% end %>
+    <% if @course.type_course == 'private' && (can? :update, @course) %>
+      <%= link_to 'Add to organization', course_org_courses_path(@course) %>
+    <% end %>
+    <br>
     <% if (can? :update, @course) %>
     <%= link_to 'Authors:', authors_course_path(@course) %>
     <%else %>

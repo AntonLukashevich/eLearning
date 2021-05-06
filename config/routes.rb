@@ -46,6 +46,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
 
   resources :courses do
     resources :individuals
+    resources :org_courses
     member do
       patch :to_publish
       patch :request_to
