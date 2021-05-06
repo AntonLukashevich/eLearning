@@ -10,6 +10,8 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     @started_courses = Achievement.includes(:user, :course).where(user_id: current_user).order(progress: :asc).limit(4)
     @new_courses = Course.includes(:users).where(status: 'ready').by_last_created_at.limit(5)
     @rating_courses = Course.where(status: 'ready').order(rating: :desc).limit(5)
+    @org_courses = Course.where(status: 'ready', type_course: 'private').limit(3)
+
   end
 
   def new
