@@ -24,5 +24,6 @@ module ELearning
     config.to_prepare do
       ActionText::ContentHelper.allowed_tags << 'iframe'
     end
+
   end
 end

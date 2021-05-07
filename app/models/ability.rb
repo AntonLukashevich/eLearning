@@ -24,7 +24,9 @@ class Ability
         end
 
         can :manage, User, id: user.id
+        can [:sing_up], Devise
       else
+        # can [:],Devise
         can [:show], User
         can [:show], Organization
         cannot [:index], User
