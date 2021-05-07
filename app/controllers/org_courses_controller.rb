@@ -1,16 +1,14 @@
 class OrgCoursesController < ApplicationController
+  before_action :set_course, only: %i[index new create destroy]
   def index
-    @course = Course.find(params[:course_id])
     @org_courses = OrgCourse.where(course_id: @course.id)
   end
 
   def new
-    @course = Course.find(params[:course_id])
     @org_course = OrgCourse.new
   end
 
   def create
-    @course = Course.find(params[:course_id])
     @org_course = @course.org_courses.build(org_course_params)
     respond_to do |format|
       if @org_course.save
@@ -22,7 +20,6 @@ class OrgCoursesController < ApplicationController
   end
 
   def destroy
-    @course = Course.find(params[:course_id])
     @org_course = OrgCourse.find(params[:id])
     @org_course.destroy
 
@@ -38,5 +35,9 @@ class OrgCoursesController < ApplicationController
 
   def org_course_params
     params.require(:org_course).permit(:organization_id)
+  end
+
+  def set_course
+    @course = Course.find(params[:course_id])
   end
 end

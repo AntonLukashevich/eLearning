@@ -1,16 +1,15 @@
 class StaffsController < ApplicationController
+  before_action :set_organization, only: %i[index new create destry]
+
   def index
-    @organization = Organization.find(params[:organization_id])
     @staffs = @organization.staffs
   end
 
   def new
-    @organization = Organization.find(params[:organization_id])
     @staff = Staff.new
   end
 
   def create
-    @organization = Organization.find(params[:organization_id])
     @staff = @organization.staffs.build(staff_params)
     respond_to do |format|
       if @staff.save
@@ -22,7 +21,6 @@ class StaffsController < ApplicationController
   end
 
   def destroy
-    @organization = Organization.find(params[:organization_id])
     @staff = Staff.find(params[:id])
     @staff.destroy
 
@@ -38,5 +36,9 @@ class StaffsController < ApplicationController
 
   def staff_params
     params.require(:staff).permit(:email, :registered)
+  end
+
+  def set_organization
+    @organization = Organization.find(params[:organization_id])
   end
 end

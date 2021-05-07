@@ -1,16 +1,14 @@
 class ManagersController < ApplicationController
+  before_action :set_organization, only: %i[index new create destroy]
   def index
-    @organization = Organization.find(params[:organization_id])
     @managers = @organization.managers
   end
 
   def new
-    @organization = Organization.find(params[:organization_id])
     @manager = Manager.new
   end
 
   def create
-    @organization = Organization.find(params[:organization_id])
     @manager = @organization.managers.build(manager_params)
     respond_to do |format|
       if @manager.save
@@ -22,7 +20,6 @@ class ManagersController < ApplicationController
   end
 
   def destroy
-    @organization = Organization.find(params[:organization_id])
     @manager = Manager.find(params[:id])
     @manager.destroy
 
@@ -37,5 +34,9 @@ class ManagersController < ApplicationController
 
   def manager_params
     params.require(:manager).permit(:user_id)
+  end
+
+  def set_organization
+    @organization = Organization.find(params[:organization_id])
   end
 end
