@@ -23,4 +23,10 @@ class User < ApplicationRecord
 
   @@role = Role.where(name: 'admin').first
   scope :followers, -> { where.not(role_id: @@role.id) }
+
+  def gravatar_url
+    gravatar_id = Digest::MD5::hexdigest(email).downcase
+    "https://gravatar.com/avatar/#{gravatar_id}.png"
+
+  end
 end

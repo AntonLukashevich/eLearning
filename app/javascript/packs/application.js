@@ -41,3 +41,6 @@ $(document).on('turbolinks:load', function() {
         $('.alert').fadeOut('slow','swing');
     }, 5000);
 })
+
+
+

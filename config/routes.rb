@@ -4,7 +4,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   require 'sidekiq/web'
 
   mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
-
+  mount ActionCable.server => '/cable'
   get 'lecture_blocks/index'
   get 'lectures/index'
   get 'organizations/index'
@@ -86,6 +86,6 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   resources :pictures, only: %i[create destroy]
   resources :organizations
   resources :roles
-
-
+  resources :room_messages
+  resources :rooms
 end

@@ -1,5 +1,6 @@
 development:
   adapter: async
+  channel_prefix: elearning-chat
 
 test:
   adapter: test
