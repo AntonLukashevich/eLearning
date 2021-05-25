@@ -1,3 +1,7 @@
+<%= form_for "", url: publications_courses_path, role: "search", method: :get do %>
+    <%= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
+<% end %>
+
 <% @courses.order(created_at: :asc).each do |course| %>
   <% if course.status == 'ready' %>
     <article class="course">

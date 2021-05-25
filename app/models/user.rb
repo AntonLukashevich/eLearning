@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :individuals
   has_many :organizations
   has_many :managers
+  has_many :room_messages
   mount_uploader :avatar, AvatarUploader
 
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }

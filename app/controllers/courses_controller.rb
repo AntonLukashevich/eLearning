@@ -111,7 +111,13 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
 
   def publications
-    @courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at
+    if params[:search]
+      @search_term = params[:search]
+      @courses = @courses.search_by(@search_term)
+    else
+      @courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at
+    end
+
   end
 
 

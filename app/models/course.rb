@@ -16,4 +16,8 @@ class Course < ApplicationRecord
 
   scope :by_created_at, -> { order(created_at: :asc) }
   scope :by_last_created_at, -> { order(created_at: :desc) }
+
+  def self.search_by(search_term)
+    where("lower(title) LIKE :search_term", search_term: "%#{search_term.downcase}%")
+  end
 end
