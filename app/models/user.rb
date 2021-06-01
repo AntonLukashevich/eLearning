@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :organizations
   has_many :managers
   has_many :room_messages
+  has_many :room_users
   mount_uploader :avatar, AvatarUploader
 
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
@@ -25,8 +26,9 @@ class User < ApplicationRecord
   scope :followers, -> { where.not(role_id: @@role.id) }
 
   def gravatar_url
-    gravatar_id = Digest::MD5::hexdigest(email).downcase
-    "https://gravatar.com/avatar/#{gravatar_id}.png"
-
+    # gravatar_id = Digest::MD5::hexdigest(email).downcase
+    # "https://gravatar.com/avatar/#{gravatar_id}.png"
+    "user.email"
   end
+
 end

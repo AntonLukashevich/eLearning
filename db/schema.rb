@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_081554) do
+ActiveRecord::Schema.define(version: 2021_06_01_063354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,6 +239,15 @@ ActiveRecord::Schema.define(version: 2021_05_25_081554) do
     t.index ["user_id"], name: "index_room_messages_on_user_id"
   end
 
+  create_table "room_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_room_users_on_room_id"
+    t.index ["user_id"], name: "index_room_users_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -307,6 +316,8 @@ ActiveRecord::Schema.define(version: 2021_05_25_081554) do
   add_foreign_key "responses", "users"
   add_foreign_key "room_messages", "rooms"
   add_foreign_key "room_messages", "users"
+  add_foreign_key "room_users", "rooms"
+  add_foreign_key "room_users", "users"
   add_foreign_key "staffs", "organizations"
   add_foreign_key "testings", "courses"
   add_foreign_key "users", "roles"

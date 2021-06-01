@@ -45,6 +45,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'cancancan'
 gem 'sidekiq'
+gem 'volkswagen'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

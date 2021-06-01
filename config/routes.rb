@@ -87,5 +87,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   resources :organizations
   resources :roles
   resources :room_messages
-  resources :rooms
+  resources :rooms do
+    resources :room_users
+  end
 end

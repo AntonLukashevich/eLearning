@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  before_action :set_organization, only: %i[index new create destry]
+  before_action :set_organization, only: %i[index new create destroy]
 
   def index
     @staffs = @organization.staffs
@@ -29,7 +29,6 @@ class StaffsController < ApplicationController
       format.html { redirect_to organization_staffs_path(@organization), info: 'The user removed!' }
       format.json
     end
-
   end
 
   private

@@ -1,6 +1,17 @@
-<h1>
-  <%= @room.name %>
-</h1>
+<div class="row">
+  <div class="col-10">
+    <h1>
+      <%= @room.name %>
+    </h1>
+  </div>
+  <div class="col-2">
+      <%= link_to room_room_users_path(@room), style: "color: black;" do %>
+      members:<%=@room.room_users.count %>
+        <i class="icon fas fa-user-plus"></i>
+      <% end %>
+  </div>
+</div>
+
 
 <div class="row">
   <div class="col-12 col-md-3">
@@ -15,7 +26,7 @@
 
             <div class="col-auto text-center">
 
-              <img src="<%= gravatar_url(room_message.user) %>" class="avatar" alt="<%= room_message.user.first_name %>">
+<!--              <img src="<%#= gravatar_url(room_message.user) %>" class="avatar" alt="<%#= room_message.user.first_name %>">-->
             </div>
             <div class="col">
               <div class="message-content">
@@ -37,7 +48,7 @@
     </div>
 
     <%= simple_form_for @room_message, remote: true do |form| %>
-      <div class="input-group mb-3">
+      <div class="input-group mb-3" >
         <%= form.input :message, as: :string,
                        wrapper: false,
                        label: false,
@@ -59,11 +70,15 @@
   <div class="chat-message-container">
     <div class="row no-gutters">
       <div class="col-auto text-center">
-        <img src="" class="avatar" alt="" data-role="user-avatar">
+<!--        <img src="" class="avatar" alt="qwqeqwe" data-role="user-avatar">-->
+        <p data-role="user-avatar"></p>
       </div>
 
       <div class="col">
         <div class="message-content">
+          <p class="mb-1" data-role="user-email">
+
+          </p>
           <p class="mb-1" data-role="message-text">
 
           </p>

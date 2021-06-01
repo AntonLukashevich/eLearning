@@ -3,7 +3,8 @@ class RoomsController < ApplicationController
   before_action :load_entities
 
   def index
-    @rooms = Room.all
+    #@rooms = Room.all
+    @rooms = Room.where(room_users: RoomUser.where(user_id: current_user.id))
   end
 
   def show
@@ -19,6 +20,8 @@ class RoomsController < ApplicationController
     @room = Room.new permitted_parameters
 
     if @room.save
+      @room_user = @room.room_users.build(user_id: current_user.id, room_id: @room.id)
+      @room_user.save
       flash[:success] = "Room #{@room.name} was created successfully"
       redirect_to rooms_path
     else
@@ -41,7 +44,7 @@ class RoomsController < ApplicationController
   protected
 
   def load_entities
-    @rooms = Room.all
+    @rooms = Room.where(room_users: RoomUser.where(user_id: current_user.id))
     @room = Room.find(params[:id]) if params[:id]
   end
 

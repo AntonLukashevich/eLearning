@@ -308,6 +308,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    volkswagen (0.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -377,6 +378,7 @@ DEPENDENCIES
   trix-rails
   turbolinks (~> 5)
   tzinfo-data
+  volkswagen
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.2.1)
