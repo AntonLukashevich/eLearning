@@ -30,7 +30,7 @@
     <tr>
       <td> <%= index + 1 %></td>
       <td><%=link_to user.id  %></td>
-      <td><%= user.email  %></td>
+      <td ><%= user.email  %></td>
       <td><%= user.role.name  %></td>
       <td><%= user.first_name  %></td>
       <td><%= user.last_name  %></td>
@@ -39,13 +39,18 @@
       <td><%= user.certificates.size%></td>
       <td><%= user.organizations.size %></td>
       <td>
-      <%= link_to 'Show', user_path(user) %>
-      <%= link_to 'Edit', edit_user_path(user) %>
-      <%= link_to 'Destroy', user_path(user),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' } %>
+        <%= link_to user_path(user), style: "color: black;" do %>
+          <i class="icon fas fa-tv" title="Show"></i>
+        <% end %>
+        <%= link_to edit_user_path(user),  style: "color: black;" do %>
+          <i class="icon far fa-edit" title="Edit"></i>
+        <% end %>
+        <%= link_to user_path(user),
+                    method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
+          <i class="icon fas fa-trash-alt" title="Delete"></i>
+          <% end %>
       </td>
-      <td><%=link_to 'Nominate', nominate_admin_path(user), class: 'btn btn-warning', method: :post,
+      <td><%=link_to 'Nominate', nominate_admin_path(user), class: 'btn btn-warning btn-sm', method: :post,
                      data: { confirm: 'Are you sure?' }  %></td>
     </tr>
   <% end %>

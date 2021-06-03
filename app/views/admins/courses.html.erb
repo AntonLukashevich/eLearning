@@ -1,7 +1,7 @@
 <div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
 <h3>Courses list:</h3>
 <div >
-<table class="table table-striped" style="margin-top: 2em; overflow-y: auto; ">
+<table class="table table-striped" style="margin-top: 2em; overflow-y: scroll; max-height: 5em;">
   <thead class="thead-dark">
   <tr>
     <th scope="col">#</th>
@@ -16,7 +16,7 @@
     <th scope="col">Actions</th>
   </tr>
   </thead>
-  <tbody>
+  <tbody style="overflow-y: scroll; max-height: 5em;">
   <% @courses.each_with_index do |course, index| %>
     <tr>
       <td><b> <%= index + 1 %></b></td>
@@ -33,11 +33,16 @@
       <td><%= course.achievements.size%></td>
       <td><%= Certificate.where(course_id: course.id).count %></td>
       <td>
-        <%= link_to 'Show', course_path(course) %>
-        <%= link_to 'Edit', edit_course_path(course) %>
-        <%= link_to 'Destroy', course_path(course),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
+        <%= link_to course_path(course), style: "color: black;" do %>
+          <i class="icon fas fa-tv" title="Show"></i>
+        <% end %>
+        <%= link_to edit_course_path(course),  style: "color: black;" do %>
+          <i class="icon far fa-edit" title="Edit"></i>
+        <% end %>
+        <%= link_to course_path(course),
+                    method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
+          <i class="icon fas fa-trash-alt" title="Delete"></i>
+        <% end %>
       </td>
     </tr>
   <% end %>

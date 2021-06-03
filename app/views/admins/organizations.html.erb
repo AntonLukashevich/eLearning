@@ -1,5 +1,5 @@
 <div align="right"><%= link_to 'Admin Panel', admins_path, class: 'btn btn-info' %></div>
-
+<i>Applications for registration of an organization.</i>
 <table class="table table-striped" style="margin-top: 2em;">
   <thead class="thead-dark">
   <tr>
@@ -21,7 +21,7 @@
       <td>
         <div>
           <%= link_to org.title, organization_path(org), style: "color: black"%>
-          <i class="icon fas fa-info-circle" data-toggle="modal" data-target="#myModalDescription"></i>
+          <i class="icon fas fa-info-circle" data-toggle="modal" data-target="#myModalDescription" title="Description"></i>
         </div>
         <div class="modal" id="myModalDescription">
           <div class="modal-dialog">
@@ -50,7 +50,7 @@
       <td><%= org.status %></td>
       <td><%= org.user.email %></td>
       <td align="center">
-        <i class="icon far fa-caret-square-up" data-toggle="modal" data-target="#myModalPurpose"></i>
+        <i class="icon far fa-caret-square-up" data-toggle="modal" data-target="#myModalPurpose" title="Show"></i>
         <div class="modal" id="myModalPurpose">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -76,9 +76,16 @@
         </div>
       </td>
       <td>
-        <%= link_to 'Show', organization_path(org) %>
-        <%= link_to 'Edit', edit_organization_path(org) %>
-        <%= link_to 'Destroy', organization_path(org),  method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to organization_path(org), style: "color: black;" do %>
+          <i class="icon fas fa-tv"></i>
+        <% end %>
+        <%= link_to edit_organization_path(org ),  style: "color: black;" do %>
+          <i class="icon far fa-edit"></i>
+        <% end %>
+        <%= link_to organization_path(org),
+                    method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
+          <i class="icon fas fa-trash-alt"></i>
+        <% end %>
 
     <td>
       <%= link_to "Confirm", response_to_request_organization_path(org, response_status: 'confirmed'),method: :patch, class: 'btn btn-success btn-sm' %>
@@ -92,7 +99,8 @@
 <br>
 <hr>
 <br>
-<div >
+<i>Organizations:</i>
+<div>
   <table class="table table-striped" style="margin-top: 2em; overflow-y: auto; ">
     <thead class="thead-dark">
     <tr>
@@ -115,7 +123,7 @@
         <td><%=org.staffs.size  %></td>
         <td>
           <%=org.managers.size %> <%= link_to organization_managers_path(org), style: "color: black;" do %>
-            <i class=" icon fas fa-user-plus"></i>
+            <i class="icon fas fa-user-plus" title="Add manager to organization"></i>
           <% end %>
         </td>
         <td>
@@ -123,7 +131,7 @@
             <i class="icon fas fa-tv"></i>
           <% end %>
           <%= link_to edit_organization_path(org ),  style: "color: black;" do %>
-            <i class="icon far fa-credit-card"></i>
+            <i class="icon far fa-edit"></i>
           <% end %>
           <%= link_to organization_path(org),
                       method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>

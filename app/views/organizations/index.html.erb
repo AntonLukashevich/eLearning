@@ -23,14 +23,14 @@
         <td><%=org.managers.size %></td>
         <td>
           <%= link_to organization_path(org), style: "color: black;" do %>
-            <i class="icon fas fa-tv"></i>
+            <i class="icon fas fa-tv" title="Show"></i>
           <% end %>
-          <%= link_to edit_organization_path(org ),  style: "color: black;" do %>
-            <i class="icon far fa-edit"></i>
+          <%= link_to edit_organization_path(org),  style: "color: black;" do %>
+            <i class="icon far fa-edit" title="Edit"></i>
           <% end %>
           <%= link_to organization_path(org),
                       method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
-            <i class="icon fas fa-trash-alt"></i>
+            <i class="icon fas fa-trash-alt" title="Delete"></i>
           <% end %>
         </td>
       </tr>
