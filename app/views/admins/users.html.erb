@@ -8,7 +8,7 @@
 
 </div>
 
-<table class="table table-striped" style="margin-top: 2em;">
+<table class="table table-striped" style=" margin-top: 2em;">
   <thead class="thead-dark">
   <tr>
     <th scope="col">#</th>
@@ -31,7 +31,7 @@
       <td> <%= index + 1 %></td>
       <td><%=link_to user.id  %></td>
       <td ><%= user.email  %></td>
-      <td><%= user.role.name  %></td>
+      <td><%= @role.name  %></td>
       <td><%= user.first_name  %></td>
       <td><%= user.last_name  %></td>
       <td><%= user.courses.size %></td>

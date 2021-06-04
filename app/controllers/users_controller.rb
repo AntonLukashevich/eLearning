@@ -37,8 +37,8 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
 
   def update
     if @user.update(user_params)
-      sign_in @user
-      redirect_to @user, success: 'Your profile updated'
+      sign_in current_user
+      redirect_to @user, success: 'Profile updated'
     else
       render 'edit', danger: 'Error! Something went wrong... Check your input info.'
     end

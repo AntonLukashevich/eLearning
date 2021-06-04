@@ -19,14 +19,15 @@ class AdminsController < ApplicationController
   end
 
   def organizations
-    @request_organizations = Organization.where.not(status: 'confirmed')
-    @organizations = Organization.where(status: 'confirmed')
+    @request_organizations = Organization.includes(:user).where.not(status: 'confirmed')
+    @organizations = Organization.includes(:staffs, :managers).where(status: 'confirmed')
   end
 
 
 
   def users
-    @users = User.includes(:role, :achievements, :certificates, :courses).where(role_id: 1)
+    @role = Role.where(name: 'user').first
+    @users = User.includes(:achievements, :certificates, :courses, :organizations).where(role_id: @role.id)
   end
 
   def courses
