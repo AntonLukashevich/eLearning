@@ -1,7 +1,7 @@
 class AdminsController < ApplicationController
   def index
     @role = Role.where(name: 'admin').first
-    @admins = User.where(role_id: @role.id)
+    @admins = User.includes(:courses, :achievements, :certificates, :organizations).where(role_id: @role.id)
   end
 
   def nominate
