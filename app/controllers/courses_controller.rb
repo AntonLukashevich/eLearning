@@ -38,7 +38,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def my_courses
     @user ||= current_user
-    @courses = @user.courses
+    @courses = @user.courses.includes(:lectures, :testings)
   end
 
   def update
