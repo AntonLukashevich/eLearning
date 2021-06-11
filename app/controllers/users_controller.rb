@@ -28,6 +28,10 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
   def create
     @user = User.new(user_params)
     if @user.save
+      if @user.avatar.empty?
+        avatar = @user.avatar = image_tag("default-avatar.png", alt: @user.email)
+        @user.update(avatar: avatar)
+      end
       sign_in @user
       redirect_to user_path(@user), success: 'Your profile created'
     else

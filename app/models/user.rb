@@ -21,6 +21,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
+  #after_commit :add_default_avatar, on: %i[create update]
+
 
   @@role = Role.where(name: 'admin').first
   scope :followers, -> { where.not(role_id: @@role.id) }
@@ -29,6 +31,22 @@ class User < ApplicationRecord
     # gravatar_id = Digest::MD5::hexdigest(email).downcase
     # "https://gravatar.com/avatar/#{gravatar_id}.png"
     "user.email"
+  end
+
+
+  private
+
+  def add_default_avatar
+    if  avatar.nil?
+      avatar.attach(
+        io: File.open(
+          Rails.root.join(
+            'app', 'asserts', 'images', 'default-avatar.png'
+          )
+        ), filename: 'default-avatar.png',
+        content_type: 'image/png'
+      )
+    end
   end
 
 end
