@@ -92,7 +92,15 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def authors
-    @users = User.all - @course.users
+    #@users = User.all - @course.users
+
+    if params[:search]
+      @search_term = params[:search]
+      @users = User.search_by(@search_term)
+    else
+      @users = User.all - @course.users
+    end
+
   end
 
   def new_author
@@ -117,7 +125,6 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     else
       @courses = Course.includes(:users, :achievements).where(status: 'ready').by_last_created_at
     end
-
   end
 
 

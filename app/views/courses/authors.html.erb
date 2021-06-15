@@ -2,9 +2,13 @@
   <%= link_to 'Back to Course', course_path(@course), class: "btn btn-outline-info btn-sm",  style: "color: black;" %>
 </div>
 <h6>You can add another authors:</h6>
+
 <div class="row">
   <div class="col-4">
     <div class="card" style="min-height:200px; height: 200px; overflow-y: scroll;">
+      <%= form_for "", url: authors_course_path, role: "search", method: :get do %>
+        <%= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
+      <% end %>
       <% @users.each do |user| %>
         <div class="row" >
           <div class="col-8" align="center" style="border-bottom: 1px solid gray; "><%=user.email %></div>

@@ -49,4 +49,9 @@ class User < ApplicationRecord
     end
   end
 
+
+  def self.search_by(search_term)
+    where("lower(email) LIKE :search_term", search_term: "%#{search_term.downcase}%")
+  end
+
 end
