@@ -1,4 +1,7 @@
 <%= form_with(model: @individual, url: [@course, @individual], local: true) do |f| %>
-  <%=f.collection_select :user_id, User.followers.order(:email), :id, :email%>
+  <%#=f.collection_select :user_id, @users, :id, :email, class: "js-states", name: "state" %>
+  <%= f.select :user_id, options_for_select(@users.map { |obj| [obj['email'], obj['id']] }), class: 'js-states', name: "state" %>
   <%= f.submit 'Add', class: 'btn btn-success btn-sm' %>
 <% end %>
+
+

@@ -13,6 +13,14 @@ class IndividualsController < ApplicationController
 
   def new
     @course = Course.find(params[:course_id])
+    @course_individuals = @course.individuals
+    course_individual_ids = []
+
+    @course_individuals.each do |individual|
+      course_individual_ids << individual.user_id
+    end
+
+    @users = User.where.not(id: course_individual_ids).order(:email)
     @individual = Individual.new
   end
 
