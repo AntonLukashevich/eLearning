@@ -6,18 +6,26 @@ class RoomUsersController < ApplicationController
   end
 
   def new
+    @room_users = @room.room_users
+    room_user_ids = []
+
+    @room_users.each do |user|
+      room_user_ids << user.user_id
+    end
+
+    @users = User.where.not(id: room_user_ids).order(:email)
     @room_user = RoomUser.new
   end
 
   def create
     @room_user = @room.room_users.build(room_user_params)
-    respond_to do |format|
-      if @room_user.save
-        format.js
-        format.html{ redirect_to room_path(@room), success: 'The users added to room'}
-        format.json
+      respond_to do |format|
+        if @room_user.save
+          format.js
+          format.html{ redirect_to room_path(@room), success: 'The users added to room'}
+          format.json
+        end
       end
-    end
   end
 
   def destroy

@@ -1,4 +1,11 @@
 <%= form_with(model: @room_user, url: [@room, @room_user], local: true) do |f| %>
-  <%=f.collection_select :user_id, User.order(:email), :id, :email%>
+  <%=f.collection_select :user_id, @users, :id, :email%>
   <%= f.submit 'Add', class: 'btn btn-success btn-sm' %>
 <% end %>
+
+
+<%#= form_tag new_room_room_user_path(@room), method: 'get' do %>
+  <%#= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
+  <%#= select_tag "Users", options_from_collection_for_select(@users, :id, :email), id: 'simple-example' %>
+<%# end %>
+

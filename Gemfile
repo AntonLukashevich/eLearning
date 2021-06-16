@@ -46,6 +46,8 @@ gem 'wkhtmltopdf-binary'
 gem 'cancancan'
 gem 'sidekiq'
 gem 'volkswagen'
+gem "select2-rails"
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
