@@ -1,96 +1,110 @@
-<div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
-<h3>Courses list:</h3>
-<div >
-<table class="table table-striped" style="margin-top: 2em; overflow-y: scroll; max-height: 5em;">
-  <thead class="thead-dark">
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">ID</th>
-    <th scope="col">Title</th>
-    <th scope="col">Authors</th>
-    <th scope="col">Type</th>
-    <th scope="col">Status</th>
-    <th scope="col">Rating</th>
-    <th scope="col">Subscriptions</th>
-    <th scope="col">Certificates</th>
-    <th scope="col">Actions</th>
-  </tr>
-  </thead>
-  <tbody style="overflow-y: scroll; max-height: 5em;">
-  <% @courses.each_with_index do |course, index| %>
-    <tr>
-      <td><b> <%= index + 1 %></b></td>
-      <td><%=link_to course.id  %></td>
-      <td><%= course.title  %></td>
-      <td>
-        <% course.users.each do |user| %>
-          <%= user.email %><br>
-        <%end %>
-      </td>
-      <td><%= course.type_course  %></td>
-      <td><%= course.status  %></td>
-      <td ><%= course.rating %></td>
-      <td><%= course.achievements.size%></td>
-      <td><%= Certificate.where(course_id: course.id).count %></td>
-      <td>
-        <%= link_to course_path(course), style: "color: black;" do %>
-          <i class="icon fas fa-tv" title="Show"></i>
-        <% end %>
-        <%= link_to edit_course_path(course),  style: "color: black;" do %>
-          <i class="icon far fa-edit" title="Edit"></i>
-        <% end %>
-        <%= link_to course_path(course),
-                    method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
-          <i class="icon fas fa-trash-alt" title="Delete"></i>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<div class="row pb-3">
+  <div class="col">
+    <h3>Courses list:</h3>
+  </div>
+  <div class="col">
+    <div align="right"><%= link_to 'Admin Panel', admins_path, class: 'btn btn-info' %></div>
+  </div>
+
 </div>
-<br><br><br><br><br><br>
-<h4>Requests to publish:</h4>
-<% if Course.where( status: 'for_publication').present? %>
-<table class="table table-striped" style="margin-top: 2em;">
-  <thead class="thead-dark">
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">ID</th>
-    <th scope="col">Title</th>
-    <th scope="col">Authors</th>
-    <th scope="col">Type</th>
-    <th scope="col">Status</th>
-    <th scope="col">Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @courses.each_with_index do |course, index| %>
-    <% if course.status == 'for_publication' %>
-    <tr>
-      <td> <%= index + 1 %></td>
-      <td><%=link_to course.id  %></td>
-      <td><%= course.title  %></td>
-      <td>
-        <% course.users.each do |user| %>
-          <%= user.email %><br>
-        <%end %>
-      </td>
-      <td><%= course.type_course  %></td>
-      <td><%= course.status  %></td>
-
-      <td>
-        <%= link_to 'Show', course_path(course), class: 'btn btn-info btn-sm' %>
-        <%= link_to 'To publish', to_publish_course_path(course),method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-success btn-sm' %>
-        <%= link_to 'To draft', to_draft_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-      </td>
-    </tr>
+<div class="row pt-1">
+  <div class="col-12">
+    <%= form_tag courses_admins_path, method: :get do %>
+      <%= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
     <% end %>
-  <% end %>
+    <div style=" max-height: 30em; overflow-y: scroll;">
+      <table class="table table-striped" style=" margin-top: 5px; max-height: 30em; overflow-y: scroll;">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"><%= sortable "id" %></th>
+          <th scope="col"><%= sortable "title" %></th>
+          <th scope="col">Authors</th>
+          <th scope="col"><%= sortable "type_course" %></th>
+          <th scope="col"><%= sortable "status" %></th>
+          <th scope="col"><%= sortable "rating" %></th>
+          <th scope="col">Subscriptions</th>
+          <th scope="col">Certificates</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody style="overflow-y: scroll; max-height: 5em;">
+        <% @courses.each_with_index do |course, index| %>
+          <tr>
+            <td><b> <%= index + 1 %></b></td>
+            <td><%= link_to course.id %></td>
+            <td><%= course.title %></td>
+            <td>
+              <% course.users.each do |user| %>
+                <%= user.email %><br>
+              <% end %>
+            </td>
+            <td><%= course.type_course %></td>
+            <td><%= course.status %></td>
+            <td><%= course.rating %></td>
+            <td><%= course.achievements.size %></td>
+            <td><%= Certificate.where(course_id: course.id).count %></td>
+            <td>
+              <%= link_to course_path(course), style: "color: black;" do %>
+                <i class="icon fas fa-tv" title="Show"></i>
+              <% end %>
+              <%= link_to edit_course_path(course), style: "color: black;" do %>
+                <i class="icon far fa-edit" title="Edit"></i>
+              <% end %>
+              <%= link_to course_path(course),
+                          method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
+                <i class="icon fas fa-trash-alt" title="Delete"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br><br>
+<h4>Requests to publish:</h4>
+<% if Course.where(status: 'for_publication').present? %>
+  <table class="table table-striped" style="margin-top: 2em;">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Authors</th>
+      <th scope="col">Type</th>
+      <th scope="col">Status</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @courses.each_with_index do |course, index| %>
+      <% if course.status == 'for_publication' %>
+        <tr>
+          <td> <%= index + 1 %></td>
+          <td><%= link_to course.id %></td>
+          <td><%= course.title %></td>
+          <td>
+            <% course.users.each do |user| %>
+              <%= user.email %><br>
+            <% end %>
+          </td>
+          <td><%= course.type_course %></td>
+          <td><%= course.status %></td>
 
-  </tbody>
-</table>
-  <%else %>
+          <td>
+            <%= link_to 'Show', course_path(course), class: 'btn btn-info btn-sm' %>
+            <%= link_to 'To publish', to_publish_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-success btn-sm' %>
+            <%= link_to 'To draft', to_draft_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    </tbody>
+  </table>
+<% else %>
   <div align="center"><i>No one requests</i></div>
 <% end %>
 <br><br><br><br><br><br>

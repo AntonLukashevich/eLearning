@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :course_sort_column, :course_sort_direction
 
   def index
     @role = Role.where(name: 'admin').first
@@ -41,7 +41,15 @@ class AdminsController < ApplicationController
   end
 
   def courses
-    @courses = Course.includes(:achievements, :testings, :lectures, :users)
+    @courses = Course.includes(:achievements, :testings, :lectures, :users, :certificate).order(course_sort_column + " " + course_sort_direction)
+
+    if params[:search]
+      @search_term = params[:search]
+      @courses = @courses.search_by(@search_term)
+    else
+      @courses #= User.includes(:achievements, :certificates, :courses, :organizations).where(role_id: @role.id)
+    end
+
   end
 
   private
@@ -54,4 +62,11 @@ class AdminsController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
+  def course_sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+
+  def course_sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end
