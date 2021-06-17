@@ -1,18 +1,19 @@
 <div class="row pb-3">
   <div class="col">
-    <h3>Users list</h3>
-  </div>
-  <div class="col">
-    <div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
+    <%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %>
+    <%= link_to 'Users', users_admins_path, class: 'btn btn-info' %>
+    <%= link_to 'Courses', courses_admins_path, class: 'btn btn-info' %>
+<%#= link_to 'Roles', roles_path, class: 'btn btn-info' %>
+    <%= link_to 'Organizations', organizations_admins_path, class: 'btn btn-info' %>
   </div>
 </div>
-
+<h3>Users list</h3>
 <div class="row pt-1">
   <div class="col-12">
     <%= form_tag users_admins_path, method: :get do %>
       <%= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
     <% end %>
-    <div style=" margin-top: 5px; max-height: 30em; overflow-y: scroll;">
+    <div style=" margin-top: 5px; max-height: 40em; overflow-y: scroll;">
       <table class="table table-striped" style=" margin-top: 5px;">
         <thead class="thead-dark">
         <tr>
