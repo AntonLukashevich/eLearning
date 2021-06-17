@@ -11,7 +11,6 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
 
   def show
     @responses = Response.where(user_id: @user.id)
-
   end
 
   def new
@@ -31,7 +30,7 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
 
   def update
     if @testing.update(testing_params)
-      redirect_to course_testing_path(@course,@testing), success: 'Changes saved!'
+      redirect_to course_testing_path(@course, @testing), success: 'Changes saved!'
     else
       render 'edit', danger: 'Error! Check input info...'
     end
@@ -58,9 +57,7 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
 
     @testing.questions.each do |q|
       q.responses.each do |r|
-        if r.user_id == current_user.id && r.present?
-          r.destroy
-        end
+        r.destroy if r.user_id == current_user.id && r.present?
       end
     end
 
@@ -90,12 +87,9 @@ class TestingsController < ApplicationController # rubocop:todo Style/Documentat
 
     questions.each do |q|
       @responses.each do |r|
-        if (q.id == r.question_id && r.mark == 1)
-          result +=1
-        end
+        result += 1 if q.id == r.question_id && r.mark == 1
       end
     end
-    return result
+    result
   end
-
 end

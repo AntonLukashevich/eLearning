@@ -48,7 +48,6 @@ class QuestionsController < ApplicationController # rubocop:todo Style/Documenta
   def question_params
     params.require(:question).permit(:question, :type_question, :testing_id, :content,
                                      answers_attributes: Answer.attribute_names.map(&:to_sym).push(:_destroy))
-
   end
 
   def answer_params

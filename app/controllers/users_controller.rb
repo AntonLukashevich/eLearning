@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController # rubocop:todo Style/Documentation
-  #load_and_authorize_resource
+  # load_and_authorize_resource
   before_action :set_user, only: %i[show edit update destroy]
-
 
   def index
     @users = User.all.includes(:achievements)
@@ -20,7 +19,7 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
     @staffs.each do |staff|
       @organizations << staff.organization
     end
-    #binding.pry
+    # binding.pry
   end
 
   def edit; end
@@ -29,7 +28,7 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
     @user = User.new(user_params)
     if @user.save
       if @user.avatar.empty?
-        avatar = @user.avatar = image_tag("default-avatar.png", alt: @user.email)
+        avatar = @user.avatar = image_tag('default-avatar.png', alt: @user.email)
         @user.update(avatar: avatar)
       end
       sign_in @user
@@ -66,12 +65,8 @@ class UsersController < ApplicationController # rubocop:todo Style/Documentation
     @user ||= User.find(params[:id])
   end
 
-
   def user_avatar(user)
     user = current_user
-    if user.avatar.nil?
-      user.update[:avatar => 'default-avatar.jpeg']
-    end
+    user.update[avatar: 'default-avatar.jpeg'] if user.avatar.nil?
   end
-
 end

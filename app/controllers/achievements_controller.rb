@@ -7,17 +7,19 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
 
   def certificate
     @achievement = Achievement.includes(:user, :course).find(params[:id])
-    if !Certificate.where(user_id: @achievement.user.id, course_id: @achievement.course.id, result: @achievement.progress).present?
-      Certificate.create!(user_id: @achievement.user.id, course_id: @achievement.course.id, result: @achievement.progress)
+    if Certificate.where(user_id: @achievement.user.id, course_id: @achievement.course.id,
+                         result: @achievement.progress).blank?
+      Certificate.create!(user_id: @achievement.user.id, course_id: @achievement.course.id,
+                          result: @achievement.progress)
     end
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: " #{current_user.first_name} #{current_user.last_name}, #{Time.now()}", ##{@course.title},
+        render pdf: " #{current_user.first_name} #{current_user.last_name}, #{Time.zone.now}", # #{@course.title},
                page_size: 'A4',
-               template: "achievements/show.pdf.erb",
-               layout: "pdf.html.erb",
-               orientation: "Portrait",
+               template: 'achievements/show.pdf.erb',
+               layout: 'pdf.html.erb',
+               orientation: 'Portrait',
                lowquality: true,
                zoom: 1,
                dpi: 75
@@ -80,9 +82,7 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
     readeds = Readed.where(user_id: current_user.id)
     course.lectures.each do |lec|
       readeds.each do |r|
-        if (r.lecture_id == lec.id)
-          r.destroy
-        end
+        r.destroy if r.lecture_id == lec.id
       end
     end
   end
@@ -92,9 +92,7 @@ class AchievementsController < ApplicationController # rubocop:todo Style/Docume
     course.testings.each do |t|
       t.questions.each do |q|
         responses.each do |r|
-          if r.question_id == q.id
-            r.destroy
-          end
+          r.destroy if r.question_id == q.id
         end
       end
     end

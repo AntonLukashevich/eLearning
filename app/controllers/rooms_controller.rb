@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class RoomsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_entities
 
   def index
-    #@rooms = Room.all
+    # @rooms = Room.all
     @rooms = Room.where(room_users: RoomUser.where(user_id: current_user.id))
   end
 
@@ -29,11 +31,10 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @room.update_attributes(permitted_parameters)
+    if @room.update(permitted_parameters)
       flash[:success] = "Room #{@room.name} was updated successfully"
       redirect_to rooms_path
     else

@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :readed do
     association :lecture, factory: :lecture
     association :user, factory: :user
-    is_readed { :true }
+    is_readed { true }
   end
 end

@@ -6,8 +6,8 @@ RSpec.describe LecturesController, type: :controller do
   let(:course) { create :course }
   let(:lectures) { create_list :lecture, 5 }
   let(:lecture) { create :lecture }
-  let(:current_user) { create :user}
-  let(:readed) { create :readed, user_id: current_user.id}
+  let(:current_user) { create :user }
+  let(:readed) { create :readed, user_id: current_user.id }
 
   let(:lecture_params) do
     {

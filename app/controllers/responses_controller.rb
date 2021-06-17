@@ -26,8 +26,6 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
     # redirect_to course_testing_path(@course, @testing)
   end
 
-
-
   private
 
   def response_params
@@ -49,7 +47,4 @@ class ResponsesController < ApplicationController # rubocop:todo Style/Documenta
   def set_answers(question)
     @answers = question.answers
   end
-
-
-
 end

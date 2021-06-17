@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  #after_commit :user_avatar, on: [:create, :update]
+  # after_commit :user_avatar, on: [:create, :update]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -21,8 +21,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
-  #after_commit :add_default_avatar, on: %i[create update]
-
+  # after_commit :add_default_avatar, on: %i[create update]
 
   @@role = Role.where(name: 'admin').first
   scope :followers, -> { where.not(role_id: @@role.id) }
@@ -30,9 +29,8 @@ class User < ApplicationRecord
   def gravatar_url
     # gravatar_id = Digest::MD5::hexdigest(email).downcase
     # "https://gravatar.com/avatar/#{gravatar_id}.png"
-    "user.email"
+    'user.email'
   end
-
 
   private
 
@@ -49,9 +47,9 @@ class User < ApplicationRecord
     end
   end
 
-
   def self.search_by(search_term)
-    where("lower(email) LIKE :search_term OR lower(first_name) LIKE :search_term OR lower(last_name) LIKE :search_term", search_term: "%#{search_term.downcase}%")
+    where(
+      'lower(email) LIKE :search_term OR lower(first_name) LIKE :search_term OR lower(last_name) LIKE :search_term', search_term: "%#{search_term.downcase}%"
+    )
   end
-
 end

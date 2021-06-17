@@ -16,25 +16,20 @@ module CoursesHelper # rubocop:todo Style/Documentation
 
   def testing_progress(test)
     # amount of correct responses / amount of correct answer
-    if user_signed_in?
-      responses = Response.where(user_id: current_user.id)
-    end
+    responses = Response.where(user_id: current_user.id) if user_signed_in?
     count_answers = 0
     count_responses = 0
     questions = test.questions
     questions.each do |q|
       count_answers += q.answers.where(isCorrect: true).size
-      if responses.present?
-        responses.each do |r|
-          if (q.id == r.question_id && r.mark == 1) && r.present?
-            count_responses += 1
-          end
-        end
+      next if responses.blank?
+
+      responses.each do |r|
+        count_responses += 1 if (q.id == r.question_id && r.mark == 1) && r.present?
       end
     end
 
     @result = (count_responses.to_f / count_answers) * 100
-    return @result
+    @result
   end
-
 end

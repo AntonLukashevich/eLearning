@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdminsController < ApplicationController
   helper_method :sort_column, :sort_direction, :course_sort_column, :course_sort_direction
 
@@ -30,14 +32,12 @@ class AdminsController < ApplicationController
     else
       @organizations #= User.includes(:achievements, :certificates, :courses, :organizations).where(role_id: @role.id)
     end
-
   end
-
-
 
   def users
     @role = Role.where(name: 'user').first
-    @users = User.includes(:achievements, :certificates, :courses, :organizations).where(role_id: @role.id).order(sort_column + " " + sort_direction)
+    @users = User.includes(:achievements, :certificates, :courses,
+                           :organizations).where(role_id: @role.id).order("#{sort_column} #{sort_direction}")
 
     if params[:search]
       @search_term = params[:search]
@@ -45,11 +45,11 @@ class AdminsController < ApplicationController
     else
       @users #= User.includes(:achievements, :certificates, :courses, :organizations).where(role_id: @role.id)
     end
-
   end
 
   def courses
-    @courses = Course.includes(:achievements, :testings, :lectures, :users, :certificate).order(course_sort_column + " " + course_sort_direction)
+    @courses = Course.includes(:achievements, :testings, :lectures, :users,
+                               :certificate).order("#{course_sort_column} #{course_sort_direction}")
 
     if params[:search]
       @search_term = params[:search]
@@ -57,24 +57,23 @@ class AdminsController < ApplicationController
     else
       @courses #= User.includes(:achievements, :certificates, :courses, :organizations).where(role_id: @role.id)
     end
-
   end
 
   private
 
   def sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'id'
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   def course_sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'id'
   end
 
   def course_sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end

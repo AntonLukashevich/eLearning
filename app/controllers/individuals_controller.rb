@@ -1,5 +1,6 @@
-class IndividualsController < ApplicationController
+# frozen_string_literal: true
 
+class IndividualsController < ApplicationController
   def index
     @course = Course.find(params[:course_id])
     @individuals = Individual.includes(:user).where(course_id: @course.id)
@@ -35,14 +36,12 @@ class IndividualsController < ApplicationController
       respond_to do |format|
         if @individual.save
           format.js
-          format.html{ redirect_to course_individuals_path, success: 'The user added to list!' }
+          format.html { redirect_to course_individuals_path, success: 'The user added to list!' }
         else
-          format.html{ render 'new', danger: 'Error! Check input info...' }
+          format.html { render 'new', danger: 'Error! Check input info...' }
         end
       end
     end
-
-
   end
 
   def destroy
@@ -55,7 +54,6 @@ class IndividualsController < ApplicationController
       format.html { redirect_to course_individuals_path(@course), info: 'The follower deleted!' }
       format.json
     end
-
   end
 
   private
@@ -63,5 +61,4 @@ class IndividualsController < ApplicationController
   def individual_params
     params.require(:individual).permit(:user_id)
   end
-
 end

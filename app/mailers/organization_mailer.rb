@@ -1,5 +1,6 @@
-class OrganizationMailer < ApplicationMailer
+# frozen_string_literal: true
 
+class OrganizationMailer < ApplicationMailer
   def confirm_email
     @organization = params[:organization]
     @user = @organization.user

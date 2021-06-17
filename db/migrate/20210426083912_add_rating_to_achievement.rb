@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddRatingToAchievement < ActiveRecord::Migration[6.1]
   def up
     add_column :achievements, :rating, :integer, default: 0

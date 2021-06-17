@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoomUsersController < ApplicationController
   before_action :set_room, only: %i[index new create destroy]
 
@@ -19,13 +21,13 @@ class RoomUsersController < ApplicationController
 
   def create
     @room_user = @room.room_users.build(room_user_params)
-      respond_to do |format|
-        if @room_user.save
-          format.js
-          format.html{ redirect_to room_path(@room), success: 'The users added to room'}
-          format.json
-        end
+    respond_to do |format|
+      if @room_user.save
+        format.js
+        format.html { redirect_to room_path(@room), success: 'The users added to room' }
+        format.json
       end
+    end
   end
 
   def destroy

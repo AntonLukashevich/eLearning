@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe CoursesController, type: :controller do
   let(:user) { create :user }
   let(:role) { create :role }
-  let(:courses) { create_list :course, 5 , status: 'ready'}
+  let(:courses) { create_list :course, 5, status: 'ready' }
   let(:course) { create :course }
 
   let(:course_params) do

@@ -16,11 +16,11 @@ class AvatarUploader < CarrierWave::Uploader::Base # rubocop:todo Style/Document
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url(*args)
+  def default_url(*_args)
     # For Rails 3.1+ asset pipeline compatibility:
-     ActionController::Base.helpers.asset_path( [version_name, "default-avatar.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path([version_name, 'default-avatar.png'].compact.join('_'))
 
-    "/images/" + [version_name, "default-avatar.png"].compact.join('_')
+    "/images/#{[version_name, 'default-avatar.png'].compact.join('_')}"
   end
 
   # Process files as they are uploaded:

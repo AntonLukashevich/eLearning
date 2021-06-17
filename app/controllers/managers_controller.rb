@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ManagersController < ApplicationController
   before_action :set_organization, only: %i[index new create destroy]
   def index
@@ -13,7 +15,9 @@ class ManagersController < ApplicationController
     respond_to do |format|
       if @manager.save
         format.js
-        format.html{ redirect_to organization_managers_path(@organization), success: 'The manager added to organization'}
+        format.html do
+          redirect_to organization_managers_path(@organization), success: 'The manager added to organization'
+        end
         format.json
       end
     end

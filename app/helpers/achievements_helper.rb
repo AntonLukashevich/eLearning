@@ -2,34 +2,31 @@
 
 module AchievementsHelper # rubocop:todo Style/Documentation
   def course_stats(course)
-
     lectures = course.lectures
     lectures_count = readed_lectures(lectures)
 
-    if lectures.size > 0
-      lecture_progress = 100* (lectures_count.to_f/ lectures.size)
-    else
-      lecture_progress = 100
-    end
+    lecture_progress = if lectures.size.positive?
+                         100 * (lectures_count.to_f / lectures.size)
+                       else
+                         100
+                       end
 
     testings = course.testings.includes(:questions)
 
     responses_count, full_count_questions = passed_tests(testings)
-    if full_count_questions > 0
-      test_progress = 100 * (responses_count.to_f/ full_count_questions)
-    else
-      test_progress = 100
-    end
+    test_progress = if full_count_questions.positive?
+                      100 * (responses_count.to_f / full_count_questions)
+                    else
+                      100
+                    end
 
-    current_progress = (test_progress + lecture_progress)/2
+    current_progress = (test_progress + lecture_progress) / 2
 
     ach = course.achievements.find_by(user_id: current_user.id)
     ach.update(progress: current_progress)
 
-
     [lecture_progress.to_i, test_progress.to_i]
   end
-
 
   private
 
@@ -42,7 +39,7 @@ module AchievementsHelper # rubocop:todo Style/Documentation
         count += 1 if r.lecture_id == lec.id
       end
     end
-    return count
+    count
   end
 
   # current user's testing stats
@@ -58,7 +55,7 @@ module AchievementsHelper # rubocop:todo Style/Documentation
 
     responses_count = all_current_responses(all_questions)
 
-    return [responses_count, full_count_questions]
+    [responses_count, full_count_questions]
   end
 
   # amount of correct test answers from all testings
@@ -67,12 +64,10 @@ module AchievementsHelper # rubocop:todo Style/Documentation
     questions = Question.includes(:answers).where(testing_id: testing.id)
     questions.each do |q|
       q.answers.each do |answer|
-        if answer.isCorrect
-          count += 1
-        end
+        count += 1 if answer.isCorrect
       end
     end
-    return count
+    count
   end
 
   # amount of correct test answers by user
@@ -81,12 +76,9 @@ module AchievementsHelper # rubocop:todo Style/Documentation
     count = 0
     questions.each do |q|
       responses.each do |r|
-        if (q.id == r.question_id && r.mark == 1)
-          count +=1
-        end
+        count += 1 if q.id == r.question_id && r.mark == 1
       end
     end
-    return count
+    count
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RatingWorker
   include Sidekiq::Worker
 

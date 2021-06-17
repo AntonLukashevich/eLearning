@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrgCoursesController < ApplicationController
   before_action :set_course, only: %i[index new create destroy]
   def index
@@ -13,7 +15,7 @@ class OrgCoursesController < ApplicationController
     respond_to do |format|
       if @org_course.save
         format.js
-        format.html{redirect_to course_org_courses_path(@course), success: 'The course added to organization'}
+        format.html { redirect_to course_org_courses_path(@course), success: 'The course added to organization' }
         format.json
       end
     end
@@ -25,11 +27,10 @@ class OrgCoursesController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.html{ redirect_to course_org_courses_path(@course),  info: 'The organization removed!'}
+      format.html { redirect_to course_org_courses_path(@course), info: 'The organization removed!' }
       format.json
     end
   end
-
 
   private
 

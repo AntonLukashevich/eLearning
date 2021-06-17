@@ -2,7 +2,7 @@
 
 class CoursesController < ApplicationController # rubocop:todo Style/Documentation
   load_and_authorize_resource
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_course, only: %i[show edit update destroy to_publish subscribe unsubscribe]
   before_action :set_user, only: %i[show create subscribe unsubscribe]
 
@@ -11,7 +11,6 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     @new_courses = Course.includes(:users).where(status: 'ready').by_last_created_at.limit(5)
     @rating_courses = Course.where(status: 'ready').order(rating: :desc).limit(5)
     @org_courses = Course.where(status: 'ready', type_course: 'private').limit(3)
-
   end
 
   def new
@@ -19,13 +18,10 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def show
-    if user_signed_in?
-      @readeds = Readed.where(user_id: @user.id)
-    end
+    @readeds = Readed.where(user_id: @user.id) if user_signed_in?
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @course = @user.courses.create(course_params)
@@ -56,28 +52,28 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def to_publish
     AddCourseToPublicationWorker.perform_async(@course.id)
-    redirect_to courses_admins_path(), info: 'The course will be publish soon'
+    redirect_to courses_admins_path, info: 'The course will be publish soon'
   end
 
   def request_to
     RequestToPublishCourseWorker.perform_async(@course.id)
-    #@course.update(status: 'ready')
-    redirect_to my_courses_courses_path(), info: 'The request has been sen. Wait for an answer...'
+    # @course.update(status: 'ready')
+    redirect_to my_courses_courses_path, info: 'The request has been sen. Wait for an answer...'
   end
 
   def to_draft
     NayToPublicationCourseWorker.perform_async(@course.id)
-    #@course.update(status: 'draft')
-    redirect_to courses_admins_path(), info: 'The request rejected.'
+    # @course.update(status: 'draft')
+    redirect_to courses_admins_path, info: 'The request rejected.'
   end
 
   def subscribe
     if subscribed?(@user.id, @course.id)
       redirect_to @course
     else
-      @achievement = @course.achievements.create(user_id: @user.id, course_id: @course.id, :progress => 0)
+      @achievement = @course.achievements.create(user_id: @user.id, course_id: @course.id, progress: 0)
       @achievement.save
-      redirect_to achievements_path,  success: 'Subscribed! New achievement is open.'
+      redirect_to achievements_path, success: 'Subscribed! New achievement is open.'
     end
   end
 
@@ -92,14 +88,13 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def authors
-    #@users = User.all - @course.users
+    # @users = User.all - @course.users
     if params[:search]
       @search_term = params[:search]
       @users = User.search_by(@search_term)
     else
       @users = User.all - @course.users
     end
-
   end
 
   def new_author
@@ -116,7 +111,6 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     redirect_to authors_course_path(@course)
   end
 
-
   def publications
     if params[:search]
       @search_term = params[:search]
@@ -126,7 +120,6 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     end
   end
 
-
   private
 
   def course_params
@@ -135,7 +128,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
   end
 
   def set_course
-    @course = Course.includes( :testings, :users).find(params[:id])
+    @course = Course.includes(:testings, :users).find(params[:id])
   end
 
   def set_user

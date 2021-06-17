@@ -3,7 +3,7 @@
 Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
   require 'sidekiq/web'
 
-  mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
+  mount Sidekiq::Web => '/sidekiq' # mount Sidekiq::Web in your Rails app
   mount ActionCable.server => '/cable'
   get 'lecture_blocks/index'
   get 'lectures/index'

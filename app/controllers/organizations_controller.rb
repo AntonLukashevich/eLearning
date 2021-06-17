@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class OrganizationsController < ApplicationController # rubocop:todo Style/Documentation
-  #before_action :set_organization, only: %i[show edit update destroy]
+  # before_action :set_organization, only: %i[show edit update destroy]
   def index
     @organizations = Organization.where(user_id: current_user.id)
   end
@@ -14,17 +14,15 @@ class OrganizationsController < ApplicationController # rubocop:todo Style/Docum
   end
 
   def new
-    if user_signed_in?
-      @organization = Organization.new
-    end
+    @organization = Organization.new if user_signed_in?
   end
 
   def create
-    #@organization = Organization.find(params[:id])
+    # @organization = Organization.find(params[:id])
     @organization = current_user.organizations.build(org_params)
     @organization.status = 'awaiting'
     if @organization.save
-      redirect_to organizations_path, success: "Application sent! Wait admin response."
+      redirect_to organizations_path, success: 'Application sent! Wait admin response.'
     else
       render 'new', danger: 'Error! Something went wrong... Check your input info.'
     end
@@ -44,7 +42,7 @@ class OrganizationsController < ApplicationController # rubocop:todo Style/Docum
   end
 
   def response_to_request
-    OrganizationRegistrationWorker.perform_async(params[:id],params[:response_status])
+    OrganizationRegistrationWorker.perform_async(params[:id], params[:response_status])
     # @organization = Organization.find(params[:id])
     # @organization.update(status: params[:response_status].to_s)
     redirect_to organizations_admins_path

@@ -29,6 +29,7 @@ gem 'image_processing', '~> 1.2'
 
 gem 'acts_as_list', '~> 1.0'
 gem 'bootstrap'
+gem 'cancancan'
 gem 'carrierwave'
 gem 'devise'
 gem 'jquery-rails'
@@ -38,16 +39,14 @@ gem 'mini_magick'
 gem 'pry'
 gem 'pry-nav'
 gem 'rubocop-rails', require: false
+gem 'select2-rails'
+gem 'sidekiq'
 gem 'simple_form'
 gem 'trix-rails', require: 'trix'
-gem 'will_paginate-bootstrap4'
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
-gem 'cancancan'
-gem 'sidekiq'
 gem 'volkswagen'
-gem "select2-rails"
-
+gem 'wicked_pdf'
+gem 'will_paginate-bootstrap4'
+gem 'wkhtmltopdf-binary'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

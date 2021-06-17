@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOrganizations < ActiveRecord::Migration[6.1]
   def up
     create_table :organizations do |t|
