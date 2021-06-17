@@ -23,6 +23,14 @@ class AdminsController < ApplicationController
   def organizations
     @request_organizations = Organization.includes(:user).where.not(status: 'confirmed')
     @organizations = Organization.includes(:staffs, :managers).where(status: 'confirmed')
+
+    if params[:search]
+      @search_term = params[:search]
+      @organizations = @organizations.search_by(@search_term)
+    else
+      @organizations #= User.includes(:achievements, :certificates, :courses, :organizations).where(role_id: @role.id)
+    end
+
   end
 
 

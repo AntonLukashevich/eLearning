@@ -7,7 +7,9 @@
 </div>
 
 <i>Applications for registration of an organization.</i>
-<table class="table table-striped" style="margin-top: 2em;">
+<div class="pt-3">
+
+<table class="table table-striped" style="margin-top: 5px;">
   <thead class="thead-dark">
   <tr>
     <th scope="col">#</th>
@@ -102,13 +104,15 @@
   <% end %>
   </tbody>
 </table>
-
-<br>
+</div>
 <hr>
 <br>
-<i>Organizations:</i>
+<h3>Organizations:</h3>
 <div>
-  <table class="table table-striped" style="margin-top: 2em; overflow-y: auto; ">
+  <%= form_tag organizations_admins_path, method: :get do %>
+    <%= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
+  <% end %>
+  <table class="table table-striped" style="margin-top: 5px; overflow-y: auto; ">
     <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>

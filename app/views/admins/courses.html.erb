@@ -6,15 +6,60 @@
 <%#= link_to 'Roles', roles_path, class: 'btn btn-info' %>
     <%= link_to 'Organizations', organizations_admins_path, class: 'btn btn-info' %>
   </div>
-
 </div>
+<hr>
+<h4>Requests to publish:</h4>
+<% if Course.where(status: 'for_publication').present? %>
+  <table class="table table-striped" style="margin-top: 2em;">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Authors</th>
+      <th scope="col">Type</th>
+      <th scope="col">Status</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @courses.each_with_index do |course, index| %>
+      <% if course.status == 'for_publication' %>
+        <tr>
+          <td> <%= index + 1 %></td>
+          <td><%= link_to course.id %></td>
+          <td><%= course.title %></td>
+          <td>
+            <% course.users.each do |user| %>
+              <%= user.email %><br>
+            <% end %>
+          </td>
+          <td><%= course.type_course %></td>
+          <td><%= course.status %></td>
+
+          <td>
+            <%= link_to 'Show', course_path(course), class: 'btn btn-info btn-sm' %>
+            <%= link_to 'To publish', to_publish_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-success btn-sm' %>
+            <%= link_to 'To draft', to_draft_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+
+    </tbody>
+  </table>
+<% else %>
+  <div align="center"><i>No one requests</i></div>
+<% end %>
+<hr>
+<br>
 <h3>Courses list:</h3>
 <div class="row pt-1">
   <div class="col-12">
     <%= form_tag courses_admins_path, method: :get do %>
       <%= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
     <% end %>
-    <div style=" max-height: 30em; overflow-y: scroll;">
+    <div style=" max-height: 40em; overflow-y: scroll;">
       <table class="table table-striped" style=" margin-top: 5px; max-height: 30em; overflow-y: scroll;">
         <thead class="thead-dark">
         <tr>
@@ -65,48 +110,8 @@
     </div>
   </div>
 </div>
-<br><br>
-<h4>Requests to publish:</h4>
-<% if Course.where(status: 'for_publication').present? %>
-  <table class="table table-striped" style="margin-top: 2em;">
-    <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">ID</th>
-      <th scope="col">Title</th>
-      <th scope="col">Authors</th>
-      <th scope="col">Type</th>
-      <th scope="col">Status</th>
-      <th scope="col">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @courses.each_with_index do |course, index| %>
-      <% if course.status == 'for_publication' %>
-        <tr>
-          <td> <%= index + 1 %></td>
-          <td><%= link_to course.id %></td>
-          <td><%= course.title %></td>
-          <td>
-            <% course.users.each do |user| %>
-              <%= user.email %><br>
-            <% end %>
-          </td>
-          <td><%= course.type_course %></td>
-          <td><%= course.status %></td>
+<hr>
 
-          <td>
-            <%= link_to 'Show', course_path(course), class: 'btn btn-info btn-sm' %>
-            <%= link_to 'To publish', to_publish_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-success btn-sm' %>
-            <%= link_to 'To draft', to_draft_course_path(course), method: :patch, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
+<br><br><br>
 
-    </tbody>
-  </table>
-<% else %>
-  <div align="center"><i>No one requests</i></div>
-<% end %>
-<br><br><br><br><br><br>
+
