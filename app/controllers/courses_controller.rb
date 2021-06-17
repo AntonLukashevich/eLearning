@@ -38,7 +38,7 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def my_courses
     @user ||= current_user
-    @courses = @user.courses.includes(:lectures, :testings)
+    @courses = @user.courses.includes(:lectures, :testings).order(params[:sort])
   end
 
   def update
@@ -93,7 +93,6 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def authors
     #@users = User.all - @course.users
-
     if params[:search]
       @search_term = params[:search]
       @users = User.search_by(@search_term)

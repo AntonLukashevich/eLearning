@@ -7,11 +7,11 @@
         &#10010
       <% end %>
         </b></th>
-    <th scope="col">Course</th>
-    <th scope="col">Status</th>
+    <th scope="col"><%= link_to 'Course', :sort => 'title', style: "color: black;" %></th>
+    <th scope="col"><%= link_to 'Status', :sort => 'status', style: "color: black;" %></th>
     <th scope="col" align="center">Lectures</th>
     <th scope="col" align="center">Tests</th>
-    <th scope="col" align="center">Rating</th>
+    <th scope="col" align="center"><%= link_to 'Rating', :sort => 'rating', style: "color: black;" %></th>
     <th scope="col" align="center">Publish</th>
     <th scope="col" align="center">Edit</th>
   </tr>

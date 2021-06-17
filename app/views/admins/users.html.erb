@@ -1,59 +1,69 @@
-<div class="row">
+<div class="row pb-3">
   <div class="col">
     <h3>Users list</h3>
   </div>
   <div class="col">
     <div align="right"><%= link_to 'Admin Panel', admins_path,  class: 'btn btn-info' %></div>
   </div>
-
 </div>
 
-<table class="table table-striped" style=" margin-top: 2em;">
-  <thead class="thead-dark">
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">ID</th>
-    <th scope="col">Email</th>
-    <th scope="col">Role</th>
-    <th scope="col">First Name</th>
-    <th scope="col">Last Name</th>
-    <th scope="col">Author's Courses</th>
-    <th scope="col">Achievements</th>
-    <th scope="col">Certificates</th>
-    <th scope="col">Managers</th>
-    <th scope="col">Actions</th>
-    <th scope="col">to Admin</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @users.each_with_index do |user, index| %>
-    <tr>
-      <td> <%= index + 1 %></td>
-      <td><%=link_to user.id  %></td>
-      <td ><%= user.email  %></td>
-      <td><%= @role.name  %></td>
-      <td><%= user.first_name  %></td>
-      <td><%= user.last_name  %></td>
-      <td><%= user.courses.size %></td>
-      <td><%= user.achievements.size%></td>
-      <td><%= user.certificates.size%></td>
-      <td><%= user.organizations.size %></td>
-      <td>
-        <%= link_to user_path(user), style: "color: black;" do %>
-          <i class="icon fas fa-tv" title="Show"></i>
+<div class="row pt-1">
+  <div class="col-12">
+    <%= form_tag users_admins_path, method: :get do %>
+      <%= text_field_tag :search, @search_term, placeholder: "Search...", class: 'form-control' %>
+    <% end %>
+    <div style=" margin-top: 5px; max-height: 30em; overflow-y: scroll;">
+      <table class="table table-striped" style=" margin-top: 5px;">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col"><%= sortable "id" %></th>
+          <th scope="col"><%= sortable "email" %></th>
+          <th scope="col">Role</th>
+          <th scope="col"><%= sortable "first_name" %></th>
+          <th scope="col"><%= sortable "last_name" %></th>
+          <th scope="col">Author's Courses</th>
+          <th scope="col">Achievements</th>
+          <th scope="col">Certificates</th>
+          <th scope="col">Managers</th>
+          <th scope="col">Actions</th>
+          <th scope="col">to Admin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @users.each_with_index do |user, index| %>
+          <tr>
+            <td style="border-right: 1px solid black;"> <b><%= index + 1 %></b></td>
+            <td><%= user.id  %></td>
+            <td ><%= user.email  %></td>
+            <td><%= @role.name  %></td>
+            <td><%= user.first_name  %></td>
+            <td><%= user.last_name  %></td>
+            <td><%= user.courses.size %></td>
+            <td><%= user.achievements.size%></td>
+            <td><%= user.certificates.size%></td>
+            <td><%= user.organizations.size %></td>
+            <td>
+              <%= link_to user_path(user), style: "color: black;" do %>
+                <i class="icon fas fa-tv" title="Show"></i>
+              <% end %>
+              <%= link_to edit_user_path(user),  style: "color: black;" do %>
+                <i class="icon far fa-edit" title="Edit"></i>
+              <% end %>
+              <%= link_to user_path(user),
+                          method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
+                <i class="icon fas fa-trash-alt" title="Delete"></i>
+              <% end %>
+            </td>
+            <td><%=link_to 'Nominate', nominate_admin_path(user), class: 'btn btn-warning btn-sm', method: :post,
+                           data: { confirm: 'Are you sure?' }  %></td>
+          </tr>
         <% end %>
-        <%= link_to edit_user_path(user),  style: "color: black;" do %>
-          <i class="icon far fa-edit" title="Edit"></i>
-        <% end %>
-        <%= link_to user_path(user),
-                    method: :delete, data: { confirm: 'Are you sure?' }, style: "color: black;" do %>
-          <i class="icon fas fa-trash-alt" title="Delete"></i>
-          <% end %>
-      </td>
-      <td><%=link_to 'Nominate', nominate_admin_path(user), class: 'btn btn-warning btn-sm', method: :post,
-                     data: { confirm: 'Are you sure?' }  %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+        </tbody>
+      </table>
+    </div>
 
+  </div>
+
+
+</div>
