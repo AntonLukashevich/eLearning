@@ -11,6 +11,7 @@
     <th scope="col"><%= link_to 'Status', :sort => 'status', style: "color: black;" %></th>
     <th scope="col" align="center">Lectures</th>
     <th scope="col" align="center">Tests</th>
+    <th scope="col" align="center">Followers</th>
     <th scope="col" align="center"><%= link_to 'Rating', :sort => 'rating', style: "color: black;" %></th>
     <th scope="col" align="center">Publish</th>
     <th scope="col" align="center">Edit</th>
@@ -26,6 +27,38 @@
       <td align="center"><%= course.status %></td>
       <td align="center"><%= course.lectures.size %></td>
       <td align="center"><%= course.testings.size %></td>
+      <td align="center">
+        <i class="icon" data-toggle="modal" data-target="#myModalDescription" title="Followers">
+          <%= course.achievements.size %>
+        </i>
+        <div class="modal" id="myModalDescription">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Followers</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body" style=" margin-top: 5px; max-height: 20em; overflow-y: scroll;">
+
+                  <%course.achievements.each do |follower| %>
+                    <div class="card"><%=follower.user.email %></div>
+                  <% end %>
+
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </td>
       <td align="center"><%= course.rating %></td>
       <td align="center">
         <% if course.status == 'draft' %>

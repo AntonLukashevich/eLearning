@@ -34,7 +34,11 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
 
   def my_courses
     @user ||= current_user
-    @courses = @user.courses.includes(:lectures, :testings).order(params[:sort])
+    @courses = @user.courses.includes(:lectures, :testings, :achievements).order(params[:sort])
+    @achievements = []
+    @courses.each do |course|
+      @achievements << course.achievements
+    end
   end
 
   def update
