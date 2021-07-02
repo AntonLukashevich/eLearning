@@ -56,6 +56,7 @@ Rails.application.routes.draw do # rubocop:todo Metrics/BlockLength
       get :authors
       post :new_author
       delete :delete_author
+      get :stats
     end
 
     collection do

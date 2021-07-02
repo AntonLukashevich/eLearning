@@ -124,6 +124,16 @@ class CoursesController < ApplicationController # rubocop:todo Style/Documentati
     end
   end
 
+  def stats
+    @course = Course.includes(:achievements).find(params[:id])
+    @achievements = Achievement.includes(:user).where(course_id: @course.id)
+
+    @followers = []
+    @achievements.each do |a|
+      @followers << a.user
+    end
+  end
+
   private
 
   def course_params

@@ -1,0 +1,43 @@
+<div class="row pb-3">
+  <div class="col-11">
+    <%= link_to 'My Courses', my_courses_courses_path, class: "btn btn-outline-info btn-sm", style: "color: black;" %>
+  </div>
+  <% if can? :update, @course %>
+    <div class="col-1" align="right">
+    </div>
+  <% end %>
+</div>
+
+<div class="row" style="min-height:300px; height: 300px; overflow-y: scroll;">
+  <div class="col">
+    <% @achievements.each do |follower| %>
+      <div class="progress card " style="height: 35px; margin: 2px;">
+        <div class="p-2">
+          <%= follower.user.email %>
+        </div>
+        <div class="progress-bar bg-success" role="progressbar " style="height: 20px; width: <%= follower.progress %>%;" aria-valuenow="#{<%= follower.progress %>}" aria-valuemin="0" aria-valuemax="100">
+          <div class="row">
+            <div class="col-10 " align="left">
+              <div class="p-2">
+                <%#= follower.user.email %>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="p-2">
+              <%= follower.progress %>%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    Followers: <%= @course.achievements.count %><br>
+    Certificates: <%=  %>
+  </div>
+</div>
+
