@@ -3,7 +3,7 @@
     <%=link_to 'Back', course_path(@course), class: 'btn btn-outline-info btn-sm' %>
   </div>
   <div class="col-4" align="center">
-    <h2>TEST: <%=@testing.title %></h2>
+    <h2><%= t('courses.testings.title') %>: <%=@testing.title %></h2>
   </div>
   <% if can? :update, @course %>
     <div class="col-4" align="right">
@@ -15,18 +15,18 @@
 </div>
 
 <div>
-  <u>Description: </u><%= @testing.description %>
+  <u><%= t('courses.testings.description') %>: </u><%= @testing.description %>
 </div>
 
 <br>
 
 <div class="row">
   <div class="col-10 pl-5">
-    <h5>Questions list:</h5>
+    <h5><%= t('courses.questions.titles') %>:</h5>
   </div>
   <div class="col-2">
     <% if author?(@course) %>
-      <%= link_to 'Add Question', new_course_testing_question_path(@course,@testing), class: 'btn btn-info btn-sm'  %>
+      <%= link_to t('courses.questions.new.title'), new_course_testing_question_path(@course,@testing), class: 'btn btn-info btn-sm'  %>
     <%end %>
   </div>
 </div>

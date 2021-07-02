@@ -1,0 +1,35 @@
+ru:
+  activerecord:
+    models:
+      course: 'Курс'
+      lecture: 'Лекция'
+      testing: 'Тест'
+      user: 'Пользователь'
+    attributes:
+      course:
+        title: 'Название: '
+        description: 'Описание: '
+        status: 'Статус: '
+        type_course: 'Тип курса: '
+        image: 'Картинка: '
+      lecture:
+        title: 'Название'
+        description: 'Описание'
+        content: 'Содержание'
+      testing:
+        title: 'Название'
+        description: 'Описание'
+      question:
+        question: 'Вопрос'
+        content: 'Описание'
+        type_question: 'Тип вопроса'
+      user:
+        email: 'Электронная почта'
+        password: 'Пароль'
+        password_confirmation: 'Повторите пароль'
+        first_name: 'Имя'
+        last_name: 'Фамилия'
+        avatar: 'Автарка'
+
+
+

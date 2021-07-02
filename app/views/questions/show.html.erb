@@ -2,11 +2,11 @@
   <%=link_to 'Back', course_testing_path(@course, @testing), class: 'btn btn-outline-info btn-sm' %>
 </div>
 
-question: <%=@question.question %><br>
-content: <%=@question.content %>
+<%= t('courses.questions.title') %>: <%=@question.question %><br>
+<%= t('courses.questions.content') %>: <%=@question.content %>
 <br>
 <div>
-  Correct answers:
+  <%= t('courses.answers.titles') %>:
   <ul>
     <%@question.answers.each do |answer| %>
       <% if answer.isCorrect %>

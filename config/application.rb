@@ -24,5 +24,9 @@ module ELearning
     config.to_prepare do
       ActionText::ContentHelper.allowed_tags << 'iframe'
     end
+
+    config.i18n.default_locale = :ru
+    config.i18n.available_locales = [:ru, :en]
+
   end
 end

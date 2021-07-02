@@ -23,7 +23,13 @@
 <header class="navbar navbar-expand-lg navbar-light" >
   <h5 class="mr-md-auto me-md-0" title="Main"><%= link_to image_tag("favicon.png",:alt =>"guitars",style:'height:2vw;width:2vw;', class: "rounded-circle"), courses_index_path, style: 'color: black;' %>
     <%= link_to "Learning", courses_index_path, style: 'color: black;' %></h5>
-
+  <span class="navbar-text">
+    <% if I18n.locale == :ru %>
+    <%= link_to 'EN', {locale: :en}, class: 'btn btn-sm btn-success'%>
+    <%else %>
+      <%= link_to 'RU', {locale: :ru}, class: 'btn btn-sm btn-success'%>
+    <%end %>
+  </span>
   <%if user_signed_in? %>
     <%# if current_user.role_id == 2 %>
     <span class="mr-md-auto me-md-0" >
@@ -31,25 +37,25 @@
   </span>
       <% #end %>
     <span class="p-1 text-dark">
-            <%= link_to 'ChatRooms', rooms_path,  class: 'btn btn-info btn-nav-bar' %>
+            <%= link_to t('common.chatrooms'), rooms_path,  class: 'btn btn-info btn-nav-bar' %>
   </span>
     <span class="p-1 text-dark">
-            <%= link_to 'Achievements', achievements_path,  class: 'btn btn-info btn-nav-bar' %>
+            <%= link_to t('common.achievements'), achievements_path,  class: 'btn btn-info btn-nav-bar' %>
   </span>
     <span class="p-1 text-dark">
-            <%= link_to 'My Courses', my_courses_courses_path,  class: 'btn btn-info btn-nav-bar' %>
+            <%= link_to t('common.my_courses'), my_courses_courses_path,  class: 'btn btn-info btn-nav-bar' %>
   </span>
     <span class="p-1 text-dark">
             <%= link_to current_user.email, user_path(current_user),  class: 'btn btn-info btn-nav-bar' %>
   </span>
     <span class="p-1 text-dark">
-            <%= link_to "Log out ", destroy_user_session_path, method: :delete, class: 'btn btn-warning btn-nav-bar' %></span>
+            <%= link_to t('common.log_out'), destroy_user_session_path, method: :delete, class: 'btn btn-warning btn-nav-bar' %></span>
 
     <% else %>
   <span class="p-1 text-dark">
-             <%= link_to "Sign up ", new_user_registration_path, class: 'btn btn-success btn-nav-bar' %></span>
+             <%= link_to t('common.sign_up'), new_user_registration_path, class: 'btn btn-success btn-nav-bar' %></span>
   <span class="p-1 text-dark">
-            <%= link_to "Login ", new_user_session_path, class: 'btn btn-success btn-nav-bar' %></span>
+            <%= link_to t('common.log_in'), new_user_session_path, class: 'btn btn-success btn-nav-bar' %></span>
 
     <%end %>
 </header>

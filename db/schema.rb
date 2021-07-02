@@ -110,16 +110,6 @@ ActiveRecord::Schema.define(version: 2021_06_01_063354) do
     t.index ["user_id"], name: "index_certificates_on_user_id"
   end
 
-  create_table "course_blocks", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.integer "position"
-    t.bigint "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["course_id"], name: "index_course_blocks_on_course_id"
-  end
-
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.text "description"

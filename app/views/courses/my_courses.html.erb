@@ -7,14 +7,14 @@
         &#10010
       <% end %>
         </b></th>
-    <th scope="col"><%= link_to 'Course', :sort => 'title', style: "color: black;" %></th>
-    <th scope="col"><%= link_to 'Status', :sort => 'status', style: "color: black;" %></th>
-    <th scope="col" align="center">Lectures</th>
-    <th scope="col" align="center">Tests</th>
-    <th scope="col" align="center">Followers</th>
-    <th scope="col" align="center"><%= link_to 'Rating', :sort => 'rating', style: "color: black;" %></th>
-    <th scope="col" align="center">Publish</th>
-    <th scope="col" align="center">Edit</th>
+    <th scope="col"><%= link_to t('courses.title'), :sort => 'title', style: "color: black;" %></th>
+    <th scope="col"><%= link_to t('courses.status'), :sort => 'status', style: "color: black;" %></th>
+    <th scope="col" align="center"><%= t('courses.lectues.titles') %></th>
+    <th scope="col" align="center"><%= t('courses.testings.titles') %></th>
+    <th scope="col" align="center"><%= t('courses.followers') %></th>
+    <th scope="col" align="center"><%= link_to t('courses.rating'), :sort => 'rating', style: "color: black;" %></th>
+    <th scope="col" align="center"><%= t('courses.publish') %></th>
+    <th scope="col" align="center"><%= t('common.edit') %></th>
   </tr>
   </thead>
 

@@ -1,6 +1,6 @@
 <div class="pb-3">
   <%=link_to 'Back', course_testing_path(@course, @testing),  class: 'btn btn-outline-info btn-sm' %>
 </div>
-<h3>New Question</h3>
+<h3><%= t('courses.questions.new.title') %></h3>
 <%=render 'questions/form' %>
 

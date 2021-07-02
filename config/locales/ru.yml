@@ -1,0 +1,91 @@
+ru:
+  hello: 'Привет'
+  common:
+    create: 'Создать'
+    edit: 'Изменить'
+    chatrooms: 'Сообщения'
+    achievements: 'Достижения'
+    my_courses: 'Мои курсы'
+    log_out: 'Выход'
+    log_in: 'Вход'
+    sign_up: 'Регистрация'
+    activity: 'Последняя активность'
+    organization_courses: 'Курсы организации'
+    popular: 'Популярные'
+    last_publications: 'Последнии публикации'
+    admin_panel: 'Админка'
+  courses:
+    title: 'Курс'
+    titles: 'Курсы'
+    rating: 'Рейтинг'
+    certificate: 'Сертификат'
+    progress: 'Прогресс'
+    status: 'Статус'
+    type_course: 'Тип курса'
+    authors: 'Автор'
+    new:
+      title: 'Новый курс'
+    edit:
+      title: 'Редактировать'
+    form:
+      submit:
+        '%{action} курс'
+    unsubscribe: 'Отписка'
+    followers: 'Подписчики'
+    publish: 'Публиковать'
+    lectues:
+      title: 'Лекция'
+      titles: 'Лекции'
+      new:
+        title: 'Добавить лекцию'
+      edit:
+        title: 'Изменить лекцию'
+      form:
+        submit:
+          '%{action} лекцию'
+    testings:
+       title: 'Тест'
+       titles: 'Тесты'
+       new:
+         title: 'Добавить тест'
+       edit:
+         title: 'Изменить тест'
+       description: 'Описание'
+    questions:
+      title: 'Вопрос'
+      titles: 'Вопросы'
+      new:
+        title: 'Новый вопрос'
+      edit:
+        title: 'Изменить вопрос'
+      form:
+        submit:
+          '%{action} вопрос'
+      content: 'Описание'
+    answers:
+      title: 'Ответ'
+      titles: 'Ответы'
+      new:
+        title: 'Новый ответ'
+      edit:
+        title: 'Изменить ответ'
+      form:
+        submit:
+          '%{action} ответ'
+  users:
+    title: 'Пользователь'
+    titles: 'Пользователи'
+    new:
+       title: 'Регистрация'
+    edit:
+      title: 'Редактировать'
+    full_name: 'Полное имя'
+    email: 'Электронная почта'
+    show:
+      certificates:
+        titles: 'Сетрификаты'
+  organization:
+    title: 'Организация'
+    titles: 'Организации'
+    new:
+      title: 'Новая организация'

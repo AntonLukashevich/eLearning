@@ -14,7 +14,7 @@
               <p class="text-muted font-size-sm"><%= @user.email %></p>
               <% if  user_signed_in?%>
                 <%  if @user.id == current_user.id %>
-                    <%= link_to "Edit", edit_user_path, class: 'btn btn-editor' %>
+                    <%= link_to t('users.edit.title'), edit_user_path, class: 'btn btn-editor' %>
                   <%end %>
               <% end %>
 
@@ -26,13 +26,13 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
             <h6 class="mb-0">
-              <%= link_to 'Organization+', new_organization_path %>
+              <%= link_to t('organization.new.title'), new_organization_path %>
             </h6>
 
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
             <h6 class="mb-0">
-            <%= link_to 'Course+', new_course_path %>
+            <%= link_to t('courses.new.title'), new_course_path %>
             </h6>
           </li>
 
@@ -45,7 +45,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="mb-0">Full Name</h6>
+              <h6 class="mb-0"><%= t('users.full_name') %></h6>
             </div>
             <div class="col-sm-9 text-secondary">
               <%= @user.first_name %> <%= @user.last_name %>
@@ -54,7 +54,7 @@
           <hr>
           <div class="row">
             <div class="col-sm-3">
-              <h6 class="mb-0">Email</h6>
+              <h6 class="mb-0"><%= t('users.email') %></h6>
             </div>
             <div class="col-sm-9 text-secondary">
               <%= @user.email %>
@@ -76,8 +76,11 @@
         <div class="col-sm-6 mb-3">
           <div class="card h-100">
             <div class="card-body">
-              <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Certificates</i></h6>
-
+              <h6 class="d-flex align-items-center mb-3">
+                <i class="material-icons text-info mr-2">
+                  <%= t('users.show.certificates.titles') %>
+                </i>
+              </h6>
             </div>
           </div>
         </div>
@@ -86,7 +89,7 @@
             <div class="card-body">
               <h6 class="d-flex align-items-center mb-3">
                 <i class="material-icons text-info mr-2">
-                  <%= link_to 'Organizations', organizations_path, style: "color: #17a2b8;"%>
+                  <%= link_to t('organization.titles'), organizations_path, style: "color: #17a2b8;"%>
                 </i>
               </h6>
               <div style="min-height:100px; height: 300px; overflow-y: scroll;">

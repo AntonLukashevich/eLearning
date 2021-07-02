@@ -14,12 +14,12 @@
 <div>
   <%= image_tag @course.image.url(:course), class: 'img-thumbnail img-show' if @course.image? %>
   <%= image_tag ("course-default.png"), class: 'img-thumbnail img-show' if !@course.image? %>
-  <h1>Course: <%= @course.title %></h1>
+  <h1><%= t('courses.title') %>: <%= @course.title %></h1>
   <div class="description">
     <%= @course.description %>
   </div>
   <div class="course-info">
-    Type: <%= @course.type_course %>
+    <%= t('courses.type_course') %>: <%= @course.type_course %>
     <% if @course.type_course == 'individual' && (can? :update, @course) %>
       <%= link_to 'Add followers', course_individuals_path(@course) %>
     <% end %>
@@ -28,9 +28,9 @@
     <% end %>
     <br>
     <% if (can? :update, @course) %>
-    <%= link_to 'Authors:', authors_course_path(@course) %>
+    <%= link_to t('courses.authors'), authors_course_path(@course) %>:
     <%else %>
-      Authors:
+      <%= t('courses.authors') %>:
     <%end %>
     <% @course.users.each do |author| %>
       <%= author.email %>
@@ -42,14 +42,14 @@
 <% if can? :update, @course %>
   <div align="right">
     <%= link_to new_course_lecture_path(@course), class: "btn btn-info btn-sm" do %>
-      new lecture &#10010
+      <%= I18n.t('courses.lectues.new.title') %> &#10010
     <% end %>
   </div>
 <% end %>
 <br>
 <% if subscribe?(current_user, @course) || (can? :update, @course) %>
   <% if @course.lectures.size > 0 %>
-    <h5>Lectures:</h5>
+    <h5><%= t('courses.lectues.titles') %>:</h5>
     <div data-controller="drag" data-drag-url="course_id/lectures/id/move">
       <% @course.lectures.by_position.each do |block| %>
         <div data-id="<%= block.id %>" data-course_id="<%= @course.id %>" class="card card-body mt-1" id="lecture-<%= block.id %>">
@@ -83,12 +83,12 @@
   <% if can? :update, @course %>
     <div align="right">
       <%= link_to new_course_testing_path(@course), class: "btn btn-info btn-sm" do %>
-        new test &#10010
+        <%= I18n.t('courses.testings.new.title') %> &#10010
       <% end %>
     </div>
   <% end %>
   <% if @course.testings.size > 0 %>
-    <h5>Test:</h5>
+    <h5><%= t('courses.testings.titles') %>:</h5>
     <ul class="list-group">
       <% @course.testings.each do |test| %>
         <% if @course.users.include? current_user %>

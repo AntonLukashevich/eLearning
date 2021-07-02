@@ -1,0 +1,35 @@
+en:
+  activerecord:
+    models:
+      course: 'Course'
+      lecture: 'Lecture'
+      testing: 'Test'
+      user: 'User'
+    attributes:
+      course:
+        title: 'Title: '
+        description: 'Description: '
+        status: 'Status: '
+        type_course: 'Type: '
+        image: 'Image: '
+      lecture:
+        title: 'Title'
+        description: 'Description'
+        content: 'Content'
+      testing:
+        title: 'Title'
+        description: 'Description'
+      question:
+        question: 'Question'
+        content: 'Description'
+        type_question: 'Type'
+      user:
+        email: 'Email'
+        password: 'Password'
+        password_confirmation: 'Password confirmation'
+        first_name: 'First name'
+        last_name: 'Second name'
+        avatar: 'Avatar'
+
+
+

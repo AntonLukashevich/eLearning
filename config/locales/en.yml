@@ -30,4 +30,93 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: 'Hello'
+  common:
+    create: 'Create'
+    edit: 'Edit'
+    chatrooms: 'Chatrooms'
+    achievements: 'Achievement'
+    my_courses: 'My courses'
+    log_out: 'Log out'
+    log_in: 'Log in'
+    sign_up: 'Sign up'
+    activity: 'Activity'
+    organization_courses: 'Organizations'
+    popular: 'Popular'
+    last_publications: 'Last publications'
+    admin_panel: 'Adminka'
+  courses:
+    title: 'Course'
+    titles: 'Courses'
+    rating: 'Rating'
+    certificate: 'Certificate'
+    progress: 'Progress'
+    status: 'Status'
+    type_course: 'Type'
+    authors: 'Authors'
+    new:
+      title: 'New course'
+    edit:
+      title: 'Edit'
+    form:
+      submit:
+        '%{action} course'
+    unsubscribe: 'Unsubscribe'
+    followers: 'Followers'
+    publish: 'Publish'
+    lectues:
+      title: 'Lecture'
+      titles: 'Lectures'
+      new:
+        title: 'New lecture'
+      edit:
+        title: 'Edit lecture'
+      form:
+        submit:
+          '%{action} lecture'
+    testings:
+      title: 'Test'
+      titles: 'Tests'
+      new:
+        title: 'New test'
+      edit:
+        title: 'Edit test'
+      description: 'Description'
+    questions:
+      title: 'Question'
+      titles: 'Questions'
+      new:
+        title: 'New question'
+      edit:
+        title: 'Edit question'
+      form:
+        submit:
+          '%{action} question'
+      content: 'Description'
+    answers:
+      title: 'Answer'
+      titles: 'Answer'
+      new:
+        title: 'New answer'
+      edit:
+        title: 'Edit answer'
+      form:
+        submit:
+          '%{action} answer'
+  users:
+    title: 'User'
+    titles: 'Users'
+    new:
+      title: 'Sign up'
+    edit:
+      title: 'Edit'
+    full_name: 'Full name'
+    email: 'Email'
+    show:
+      certificates:
+        titles: 'Certificates'
+  organization:
+    title: 'Organization'
+    titles: 'Organizations'
+    new:
+      title: 'New organization'
