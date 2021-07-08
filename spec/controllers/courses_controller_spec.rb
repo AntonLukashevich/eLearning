@@ -6,7 +6,7 @@ RSpec.describe CoursesController, type: :controller do
   let(:user) { create :user }
   let(:role) { create :role }
   let(:courses) { create_list :course, 5, status: 'ready' }
-  let(:course) { create :course }
+  # let(:course) { create :course }
 
   let(:course_params) do
     {
@@ -39,10 +39,13 @@ RSpec.describe CoursesController, type: :controller do
   describe 'GET #index' do
     context 'index action' do
       let(:course_relation) { instance_double('ActiveRecord::Relation') }
+      let(:achievement_relation) { instance_double('ActiveRecord::Relation')}
       before do
+        allow(Achievement).to receive(:where).with(user_id: user.id).and_return(achievement_relation)
+
         allow(Course).to receive(:where).with(status: 'ready').and_return(course_relation)
         allow(course_relation).to receive(:includes).with(:users).and_return(courses)
-        get :index # попадаем в action index
+        get :index
       end
 
       it 'render template #index' do
@@ -51,12 +54,13 @@ RSpec.describe CoursesController, type: :controller do
 
       it 'return courses' do
         expect(assigns(:courses)).to match_array(courses)
+
       end
     end
   end
 
   describe 'GET #show' do
-    context 'show action' do
+    fcontext 'show action' do
       let(:readeds_relation) { instance_double('ActiveRecord::Relation') }
       before do
         allow(Course).to receive(:find).and_return(course)
@@ -76,14 +80,16 @@ RSpec.describe CoursesController, type: :controller do
   end
 
   describe 'GET #new' do
-    context 'action new' do
+
+    fcontext 'action new' do
       before do
-        allow(Course).to receive(:new).and_return(course)
-        get :new
+        allow_any_instance_of(CanCan::ControllerResource).to receive(:load_and_authorize_resource){ user }
+        allow(Course).to receive(:new)#.and_return(course)
       end
 
       it 'create a new course' do
-        expect(assigns(:course)).to be(course)
+        get :new
+        expect(assigns(:course)).to be_a_new(Course)
       end
     end
   end

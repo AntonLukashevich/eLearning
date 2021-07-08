@@ -291,7 +291,6 @@ ActiveRecord::Schema.define(version: 2021_06_01_063354) do
   add_foreign_key "answers", "questions"
   add_foreign_key "certificates", "courses"
   add_foreign_key "certificates", "users"
-  add_foreign_key "course_blocks", "courses"
   add_foreign_key "individuals", "courses"
   add_foreign_key "individuals", "users"
   add_foreign_key "managers", "organizations"

@@ -32,6 +32,18 @@ class User < ApplicationRecord
     'user.email'
   end
 
+  def user_avatar(user, size=40)
+    if user.avatar
+      user.avatar.variant(resize: "#{size}x#{size}")
+    else
+
+    end
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   private
 
   def add_default_avatar

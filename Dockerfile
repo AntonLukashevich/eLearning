@@ -27,13 +27,10 @@ RUN gem install bundler -v 2.2.20
 RUN gem install faker
 
 WORKDIR /app
-
 COPY . /app/
 
 RUN yarn install
 RUN bundle install
-
-
 
 ENTRYPOINT ["bin/rails"]
 CMD ["s", "-b", "0.0.0.0"]
