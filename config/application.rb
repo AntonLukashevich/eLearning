@@ -28,5 +28,6 @@ module ELearning
     config.i18n.default_locale = :ru
     config.i18n.available_locales = [:ru, :en]
 
+    config.assets.initialize_on_precompile = false
   end
 end
