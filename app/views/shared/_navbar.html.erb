@@ -26,7 +26,7 @@
   </span>
     <span class="p-1 text-dark">
       <%= link_to user_path(current_user),  class: 'btn btn-info btn-nav-bar' do %>
-        <%= current_user.email %> <%=image_tag(current_user.avatar.url(:thumb),:alt =>"avatar",style:'height:2vw;width:2vw;', class: "rounded-circle") if current_user.avatar? %>
+        <%= current_user.email %> <%=image_tag(current_user.avatar.url(:thumb),:alt =>"avatar",style:'height:30px;width:30px;', class: "rounded-circle") if current_user.avatar? %>
       <%end %>
   </span>
     <span class="p-1 text-dark">
