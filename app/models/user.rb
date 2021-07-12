@@ -23,8 +23,8 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true, length: { minimum: 2 }
   # after_commit :add_default_avatar, on: %i[create update]
 
-  @@role = Role.where(name: 'admin').first
-  scope :followers, -> { where.not(role_id: @@role.id) }
+  # @@role = Role.where(name: 'admin').first
+   scope :followers, -> { where(role_id: 1) }
 
   def gravatar_url
     # gravatar_id = Digest::MD5::hexdigest(email).downcase
